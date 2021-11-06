@@ -1,43 +1,38 @@
-// 栈结构的封装
+//封装栈类
 export default class Stack {
-
+  // 栈中的属性
   constructor() {
-    this.items = [];
+    this.items = []
   }
 
-  // push(item) 压栈操作，往栈里面添加元素
-  push(item) {
-    this.items.push(item);
+  // 栈的相关操作
+  // 1.将元素压入栈
+  push(element) {
+    this.items.push(element)
   }
-
-  // pop() 出栈操作，从栈中取出元素，并返回取出的那个元素
+  // 2.从栈中取出元素
   pop() {
-    if(this.isEmpty()) throw new Error('栈空了');
-    return this.items.pop();
+    return this.items.pop()
   }
-
-  // peek() 查看栈顶元素
+  // 3.查看一下栈顶元素
   peek() {
-    if(this.isEmpty()) throw new Error('栈空了');
-    return this.items[this.items.length - 1];
+    return this.items[this.items.length-1]
   }
-
-  // isEmpty() 判断栈是否为空
+  // 4.判断栈是否为空
   isEmpty() {
-    return this.items.length === 0;
+    return this.items.length === 0
   }
-
-  // size() 获取栈中元素个数
+  // 5.获取栈中元素个数
   size() {
-    return this.items.length;
+    return this.items.length
+  }
+  // 6.toString方法
+  toString() {
+    let resultString = ''
+    for (const item of this.items) {
+      resultString += item + ' '
+    }
+    return resultString
   }
 
-  // toString() 返回以字符串形式的栈内元素数据
-  toString() {
-    let result = '';
-    for (let item of this.items) {
-      result += item + ' ';
-    }
-    return result;
-  }
 }
