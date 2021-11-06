@@ -11,23 +11,17 @@ priorityQueue.enqueue('B', 15);
 priorityQueue.enqueue('C', 11);
 priorityQueue.enqueue('D', 20);
 priorityQueue.enqueue('E', 18);
-console.log(priorityQueue.items);
+console.log(priorityQueue.toString());
 //--> output:
-// QueueElement {element: "A", priority: 10}
-// QueueElement {element: "C", priority: 11}
-// QueueElement {element: "B", priority: 15}
-// QueueElement {element: "E", priority: 18}
-// QueueElement {element: "D", priority: 20}
+// A-10 C-11 B-15 E-18 D-20
 
 
 // 出队 dequeue() 测试
 priorityQueue.dequeue();
 priorityQueue.dequeue();
-console.log(priorityQueue.items);
+console.log(priorityQueue.toString());
 //--> output:
-// QueueElement {element: "B", priority: 15}
-// QueueElement {element: "E", priority: 18}
-// QueueElement {element: "D", priority: 20}
+// B-15 E-18 D-20
 
 // isEmpty() 测试
 console.log(priorityQueue.isEmpty()); //--> false
