@@ -150,7 +150,35 @@ export default class LinkedList{
     return current
   }
 
+  // removeAt(position) 删除指定位置的节点，并返回删除的那个节点
+  removeAt(position) {
+    // 1、position越界判断
+    if (position < 0 || position >= this.length) return null
 
+    // 2、删除指定 position 节点
+    let current = this.head
+    if (position === 0) {
+      // position = 0 的情况
+      this.head = this.head.next
+    } else {
+      // position > 0 的情况
+      // 在 0 ~ position 之间遍历，不断地更新 current 和 previous
+      // 直到找到要删除的位置
+      let index = 0
+      let previous = null
+      while (index++ < position) {
+        previous = current
+        current = current.next
+      }
+      // 让上一节点的 next 指向当前的节点的 next，相当于删除了当前节点。
+      previous.next = current.next
+    }
+
+    // 3、更新链表长度 -1
+    this.length--
+    // 4、返回被删除的节点，方便其他操作
+    return current
+  }
 
   // toString() 链表数据以字符串形式返回
   toString() {
