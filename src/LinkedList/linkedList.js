@@ -97,16 +97,16 @@ export default class LinkedList{
   // getData(position) 获取指定位置的 data
   getData(position) {
     // 1、position越界判断,注意链表长度为0也应直接返回null
-    if (position < 0 || position > this.length || this.length === 0) return null
+    if (position < 0 || position >= this.length || this.length === 0) return null
 
-    // 2、获取指定 position 节点的 data
+    // 2、获取指定 position 的节点
     let index = 0
     let current = this.head
     while (index++ < position) {
       current = current.next
     }
 
-    // 3、返回 data
+    // 3、返回相应节点的 data
     return current.data
 
   }
@@ -129,6 +129,25 @@ export default class LinkedList{
 
     // 未找到相应数据，返回-1
     return -1
+  }
+
+  // update(position, data) 修改指定位置节点的 data
+  update(position, data) {
+    // 涉及到 position 都要进行越界判断
+    // 1、position越界判断,注意链表长度为0也应直接返回false
+    if (position < 0 || position >= this.length || this.length === 0) return false
+
+    // 2、循环遍历，找到指定 position 的节点
+    let index = 0
+    let current = this.head
+    while (index++ < position) {
+      current = current.next
+    }
+
+    // 3、修改相应节点的 data
+    current.data = data
+    // 4、返回指定 position 的节点，方便其他操作
+    return current
   }
 
   // toString() 链表数据以字符串形式返回
