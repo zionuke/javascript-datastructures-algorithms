@@ -94,6 +94,23 @@ export default class LinkedList{
     return newNode
   }
 
+  // getData(position) 获取指定位置的 data
+  getData(position) {
+    // 1、position越界判断,注意链表长度为0也应直接返回null
+    if (position < 0 || position > this.length || this.length === 0) return null
+
+    // 2、获取指定 position 节点的 data
+    let index = 0
+    let current = this.head
+    while (index++ < position) {
+      current = current.next
+    }
+
+    // 3、返回 data
+    return current.data
+
+  }
+
   // toString() 链表数据以字符串形式返回
   toString() {
     let current = this.head
