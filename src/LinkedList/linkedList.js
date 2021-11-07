@@ -9,7 +9,7 @@ class Node{
 }
 
 // 单向链表结构的封装
-export default class LinkedList{
+export class LinkedList{
 
   constructor() {
     // 链表头节点，初始为 null
