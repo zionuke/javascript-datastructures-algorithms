@@ -46,4 +46,17 @@ export default class LinkedList{
     this.length++
   }
 
+  // toString() 链表数据以字符串形式返回
+  toString() {
+    let current = this.head
+    let resultString = ''
+
+    // 遍历所有的节点，拼接为字符串，直到尾节点(值为null)
+    while (current) {
+      resultString += current.data + ' '
+      current = current.next
+    }
+    
+    return resultString
+  }
 }
