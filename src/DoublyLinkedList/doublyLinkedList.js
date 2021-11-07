@@ -118,6 +118,37 @@ export class DoublyLinkedList extends LinkedList {
     return newNode
   }
 
+  // getData(position) 获取指定位置的 data
+  getData(position) {
+    // 1、position越界判断
+    if (position < 0 || position >= this.length) return null
+
+    // 2、判断要获取的节点离头尾节点哪个比较近
+
+    // 离头节点比较近
+    if (this.length / 2 >= position) {
+
+      // 获取指定 position 的节点
+      let index = 0
+      let current = this.head
+      while (index++ < position) {
+        current = current.next
+      }
+      // 3、返回相应节点的 data
+      return current.data
+    // 离尾节点比较近
+    } else {
+  
+      let index = this.length - 1
+      let current = this.tail
+      while (index-- > position) {
+        current = current.prev
+      }
+      // 3、返回相应节点的 data
+      return current.data
+    }
+  }
+
   // forwardToString() 链表数据从前往后以字符串形式返回
   forwardToString() {
     let currentNode = this.head
