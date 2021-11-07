@@ -46,6 +46,54 @@ export default class LinkedList{
     this.length++
   }
 
+  // insert(position, data) 在指定位置（position）插入节点
+  insert(position, data) {
+    // position 新插入节点的位置
+    // position = 0 表示新插入后是第一个节点
+    // position = 1 表示新插入后是第二个节点，以此类推
+
+    // 1、对 position 进行越界判断，不能小于 0 或大于链表长度
+    if (position < 0 || position > this.length) return false
+
+    // 2、创建新节点
+    const newNode = new Node(data)
+
+    // 3、插入节点
+    if (position === 0) {
+      // position = 0 即新插入节点为第一个节点的情况
+      // 顺序很重要，先让新节点指向原来的第一个节点，之后修改头指针指向新节点
+
+      // 让新节点的 next 指向 原来的第一个节点，即 head
+      newNode.next = this.head
+      // head 赋值为 newNode
+      this.head = newNode
+    } else {
+      // 0 < position <= length 的情况
+
+      // 初始化一些状态变量
+      let index = 0           // 遍历索引初始化为 0
+      let current = this.head // 遍历的当前节点初始化为 head
+      let previous = null     // 遍历的的上一节点初始化为 null
+
+      // 在 0 ~ position 之间遍历，不断地更新 current 和 previous
+      // 直到找到要插入的位置
+      while (index++ < position) {
+        previous = current
+        current = current.next
+      }
+
+      // 在当前节点和当前节点的上一节点之间插入新节点，即改变它们的指向
+      newNode.next = current
+      previous.next = newNode
+
+    }
+
+    // 4、追加完新节点后，链表长度 + 1
+    this.length++
+    // 5、返回新添加的节点，方便其他操作
+    return newNode
+  }
+
   // toString() 链表数据以字符串形式返回
   toString() {
     let current = this.head
@@ -56,7 +104,7 @@ export default class LinkedList{
       resultString += current.data + ' '
       current = current.next
     }
-    
+
     return resultString
   }
 }
