@@ -185,6 +185,16 @@ export default class LinkedList{
     return this.removeAt(this.indexOf(data))
   }
 
+  // isEmpty() 判断链表是否为空
+  isEmpty() {
+    return this.length === 0
+  }
+
+  // size() 获取链表的长度
+  size() {
+    return this.length
+  }
+
   // toString() 链表数据以字符串形式返回
   toString() {
     let current = this.head
