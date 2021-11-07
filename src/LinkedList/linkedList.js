@@ -96,8 +96,8 @@ export default class LinkedList{
 
   // getData(position) 获取指定位置的 data
   getData(position) {
-    // 1、position越界判断,注意链表长度为0也应直接返回null
-    if (position < 0 || position >= this.length || this.length === 0) return null
+    // 1、position越界判断
+    if (position < 0 || position >= this.length) return null
 
     // 2、获取指定 position 的节点
     let index = 0
@@ -134,8 +134,8 @@ export default class LinkedList{
   // update(position, data) 修改指定位置节点的 data
   update(position, data) {
     // 涉及到 position 都要进行越界判断
-    // 1、position越界判断,注意链表长度为0也应直接返回false
-    if (position < 0 || position >= this.length || this.length === 0) return false
+    // 1、position越界判断
+    if (position < 0 || position >= this.length) return false
 
     // 2、循环遍历，找到指定 position 的节点
     let index = 0
@@ -149,6 +149,8 @@ export default class LinkedList{
     // 4、返回指定 position 的节点，方便其他操作
     return current
   }
+
+
 
   // toString() 链表数据以字符串形式返回
   toString() {
