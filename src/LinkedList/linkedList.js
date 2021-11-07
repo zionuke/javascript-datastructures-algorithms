@@ -111,6 +111,26 @@ export default class LinkedList{
 
   }
 
+  // indexOf(data) 返回指定 data 的 index，如果没有，返回 -1。
+  indexOf(data) {
+    // 1、定义遍历变量
+    let index = 0
+    let current = this.head
+
+    // 2、遍历比较链表中数据
+    while (current) {
+      if (current.data === data) {
+        // 找到相应数据,返回索引
+        return index
+      }
+      current = current.next
+      index++
+    }
+
+    // 未找到相应数据，返回-1
+    return -1
+  }
+
   // toString() 链表数据以字符串形式返回
   toString() {
     let current = this.head
