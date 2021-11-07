@@ -47,5 +47,32 @@ export class DoublyLinkedList extends LinkedList {
     this.length++
   }
 
-  
+  // forwardToString() 链表数据从前往后以字符串形式返回
+  forwardToString() {
+    let currentNode = this.head
+    let result = ''
+
+    // 遍历所有的节点，拼接为字符串，直到节点为 null
+    while (currentNode) {
+      result += currentNode.data + '--'
+      currentNode = currentNode.next
+    }
+
+    return result
+  }
+
+  // backwardString() 链表数据从后往前以字符串形式返回
+  backwardString() {
+    let currentNode = this.tail
+    let result = ''
+
+    // 遍历所有的节点，拼接为字符串，直到节点为 null
+    while (currentNode) {
+      result += currentNode.data + '--'
+      currentNode = currentNode.prev
+    }
+
+    return result
+  }
+
 }
