@@ -182,7 +182,7 @@ export default class LinkedList{
 
   // remove(data) 删除指定 data 的节点，并返回删除的那个节点
   remove(data) {
-    return this.removeAt(this.indexOf(data));
+    return this.removeAt(this.indexOf(data))
   }
 
   // toString() 链表数据以字符串形式返回
