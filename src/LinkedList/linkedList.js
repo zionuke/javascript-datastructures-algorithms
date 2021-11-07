@@ -1,7 +1,7 @@
 // 封装链表结构
 
 // 封装链表节点类
-class Node{
+export class Node{
   constructor(data) {
     this.data = data
     this.next = null
