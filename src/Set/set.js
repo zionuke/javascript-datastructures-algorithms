@@ -47,6 +47,7 @@ export default class Set {
 
   // union(otherSet) 求两个集合的并集
   union(otherSet) {
+
     // 1、创建一个新集合,代表两个集合的并集
     const unionSet = new Set()
 
@@ -57,5 +58,21 @@ export default class Set {
     otherSet.values().forEach(value => unionSet.add(value))
 
     return unionSet
+  }
+
+  // intersection() 求两个集合的交集
+  intersection(otherSet) {
+
+    // 1、创建一个新集合，用于返回共有的元素
+    const intersectionSet = new Set()
+
+    // 2、迭代当前Set实例所有值，验证它们是否也存在于OtherSet实例中
+    for (const value of this.values()) {
+      if (otherSet.has(value)) {
+        intersectionSet.add(value)
+      }
+    }
+
+    return intersectionSet
   }
 }
