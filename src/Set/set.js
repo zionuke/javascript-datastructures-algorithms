@@ -91,4 +91,17 @@ export default class Set {
 
     return differenceSet
   }
+
+  // isSubsetOf(otherSet) 判断集合是否是另一个集合的子集
+  isSubsetOf(otherSet) {
+
+    // 1、如果当前实例中元素比otherSet实例更多，显然不是子集
+    if (this.size() > otherSet.size()) {
+      return false
+    }
+
+    // 2、迭代当前Set实例所有值，判断是否在otherSet集合中存在，有不存在的立即返回false(不是子集)
+    // 如果所有元素都存在于otherSet中，返回true
+    return this.values().every(value => otherSet.has(value))
+  }
 }
