@@ -1,6 +1,6 @@
 # JavaScript 数据结构与算法
 
-本仓库内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频整理的学习笔记，视频教程讲的特别好，配合本仓库的代码测试环境来练习，学习效果更佳，欢迎同学们 Star 和 Fork。  
+本仓库内容根据书籍 [《学习JavaScript数据结构与算法(第3版)》](https://github.com/loiane/javascript-datastructures-algorithms) 整理的学习笔记，链接是配套教学代码，配合本仓库的代码测试环境来练习，学习效果更佳，欢迎同学们 Star 和 Fork。  
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
 

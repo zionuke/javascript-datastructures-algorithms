@@ -29,7 +29,7 @@ console.log(set.values()); //--> ["123", "zxc"]
 set.clear();
 console.log(set.values()); //--> []
 
-/*
+
 // ------- 集合的操作测试 ------- //
 const setA = new Set();
 setA.add('111');
@@ -57,4 +57,4 @@ console.log(setA.subset(setB)); //--> false
 
 console.log('// ----- 集合结构测试 END -----//');
 
-*/
+
