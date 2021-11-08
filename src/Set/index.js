@@ -9,7 +9,7 @@ set.add('abc');
 set.add('abc');
 set.add('123');
 set.add('zxc');
-console.log(set); //--> {items: {123: "123", abc: "abc", zxc: "zxc"}}
+console.log(set.items); //--> {items: {123: "123", abc: "abc", zxc: "zxc"}}
 
 // has() 测试
 console.log(set.has('123')); //--> true
@@ -17,7 +17,7 @@ console.log(set.has('456')); //--> false
 
 // remove() 测试
 set.remove('abc');
-console.log(set); //--> {items: {123: "123", zxc: "zxc"}}
+console.log(set.items); //--> {items: {123: "123", zxc: "zxc"}}
 
 // size() 测试
 console.log(set.size()); //--> 2
@@ -29,6 +29,7 @@ console.log(set.values()); //--> ["123", "zxc"]
 set.clear();
 console.log(set.values()); //--> []
 
+/*
 // ------- 集合的操作测试 ------- //
 const setA = new Set();
 setA.add('111');
@@ -56,4 +57,4 @@ console.log(setA.subset(setB)); //--> false
 
 console.log('// ----- 集合结构测试 END -----//');
 
-
+*/
