@@ -45,8 +45,17 @@ export default class Set {
 
   // ------- 集合间的操作 ------- //
 
-  // union() 求两个集合的并集
+  // union(otherSet) 求两个集合的并集
   union(otherSet) {
-    
+    // 1、创建一个新集合,代表两个集合的并集
+    const unionSet = new Set()
+
+    // 2、将当前集合（this）的所有 value，添加到新集合（unionSet）中
+    this.values().forEach(value => unionSet.add(value))
+
+    // 3、将 otherSet 集合的所有 value，添加到新集合（unionSet）中
+    otherSet.values().forEach(value => unionSet.add(value))
+
+    return unionSet
   }
 }
