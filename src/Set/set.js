@@ -60,7 +60,7 @@ export default class Set {
     return unionSet
   }
 
-  // intersection() 求两个集合的交集
+  // intersection(otherSet) 求两个集合的交集
   intersection(otherSet) {
 
     // 1、创建一个新集合，用于返回共有的元素
@@ -74,5 +74,21 @@ export default class Set {
     }
 
     return intersectionSet
+  }
+
+  // difference(otherSet) 求两个集合的差集
+  difference(otherSet) {
+
+    // 1、创建一个新集合,用于存放结果，因为不想修改原来的集合
+    const differenceSet = new Set()
+
+    // 2、迭代当前Set实例所有值，判断是否在 otherSet 集合中存在，不存在的即为差集
+    for (const value of this.values()) {
+      if (!otherSet.has(value)) {
+        differenceSet.add(value)
+      }
+    }
+
+    return differenceSet
   }
 }
