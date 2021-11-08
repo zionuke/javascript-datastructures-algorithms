@@ -50,7 +50,7 @@ export class DoublyLinkedList extends LinkedList {
   // insert(position, data) 插入元素
   // 重写 insert()
   insert(position, data) {
-    
+
     // 1、对 position 进行越界判断，不能小于 0 或大于链表长度
     if (position < 0 || position > this.length) return false
 
@@ -86,7 +86,7 @@ export class DoublyLinkedList extends LinkedList {
       newNode.prev = this.tail
       this.tail.next = newNode
       this.tail = newNode
-      
+
     } else {
       // 3.3 在中间位置插入，对应 0 < position < length 的情况
 
@@ -119,6 +119,7 @@ export class DoublyLinkedList extends LinkedList {
   }
 
   // getData(position) 获取指定位置的 data
+  // 重写 getData()
   getData(position) {
     // 1、position越界判断
     if (position < 0 || position >= this.length) return null
@@ -138,7 +139,7 @@ export class DoublyLinkedList extends LinkedList {
       return current.data
     // 离尾节点比较近
     } else {
-  
+
       let index = this.length - 1
       let current = this.tail
       while (index-- > position) {
@@ -147,6 +148,67 @@ export class DoublyLinkedList extends LinkedList {
       // 3、返回相应节点的 data
       return current.data
     }
+  }
+
+  // removeAt(position) 删除指定位置的节点，并返回删除的那个节点
+  // 重写 removeAt()
+  removeAt(position) {
+    // 1、position越界判断
+    if (position < 0 || position >= this.length) return null
+
+    // 2、删除指定 position 节点
+    let current = this.head
+
+    // 删除第一个节点的情况
+    if (position === 0) {
+      // 链表内只有一个节点的情况
+      if (this.length === 1) {
+        this.head = null
+        this.tail = null
+      } else { // 链表内有多个节点的情况
+        this.head.next.prev = null
+        this.head = this.head.next
+      }
+    } else if (position === this.length - 1) { // 删除最后一个节点的情况
+      current = this.tail
+      this.tail.prev.next = null
+      this.tail = this.tail.prev
+    } else { // 删除 0 ~ this.length - 1 里面节点的情况
+
+      // 判断要删除的节点离头尾节点哪个比较近
+
+      // 离头节点比较近
+      if (this.length / 2 >= position) {
+
+        // 获取指定 position 的节点
+        let index = 0
+        while (index++ < position) {
+          current = current.next
+        }
+
+        // 删除相应节点
+        current.prev.next = current.next
+        current.next.prev = current.prev
+
+      } else { // 离尾节点比较近
+
+        // 获取指定 position 的节点
+        let index = this.length - 1
+        current = this.tail
+        while (index-- > position) {
+          current = current.prev
+        }
+
+        // 删除相应节点
+        current.prev.next = current.next
+        current.next.prev = current.prev
+      }
+    }
+
+    // 3、更新链表长度 -1
+    this.length--
+    // 4、返回被删除的节点，方便其他操作
+    return current
   }
 
   // forwardToString() 链表数据从前往后以字符串形式返回
