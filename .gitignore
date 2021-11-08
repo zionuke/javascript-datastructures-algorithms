@@ -5,6 +5,7 @@ db.json
 node_modules/
 dist
 .deploy*/
+package-lock.json
 
 # dependencies
 # dependencies

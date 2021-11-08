@@ -42,4 +42,11 @@ export default class Set {
   values() {
     return Object.values(this.items)
   }
+
+  // ------- 集合间的操作 ------- //
+
+  // union() 求两个集合的并集
+  union(otherSet) {
+    
+  }
 }
