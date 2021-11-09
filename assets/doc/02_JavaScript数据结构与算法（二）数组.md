@@ -1,8 +1,8 @@
 # JavaScript 数据结构与算法（二）数组
 
 几乎所有的编程语言都原生支持数组类型，因为数组是最简单的内存数据结构。
-数组通常情况下用于存储一系列同一种数据类型的值。
-但在 JavaScript 里，数组中可以保存不同类型的值。但我们还是要遵守最佳实践，别这么做（大多数语言都没这个能力）。
+
+数组存储一系列同一种数据类型的值。虽然在JavaScript里，也可以在数组中保存不同类型的值，但我们还是遵守最佳实践，避免这么做（大多数语言都没这个能力）。
 
 ## 创建和初始化数组
 
@@ -51,15 +51,20 @@
 ### 删除元素
 
 - 删除数组最后的元素 `array.pop(item)`
+
 - 删除数组首位的元素 `array.shift(item)`
+
 - 删除指定索引位置的元素 `array.splice(start, number)`
   例如：
+  
   ```js
   let myArray2 = [1, 2, 3, 4, 5];
   // 删除索引 4 位置起，2 个元素
-  myArray2.splice(4, 2);
+  myArray2.splice(3, 2);
   console.log(myArray2); //--> [1, 2, 3]
   ```
+
+ > 对于JavaScript数组和对象，我们还可以用delete运算符删除数组中的元素，例如delete numbers[0]。然而，数组位置0的值会变成undefined，也就是说，以上操作等同于numbers[0] = undefined。因此，我们应该始终使用splice、pop或shift方法来删除数组元素。
 
 ### 修改元素
 
@@ -77,3 +82,48 @@
   myArray2.splice(2, 2, "AA", "BB");
   console.log(myArray3); //--> [1, 2, "AA", "BB", 5, 6, 7]
   ```
+
+## 二维和多维数组
+
+JavaScript只支持一维数组，并不支持矩阵。但是，我们可以像下面的代码一样，用数组套数组，实现矩阵或任一多维数组。
+
+```js
+let averageTemp = [];
+averageTemp[0] = [72, 75, 79, 79, 81, 81];
+averageTemp[1] = [81, 79, 75, 75, 73, 73];
+```
+
+数组中的内容如下图所示。
+
+![image](https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.6myf7b0zsng0.png)
+
+### 迭代二维数组的元素
+
+如果想看这个矩阵的输出，可以创建一个通用函数，专门输出其中的值。
+
+```js
+function printMatrix(myMatrix) {
+  for (let i = 0; i < myMatrix.length; i++) {
+    for (let j = 0; j < myMatrix[i].length; j++) {
+      console.log(myMatrix[i][j]);
+    }
+  }
+}
+```
+
+我们需要迭代所有的行和列。因此，使用一个嵌套的for循环来处理，其中变量i为行，变量j为列。在这种情况下，每个myMatrix[i]同样代表一个数组，因此需要在嵌套的for循环中迭代myMatrix[i]的每个位置。
+
+> 要在浏览器控制台中打印二维数组，还可以使用console.table(averageTemp)语句。它会显示一个更加友好的输出结果
+
+## 常用数组方法参考
+
+在JavaScript里，数组是经过改进的对象，这意味着创建的每个数组都有一些可用的方法。数组很有趣，因为它十分强大，并且相比其他语言中的数组，JavaScript中的数组有许多很好用的方法。这样就不用再为它开发一些基本功能了，例如在数据结构的中间添加或删除元素。
+
+下表详述了数组的一些核心方法，其中的一些我们已经学习过了。
+
+![image](https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.19fp7e8y8mg0.png)
+
+下表列出了ES2015和ES2016新增的数组方法。
+
+![image](https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.48lm9bdzx2k0.png)
+
