@@ -1,4 +1,4 @@
-import Stack from "./stack"
+import Stack from "./stack-array"
 // 函数:将十进制转换为二进制
 export default function (decNumber) {
   // 1.定义栈对象

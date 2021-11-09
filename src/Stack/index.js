@@ -1,4 +1,4 @@
-import Stack from './stack';
+import Stack from './stack-array';
 import dec2bin from './dec2bin';
 
 // ---------------- 封装的栈结构测试 ---------------- //
