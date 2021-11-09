@@ -42,6 +42,10 @@ setB.add('222');
 setB.add('aaa');
 setB.add('ccc');
 
+const setC = new Set()
+setC.add('111')
+setC.add('222')
+
 // 求两个集合的并集 union() 测试
 console.log(setA.union(setB).values()); //--> ["111", "222", "333", "aaa", "ccc"]
 
@@ -52,7 +56,8 @@ console.log(setA.intersection(setB).values()); //--> ["111", "222"]
 console.log(setA.difference(setB).values()); //--> ["333"]
 
 // 求集合 A 是否为 集合 B 的 子集，subset() 测试
-console.log(setA.subset(setB)); //--> false
+console.log(setA.isSubsetOf(setB)); //--> false
+console.log(setC.isSubsetOf(setB)); //--> true
 
 
 console.log('// ----- 集合结构测试 END -----//');
