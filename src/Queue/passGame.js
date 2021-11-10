@@ -1,7 +1,7 @@
 import Queue from './queue';
 
 // 利用队列结构的特点实现击鼓传花算法
-export default function (namelist, num) {
+export default function passGame(namelist, num) {
 
   // 1、new 一个 Queue 对象
   let queue = new Queue()
@@ -33,3 +33,10 @@ export default function (namelist, num) {
   // 4、返回最后剩下这个人在原数组中对应的索引
   return namelist.indexOf(queue.peek())
 }
+
+// passGame() 测试
+console.log('// ----- 击鼓传花测试 START -----//');
+const names = ['lily', 'lucy', 'tom', 'tony', 'jack'];
+const targetIndex = passGame(names, 4);
+console.log('击鼓传花', names[targetIndex]); //--> lily
+console.log('// ----- 击鼓传花测试 END -----//');

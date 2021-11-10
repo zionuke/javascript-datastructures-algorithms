@@ -135,7 +135,7 @@ console.log(queue.size()); //--> 2
 console.log(queue.toString()); //--> c d
 ```
 
-## 队列的应用
+## 队列的应用：击鼓传花
 
 使用队列实现小游戏：**击鼓传花**。
 
@@ -190,3 +190,100 @@ const names = ["lily", "lucy", "tom", "tony", "jack"];
 const targetIndex = passGame(names, 4);
 console.log("击鼓传花", names[targetIndex]); //--> lily
 ```
+
+## 双端队列
+
+双端队列（deque，或称double-ended queue）是一种允许我们同时从前端和后端添加和移除元素的特殊队列。
+
+双端队列在现实生活中的例子有电影院、餐厅中排队的队伍等。举个例子，一个刚买了票的人如果只是还需要再问一些简单的信息，就可以直接回到队伍的头部。另外，在队伍末尾的人如果赶时间，他可以直接离开队伍。
+
+在计算机科学中，双端队列的一个常见应用是存储一系列的撤销操作。每当用户在软件中进行了一个操作，该操作会被存在一个双端队列中（就像在一个栈里）。当用户点击撤销按钮时，该操作会被从双端队列中弹出，表示它被从后面移除了。在进行了预先定义的一定数量的操作后，最先进行的操作会被从双端队列的前端移除。由于双端队列同时遵守了先进先出和后进先出原则，可以说它是把队列和栈相结合的一种数据结构。
+
+```js
+class Deque {
+  constructor() {
+    this.count = 0;
+    this.lowestCount = 0;
+    this.items = {};
+  }
+}
+```
+
+既然双端队列是一种特殊的队列，我们可以看到其构造函数中的部分代码和队列相同，包括相同的内部属性和以下方法：isEmpty、clear、size和toString。
+
+### 双端队列常见的操作
+
+由于双端队列允许在两端添加和移除元素，还会有下面几个方法。
+
+- `addFront(element)`：该方法在双端队列前端添加新的元素。
+
+- `addBack(element)`：该方法在双端队列后端添加新的元素（实现方法和Queue类中的enqueue方法相同）。
+
+- `removeFront()`：该方法会从双端队列前端移除第一个元素（实现方法和Queue类中的dequeue方法相同）。
+
+- `removeBack()`：该方法会从双端队列后端移除第一个元素（实现方法和Stack类中的pop方法一样）。
+
+- `peekFront()`：该方法返回双端队列前端的第一个元素（实现方法和Queue类中的peek方法一样）。
+
+- `peekBack()`：该方法返回双端队列后端的第一个元素（实现方法和Stack类中的peek方法一样）。
+
+Deque类同样实现了isEmpty、clear、size和toString方法，完整实现详见代码目录
+
+## 双端队列的应用：回文检查器
+
+回文是正反都能读通的单词、词组、数或一系列字符的序列，例如madam或racecar。
+
+有不同的算法可以检查一个词组或字符串是否为回文。最简单的方式是将字符串反向排列并检查它和原字符串是否相同。如果两者相同，那么它就是一个回文。我们也可以用栈来完成，但是利用数据结构来解决这个问题的最简单方法是使用双端队列。
+
+### 代码实现
+
+```js
+function palindromeChecker(aString) {
+  // 检查传入的字符串参数是否合法
+  if (
+    aString === undefined
+    || aString === null
+    || (aString !== null && aString.length === 0)
+  ) {
+    return false;
+  }
+
+  const deque = new Deque();
+  // 由于可能接收到同时包含大小写字母的字符串，将所有字母转化为小写，同时移除所有的空格
+  const lowerString = aString.toLocaleLowerCase().split(' ').join('');
+  let firstChar;
+  let lastChar;
+
+  // 对字符串中的所有字符执行enqueue操作
+  for (let i = 0; i < lowerString.length; i++) {
+    deque.addBack(lowerString.charAt(i));
+  }
+
+  // 如果只有一个字符的话，那它肯定是回文
+  // 大于一个字符则两端各移除一个元素，判断是否相等
+  // 若不相等则不是回文，比较至只剩0 / 1个字符仍相等则为回文
+  while (deque.size() > 1) {
+    firstChar = deque.removeFront();
+    lastChar = deque.removeBack();
+    if (firstChar !== lastChar) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+
+### 测试代码
+
+```js
+console.log('// ----- 回文检查器测试 START -----//');
+console.log('a', palindromeChecker('a'));
+console.log('aa', palindromeChecker('aa'));
+console.log('kayak', palindromeChecker('kayak'));
+console.log('level', palindromeChecker('level'));
+console.log('Was it a car or a cat I saw', palindromeChecker('Was it a car or a cat I saw'));
+console.log('Step on no pets', palindromeChecker('Step on no pets'));
+console.log('// ----- 回文检查器测试 END -----//');
+```
+

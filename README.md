@@ -34,8 +34,9 @@
 
 ### 队列和双端队列
 
-- [基于JavaScript对象的队列](src/Queue/queue.js)
 - [基于数组的队列](src/Queue/queue-array.js)
+- [基于JavaScript对象的队列](src/Queue/queue.js)
+- [双端队列的封装](src/Queue/deque.js)
 - [优先队列的封装](src/PriorityQueue/priorityQueue.js)
 
 ### 链表
