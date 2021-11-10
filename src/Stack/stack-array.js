@@ -1,5 +1,5 @@
 //封装栈类
-export default class Stack {
+export default class StackArray {
   // 用数组来保存栈内元素
   constructor() {
     this.items = []

@@ -55,49 +55,57 @@
 - `peek()` 返回栈顶的元素，不对栈做任何修改（该方法不会移除栈顶的元素，仅仅返回它）。
 - `isEmpty()` 如果栈里没有任何元素就返回 `true`，否则返回 `false`。
 - `size()` 返回栈里的元素个数。这个方法和数组的 `length` 属性类似。
+- `clear()` 移除栈里的所有元素。
 - `toString()` 将栈结构的内容以字符串的形式返回。
 
 ### 创建一个基于数组的栈
 
 ```js
-// 栈结构的封装
 class Stack {
+  // 用数组来保存栈内元素
   constructor() {
-    this.items = [];
+    this.items = []
   }
 
-  // push(item) 压栈操作，往栈里面添加元素
-  push(item) {
-    this.items.push(item);
+  // 栈的相关操作
+
+  // 1.添加一个（或几个）新元素到栈顶
+  push(element) {
+    this.items.push(element)
   }
 
-  // pop() 出栈操作，从栈中取出元素，并返回取出的那个元素
+  // 2.移除栈顶的元素，同时返回被移除的元素
   pop() {
-    return this.items.pop();
+    return this.items.pop()
   }
 
-  // peek() 查看栈顶元素
+  // 3.返回栈顶的元素，不对栈做任何修改
   peek() {
-    return this.items[this.items.length - 1];
+    return this.items[this.items.length-1]
   }
 
-  // isEmpty() 判断栈是否为空
+  // 4.判断栈是否为空，如果栈里没有任何元素就返回true，否则返回false
   isEmpty() {
-    return this.items.length === 0;
+    return this.items.length === 0
   }
 
-  // size() 获取栈中元素个数
+  // 5.获取栈中元素个数
   size() {
-    return this.items.length;
+    return this.items.length
   }
 
-  // toString() 返回以字符串形式的栈内元素数据
+  // 6.移除栈里所有元素
+  clear() {
+    this.items = []
+  }
+
+  // 7.toString方法
   toString() {
-    let result = "";
-    for (let item of this.items) {
-      result += item + " ";
+    let resultString = ''
+    for (const item of this.items) {
+      resultString += item + ' '
     }
-    return result;
+    return resultString
   }
 }
 ```
@@ -164,3 +172,16 @@ function dec2bin(dec) {
 console.log(dec2bin(100)); //--> 1100100
 console.log(dec2bin(88)); //--> 1011000
 ```
+
+## 补充
+
+### 创建一个基于JavaScript对象的栈
+
+创建一个Stack类最简单的方式是使用一个数组来存储其元素。在处理大量数据的时候（这在现实生活中的项目里很常见），我们同样需要评估如何操作数据是最高效的。在使用数组时，大部分方法的时间复杂度是O(n)。O(n)的意思是，我们需要迭代整个数组直到找到要找的那个元素，在最坏的情况下需要迭代数组的所有位置，其中的n代表数组的长度。如果数组有更多元素的话，所需的时间会更长。另外，数组是元素的一个有序集合，为了保证元素排列有序，它会占用更多的内存空间。
+
+如果我们能直接获取元素，占用较少的内存空间，并且仍然保证所有元素按照我们的需要排列，那不是更好吗？对于使用JavaScript语言实现栈数据结构的场景，我们也可以使用一个JavaScript对象来存储所有的栈元素，保证它们的顺序并且遵循LIFO原则。我们来看看如何实现这样的行为。
+
+```js
+
+```
+

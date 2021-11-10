@@ -1,8 +1,8 @@
-import Stack from "./stack-array"
+import StackArray from "./stack-array"
 // 函数:将十进制转换为二进制
 export default function (decNumber) {
   // 1.定义栈对象
-  let stack = new Stack()
+  let stack = new StackArray()
 
   // 2.循环取余压栈
   while (decNumber > 0) {

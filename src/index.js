@@ -1,5 +1,5 @@
 // 导入栈结构的封装及测试代码
-// import './Stack'
+import './Stack'
 
 // 导入队列结构的封装及测试代码
 // import './Queue'
@@ -14,7 +14,7 @@
 // import './DoublyLinkedList'
 
 // 导入集合结构的封装及测试代码
-import './Set'
+// import './Set'
 
 // 导入字典结构的封装及测试代码
 // import './Map'

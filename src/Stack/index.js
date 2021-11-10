@@ -1,15 +1,15 @@
-import Stack from './stack-array';
+import StackArray from './stack-array';
 import dec2bin from './dec2bin';
 
 // ---------------- 封装的栈结构测试 ---------------- //
 console.log('// ----- 栈结构测试 START -----//');
-const stack = new Stack();
+const stack = new StackArray();
 
 // push() 测试
 stack.push(1);
 stack.push(2);
 stack.push(3);
-console.log(stack.items); //--> [1, 2, 3]
+console.log(stack.toString()); //--> 1 2 3
 
 // pop() 测试
 console.log(stack.pop()); //--> 3
