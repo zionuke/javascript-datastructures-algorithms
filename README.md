@@ -11,7 +11,7 @@
 - [JavaScript 数据结构与算法（一）前言](assets/doc/01_JavaScript数据结构与算法（一）前言.md)
 - [JavaScript 数据结构与算法（二）数组](assets/doc/02_JavaScript数据结构与算法（二）数组.md)
 - [JavaScript 数据结构与算法（三）栈](assets/doc/03_JavaScript数据结构与算法（三）栈.md)
-- [JavaScript 数据结构与算法（四）队列](assets/doc/04_JavaScript数据结构与算法（四）队列.md)
+- [JavaScript 数据结构与算法（四）队列和双端队列](assets/doc/04_JavaScript数据结构与算法（四）队列.md)
 - [JavaScript 数据结构与算法（五）优先队列](assets/doc/05_JavaScript数据结构与算法（五）优先队列.md)
 - [JavaScript 数据结构与算法（六）单向链表](assets/doc/06_JavaScript数据结构与算法（六）单向链表.md)
 - [JavaScript 数据结构与算法（七）双向链表](assets/doc/07_JavaScript数据结构与算法（七）双向链表.md)

@@ -5,13 +5,16 @@ export default class Deque {
     this.items = {};
   }
 
+  // 将一个元素添加到双端队列的前端，存在三种场景
   addFront(element) {
+    // 1、双端队列为空
     if (this.isEmpty()) {
       this.addBack(element);
     } else if (this.lowestCount > 0) {
+      // 2、一个元素已经被从双端队列的前端移除，即lowestCount属性大于等于1
       this.lowestCount--;
       this.items[this.lowestCount] = element;
-    } else {
+    } else { // 3、lowestCount为0的情况
       for (let i = this.count; i > 0; i--) {
         this.items[i] = this.items[i - 1];
       }
