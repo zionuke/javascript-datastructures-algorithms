@@ -60,6 +60,7 @@ export default class Stack {
 }
 
 // 测试代码
+console.log('// ----- 基于JavaScript对象的栈结构测试 START -----//');
 const stack = new Stack()
 console.log('stack.isEmpty() => ', stack.isEmpty()); // outputs true
 
@@ -81,3 +82,5 @@ stack.pop();
 stack.pop();
 
 console.log('stack.size() after push 15 and pop twice => ', stack.size()); // outputs 2
+
+console.log('// ----- 基于JavaScript对象的栈结构测试 END -----//');

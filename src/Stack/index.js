@@ -1,36 +1,22 @@
-import StackArray from './stack-array';
-import dec2bin from './dec2bin';
+// 导入基于数组的栈结构的封装及测试代码
+import './stack-array'
+// 导入基于JavaScript对象的栈结构的封装及测试代码
+// import './stack'
+// 导入使用ES6 Symbol类型基于数组的栈结构测试代码
+// import './StackSymbol'
+// 导入十进制转二进制测试代码
+import './dec2bin'
+// 进制转换算法
+// import './base-converter'
+// 平衡圆括号算法
+// import './balanced-symbols'
+// 汉诺塔算法
+// import './hanoi'
 
-// ---------------- 封装的栈结构测试 ---------------- //
-console.log('// ----- 栈结构测试 START -----//');
-const stack = new StackArray();
 
-// push() 测试
-stack.push(1);
-stack.push(2);
-stack.push(3);
-console.log(stack.toString()); //--> 1 2 3
 
-// pop() 测试
-console.log(stack.pop()); //--> 3
 
-// peek() 测试
-console.log(stack.peek()); //--> 2
 
-// isEmpty() 测试
-console.log(stack.isEmpty()); //--> false
 
-// size() 测试
-console.log(stack.size()); //--> 2
-
-// toString() 测试
-console.log(stack.toString()); //--> 1 2
-
-// dec2bin() 测试
-console.log(dec2bin(100)); //--> 1100100
-console.log(dec2bin(88)); //--> 1011000
-console.log(dec2bin(233)); //--> 11101001
-
-console.log('// ----- 栈结构测试 END -----//');
 
 

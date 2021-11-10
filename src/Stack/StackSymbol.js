@@ -38,6 +38,8 @@ class Stack {
   }
 }
 
+
+console.log('// ----- 使用ES6 Symbol类型基于数组的栈结构测试 START -----//');
 const stack = new Stack();
 const objectSymbols = Object.getOwnPropertySymbols(stack);
 console.log(objectSymbols.length); // 1
@@ -45,3 +47,4 @@ console.log(objectSymbols); // [Symbol()]
 console.log(objectSymbols[0]); // Symbol()
 stack[objectSymbols[0]].push(1);
 stack.print(); // 5, 8, 1
+console.log('// ----- 使用ES6 Symbol类型基于数组的栈结构测试 END -----//');

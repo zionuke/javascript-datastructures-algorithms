@@ -1,6 +1,6 @@
 import StackArray from "./stack-array"
 // 函数:将十进制转换为二进制
-export default function (decNumber) {
+export default function dec2bin(decNumber) {
   // 1.定义栈对象
   let stack = new StackArray()
 
@@ -17,3 +17,10 @@ export default function (decNumber) {
   }
   return binaryString
 }
+
+// dec2bin() 测试
+console.log('// ----- 十进制转二进制测试 START -----//');
+console.log(dec2bin(100)); //--> 1100100
+console.log(dec2bin(88)); //--> 1011000
+console.log(dec2bin(233)); //--> 11101001
+console.log('// ----- 十进制转二进制测试 END -----//');
