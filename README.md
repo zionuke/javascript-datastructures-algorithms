@@ -1,17 +1,19 @@
 # JavaScript 数据结构与算法
 
-本仓库内容根据书籍 [《学习JavaScript数据结构与算法(第3版)》](https://github.com/loiane/javascript-datastructures-algorithms) 整理的学习笔记，链接是配套教学代码，配合本仓库的代码测试环境来练习，学习效果更佳，欢迎同学们 Star 和 Fork。  
+本仓库内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与书籍《学习JavaScript数据结构与算法(第3版)》整理的学习笔记，视频教程讲的比较好，结合书籍ES6实现，配合本仓库的代码测试环境来练习，学习效果更佳，欢迎同学们 Star 和 Fork。  
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
 
 > 重点要掌握数据结构与算法的思想和原理，使用哪种编程语言区别不大。
+
+> 本仓库在XPoet的[仓库](https://github.com/XPoet/js-data-structures-and-algorithms)基础上重构和补充代码完成
 
 ## 文档目录
 
 - [JavaScript 数据结构与算法（一）前言](assets/doc/01_JavaScript数据结构与算法（一）前言.md)
 - [JavaScript 数据结构与算法（二）数组](assets/doc/02_JavaScript数据结构与算法（二）数组.md)
 - [JavaScript 数据结构与算法（三）栈](assets/doc/03_JavaScript数据结构与算法（三）栈.md)
-- [JavaScript 数据结构与算法（四）队列和双端队列](assets/doc/04_JavaScript数据结构与算法（四）队列.md)
+- [JavaScript 数据结构与算法（四）队列](assets/doc/04_JavaScript数据结构与算法（四）队列.md)
 - [JavaScript 数据结构与算法（五）优先队列](assets/doc/05_JavaScript数据结构与算法（五）优先队列.md)
 - [JavaScript 数据结构与算法（六）单向链表](assets/doc/06_JavaScript数据结构与算法（六）单向链表.md)
 - [JavaScript 数据结构与算法（七）双向链表](assets/doc/07_JavaScript数据结构与算法（七）双向链表.md)
