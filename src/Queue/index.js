@@ -10,15 +10,15 @@ queue.enqueue('a');
 queue.enqueue('b');
 queue.enqueue('c');
 queue.enqueue('d');
-console.log(queue.items); //--> ["a", "b", "c", "d"]
+console.log(queue.toString()); //--> a,b,c,d
 
 // dequeue() 测试
 queue.dequeue();
 queue.dequeue();
-console.log(queue.items); //--> ["c", "d"]
+console.log(queue.toString()); //--> c,d
 
 // front() 测试
-console.log(queue.front()); //--> c
+console.log(queue.peek()); //--> c
 
 // isEmpty() 测试
 console.log(queue.isEmpty()); //--> false

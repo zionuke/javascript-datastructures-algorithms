@@ -1,8 +1,8 @@
-import Queue from './queue.js';
+import Queue from './queue';
 
 // 利用队列结构的特点实现击鼓传花算法
 export default function (namelist, num) {
-  
+
   // 1、new 一个 Queue 对象
   let queue = new Queue()
 
@@ -31,5 +31,5 @@ export default function (namelist, num) {
   }
 
   // 4、返回最后剩下这个人在原数组中对应的索引
-  return namelist.indexOf(queue.front())
+  return namelist.indexOf(queue.peek())
 }

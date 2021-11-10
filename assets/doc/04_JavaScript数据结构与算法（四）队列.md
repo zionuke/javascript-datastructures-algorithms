@@ -1,4 +1,4 @@
-# JavaScript 数据结构与算法（四）队列
+# JavaScript 数据结构与算法（四）队列和双端队列
 
 ## 认识队列
 
@@ -27,60 +27,80 @@
 
 ## 队列的实现
 
-队列的实现和栈一样，有两种方案：
+队列的实现和栈一样，有多种方案：
 
 - 基于数组实现。
+- 基于对象实现。
 - 基于链表实现。
 
 ### 队列常见的操作
 
 - `enqueue(element)` 向队列尾部添加一个（或多个）新的项。
 - `dequeue()` 移除队列的第一（即排在队列最前面的）项，并返回被移除的元素。
-- `front()` 返回队列中的第一个元素——最先被添加，也将是最先被移除的元素。队列不做任何变动（不移除元素，只返回元素信息与 Map 类的 peek 方法非常类似）。
+- `peek()` 返回队列中的第一个元素——最先被添加，也将是最先被移除的元素。队列不做任何变动（不移除元素，只返回元素信息与Stack类的peek方法非常类似）。该方法在其他语言中也可以叫作front方法。
 - `isEmpty()` 如果队列中不包含任何元素，返回 true，否则返回 false。
 - `size()` 返回队列包含的元素个数，与数组的 length 属性类似。
 - `toString()` 将队列中的内容，转成字符串形式。
 
 ### 代码实现
 
+首先需要一个用于存储队列中元素的数据结构。我们可以使用数组，就像栈的StackArray类那样。但是，为了写出一个在获取元素时更高效的数据结构，我们将使用一个对象来存储我们的元素。你会发现Queue类和Stack类非常类似，只是添加和移除元素的原则不同。
+
 ```js
 class Queue {
   constructor() {
-    this.items = [];
+    // 用于控制队列的大小
+    this.count = 0;
+    // 用于追踪第一个元素
+    this.lowestCount = 0;
+    this.items = {};
   }
 
-  // enqueue(item) 入队，将元素加入到队列中
-  enqueue(item) {
-    this.items.push(item);
+  enqueue(element) {
+    this.items[this.count] = element;
+    this.count++;
   }
 
-  // dequeue() 出队，从队列中删除队头元素，返回删除的那个元素
   dequeue() {
-    return this.items.shift();
-  }
-
-  // front() 查看队列的队头元素
-  front() {
-    return this.items[0];
-  }
-
-  // isEmpty() 查看队列是否为空
-  isEmpty() {
-    return this.items.length === 0;
-  }
-
-  // size() 查看队列中元素的个数
-  size() {
-    return this.items.length;
-  }
-
-  // toString() 将队列中的元素以字符串形式返回
-  toString() {
-    let result = "";
-    for (let item of this.items) {
-      result += item + " ";
+    if (this.isEmpty()) {
+      return undefined;
     }
+    const result = this.items[this.lowestCount];
+    delete this.items[this.lowestCount];
+    this.lowestCount++;
     return result;
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    return this.items[this.lowestCount];
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  clear() {
+    this.items = {};
+    this.count = 0;
+    this.lowestCount = 0;
+  }
+
+  size() {
+    return this.count - this.lowestCount;
+  }
+
+  toString() {
+    if (this.isEmpty()) {
+      return '';
+    }
+    let objString = `${this.items[this.lowestCount]}`;
+    for (let i = this.lowestCount + 1; i < this.count; i++) {
+      objString = `${objString},${this.items[i]}`;
+    }
+    return objString;
   }
 }
 ```
@@ -91,19 +111,19 @@ class Queue {
 const queue = new Queue();
 
 // enqueue() 测试
-queue.enqueue("a");
-queue.enqueue("b");
-queue.enqueue("c");
-queue.enqueue("d");
-console.log(queue.items); //--> ["a", "b", "c", "d"]
+queue.enqueue('a');
+queue.enqueue('b');
+queue.enqueue('c');
+queue.enqueue('d');
+console.log(queue.toString()); //--> a,b,c,d
 
 // dequeue() 测试
 queue.dequeue();
 queue.dequeue();
-console.log(queue.items); //--> ["c", "d"]
+console.log(queue.toString()); //--> c,d
 
 // front() 测试
-console.log(queue.front()); //--> c
+console.log(queue.peek()); //--> c
 
 // isEmpty() 测试
 console.log(queue.isEmpty()); //--> false
