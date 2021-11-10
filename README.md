@@ -28,6 +28,7 @@
 ### 栈
 
 - [基于数组的栈的封装](src/Stack/stack-array.js)
+- [基于JavaScript对象的栈](src/Stack/stack.js)
 
 ### 队列和双端队列
 
