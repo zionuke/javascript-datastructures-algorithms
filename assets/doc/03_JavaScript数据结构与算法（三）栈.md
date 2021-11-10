@@ -137,7 +137,11 @@ console.log(stack.toString()); //--> 1 2
 
 ## 栈结构的简单应用
 
-利用栈结构的特点封装实现十进制转换为二进制的方法。
+栈的实际应用非常广泛。在回溯问题中，它可以存储访问过的任务或路径、撤销的操作。Java和C#用栈来存储变量和方法调用，特别是处理递归算法时，有可能抛出一个栈溢出异常。
+
+既然我们已经了解了Stack类的用法，不妨用它来解决一些计算机科学问题。利用栈结构的特点封装实现十进制转换为二进制的方法。
+
+现实生活中，我们主要使用十进制。但在计算科学中，二进制非常重要，因为计算机里的所有内容都是用二进制数字表示的（0和1）。没有十进制和二进制相互转化的能力，与计算机交流就很困难。
 
 分析：把十进制转换为二进制的通用方法就是模二取余法，将十进制数字不断模二取余，直到被除数等于零时停止，将得到的余数逆序输出即为相应二进制数字。
 
@@ -171,11 +175,10 @@ function dec2bin(dec) {
 // dec2bin() 测试
 console.log(dec2bin(100)); //--> 1100100
 console.log(dec2bin(88)); //--> 1011000
+console.log(dec2bin(233)); //--> 11101001
 ```
 
-## 补充
-
-### 创建一个基于JavaScript对象的栈
+## 创建一个基于JavaScript对象的栈
 
 创建一个Stack类最简单的方式是使用一个数组来存储其元素。在处理大量数据的时候（这在现实生活中的项目里很常见），我们同样需要评估如何操作数据是最高效的。在使用数组时，大部分方法的时间复杂度是O(n)。O(n)的意思是，我们需要迭代整个数组直到找到要找的那个元素，在最坏的情况下需要迭代数组的所有位置，其中的n代表数组的长度。如果数组有更多元素的话，所需的时间会更长。另外，数组是元素的一个有序集合，为了保证元素排列有序，它会占用更多的内存空间。
 
@@ -188,59 +191,99 @@ class Stack {
     this.count = 0
     this.items = {}
   }
+}
+//完整实现详见src/Stack/stack.js
+```
 
-  push(element) {
-    // 使用count变量作为items对象的键名，插入的元素则是它的值
-    this.items[this.count] = element
-    // 在向栈插入元素后，递增count变量
-    this.count++
+## 保护数据结构内部元素
+
+在创建别的开发者也可以使用的数据结构或对象时，我们希望保护内部的元素，只有我们暴露出的方法才能修改内部结构。对于Stack类来说，要确保元素只会被添加到栈顶，而不是栈底或其他任意位置（比如栈的中间）。不幸的是，我们在Stack类中声明的items和count属性并没有得到保护，因为JavaScript的类就是这样工作的。
+
+我们使用ES2015（ES6）语法创建了Stack类。ES2015类是基于原型的。尽管基于原型的类能节省内存空间并在扩展方面优于基于函数的类，但这种方式不能声明私有属性（变量）或方法。另外，在本例中，我们希望Stack类的用户只能访问我们在类中暴露的方法。下面来看看其他使用JavaScript来实现私有属性的方法。
+
+### 下划线命名约定
+
+一部分开发者喜欢在JavaScript中使用下划线命名约定来标记一个属性为私有属性。
+
+```js
+class Stack{
+  constructor(){
+    this._count = 0
+    this._items = {}
   }
+}
+```
 
-  pop() {
-    // 如果栈为空，就返回undefined
-    if (this.isEmpty()) {
-      return undefined
+下划线命名约定就是在属性名称之前加上一个下划线（_）。不过这种方式只是一种约定，并不能保护数据，而且只能依赖于使用我们代码的开发者所具备的常识。
+
+### 用ES2015的限定作用域Symbol实现类
+
+ES2015新增了一种叫作Symbol的基本类型，它是不可变的，可以用作对象的属性。看看怎么用它在Stack类中声明items属性（我们将使用数组来存储元素以简化代码）。
+
+```js
+const _items = Symbol('stackItems');
+class Stack {
+  constructor() {
+    this[_items] = [];
+  }
+  //栈的方法
+}
+```
+
+在上面的代码中，我们声明了Symbol类型的变量items，在类的constructor函数中初始化它的值。要访问items，只需要把所有的this.items都换成this[_items]。
+
+这种方法创建了一个假的私有属性，因为ES2015新增的Object.getOwnPropertySymbols方法能够取到类里面声明的所有Symbols属性。
+
+### 用ES2015的WeakMap实现类
+
+有一种数据类型可以确保属性是私有的，这就是WeakMap。WeakMap可以存储键值对，其中键是对象，值可以是任意数据类型。
+
+如果用WeakMap来存储items属性（数组版本）, Stack类就是这样的：
+
+```js
+const items = new WeakMap();
+class Stack {
+  constructor() {
+    items.set(this, []);
+  }
+  push(element){
+    const s = items.get(this);
+    s.push(element)
+  }
+    pop(){
+      const s = items.get(this);
+      const r = s.pop();
+      return r
     }
-    // 将count属性减1，并保存栈顶的值
-    this.count--
-    const result = this.items[this.count]
-    // 用delete运算符从对象中删除一个特定的值
-    delete this.items[this.count]
+    //其它方法
+}
+```
 
-    return result
-  }
+现在我们知道了，items在Stack类里是真正的私有属性。采用这种方法，代码的可读性不强，而且在扩展该类时无法继承私有属性。鱼和熊掌不可兼得！
 
-  peek() {
-    if (this.isEmpty()) {
-      return undefined
-    }
+### ECMAScript类属性提案
 
-    return this.items[this.count - 1]
-  }
+TypeScript提供了一个给类属性和方法使用的private修饰符。然而，该修饰符只在编译时有用（包括在前面讨论的TypeScript类型和错误检测）。在代码被转移完成后，属性同样是公开的。
 
-  clear() {
-    this.items = {}
-    this.count = 0
-  }
+事实上，我们不能像在其他编程语言中一样声明私有属性和方法。虽然有很多种方法都可以达到相同的效果，但无论是在语法还是性能层面，这些方法都有各自的优点和缺点。
 
-  size() {
-    return this.count
-  }
+哪种方法更好呢？这取决于你在实际项目中如何使用本书展示的算法，也取决于你需要处理的数据量、需要构造的实例数量，以及其他约束条件。最终，还是取决于你的选择。
 
-  isEmpty() {
-    return this.count === 0
-  }
+在[ES2020 实验草案](https://github.com/tc39/proposal-class-fields) 中，增加了定义私有类字段的能力，写法是使用一个#作为前缀。
 
-  toString() {
-    if (this.isEmpty()) {
-      return ''
-    }
-    let objString = `${this.items[0]}`
-    for (let i = 1; i < this.count; i++){
-      objString = `${objString},${this.items[i]}`
-    }
-    return objString
-  }
+```js
+class ClassWithPrivateField {
+  #privateField
+}
+
+class ClassWithPrivateMethod {
+  #privateMethod() {
+    return 'hello world'
+ }
+}
+
+class ClassWithPrivateStaticField {
+  static #PRIVATE_STATIC_FIELD
 }
 ```
 

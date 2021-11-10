@@ -27,8 +27,10 @@
 
 ### 栈
 
-- [基于数组的栈的封装](src/Stack/stack-array.js)
+- [基于数组的栈](src/Stack/stack-array.js)
 - [基于JavaScript对象的栈](src/Stack/stack.js)
+- [使用ES6 Symbol类型基于数组的栈](src/Stack/StackSymbol.js)
+- [使用ES6 WeakMap类型基于对象的栈](src/Stack/StackWeakMap.js)
 
 ### 队列和双端队列
 
