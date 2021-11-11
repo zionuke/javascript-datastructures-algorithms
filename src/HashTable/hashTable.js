@@ -6,8 +6,8 @@
  */
 export function hashFn(string, limit = 7) {
 
-  // 自己采用的一个质数（无强制要求，质数即可）
-  const PRIME = 31;
+  // 自己采用的一个质数（无强制要求，质数即可，开发中37用的较多）
+  const PRIME = 37;
 
   // 1、定义存储 hashCode 的变量
   let hashCode = 0;

@@ -3,8 +3,8 @@ import { hashFn, HashTable, isPrime } from './hashTable';
 console.log('// ----- 哈希表结构测试 START -----//');
 
 console.log('=== START 哈希函数测试 START === ');
-console.log(hashFn('123')); //--> 5
-console.log(hashFn('abc')); //--> 6
+console.log(hashFn('124')); //--> 5
+console.log(hashFn('abc')); //--> 4
 console.log('=== END 哈希函数测试 END === ');
 
 const hashTable = new HashTable();
