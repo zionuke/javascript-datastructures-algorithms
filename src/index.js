@@ -1,5 +1,5 @@
 // 导入栈结构的封装及测试代码
-import './Stack'
+// import './Stack'
 
 // 导入队列结构的封装及测试代码
 // import './Queue'
@@ -17,7 +17,7 @@ import './Stack'
 // import './Set'
 
 // 导入字典结构的封装及测试代码
-// import './Map'
+import './Map'
 
 // 导入哈希表结构的封装及测试代码
 // import './HashTable';

@@ -8,7 +8,7 @@ const map = new Map();
 map.set('name', 'XPoet');
 map.set('age', 18);
 map.set('email', 'i@xpoet.cn');
-console.log(map); // {items: {name: "XPoet", age: 18, email: "i@xpoet.cn"}}
+console.log(map.items); // {items: {name: "XPoet", age: 18, email: "i@xpoet.cn"}}
 
 // has() 测试
 console.log(map.has('name')); //--> true
@@ -16,7 +16,7 @@ console.log(map.has('address')); //--> false
 
 // remove() 测试
 map.remove('name');
-console.log(map); // {age: 18, email: "i@xpoet.cn"}
+console.log(map.items); // {age: 18, email: "i@xpoet.cn"}
 
 // get() 测试
 console.log(map.get('age')); //--> 18
