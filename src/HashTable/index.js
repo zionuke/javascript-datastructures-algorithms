@@ -5,31 +5,40 @@ console.log('// ----- 哈希表结构测试 START -----//');
 const hashTable = new HashTable();
 
 console.log('=== START 哈希函数测试 START === ');
-console.log(hashTable.hashFn('124')); //--> 3
-console.log(hashTable.hashFn('abc')); //--> 2
+console.log(hashTable.hashFn('Aethelwulf')); //--> 1
+console.log(hashTable.hashFn('Jamie')); //--> 4
 console.log('=== END 哈希函数测试 END === ');
 
 // put() 测试
-hashTable.put('name', 'XPoet');
-hashTable.put('age', 18);
-hashTable.put('height', 178);
-hashTable.put('email', 'i@xpoet.cn');
-hashTable.put('address', 'china');
-console.log(hashTable);
-//--> {storage: Array(6), count: 5, limit: 7, loadFactor: 0.75, minLoadFactor: 0.25}
-
-hashTable.put('address2', 'china2');
-console.log(hashTable);
-//--> {storage: Array(16), count: 6, limit: 17, loadFactor: 0.75, minLoadFactor: 0.25}
+hashTable.put('Aethelwulf', 'aethelwulf@email.com');
+hashTable.put('Jamie', 'jamie@email.com');
+hashTable.put('Jack', 'jack@email.com');
+hashTable.put('Nathan', 'nathan@email.com');
+hashTable.put('Sue', 'sue@email.com');
+console.log(hashTable.toString());
+/**
+ *哈希表存储数据
+  0=>Jack,jack@email.com
+  0=>Sue,sue@email.com
+  1=>Aethelwulf,aethelwulf@email.com
+  3=>Nathan,nathan@email.com
+  4=>Jamie,jamie@email.com
+ */
 
 // get() 测试
-console.log(hashTable.get('name')); //--> XPoet
-
+console.log(hashTable.get('Jack')); //--> jack@email.com
+console.log(hashTable.get('Sue')); //--> sue@email.com
+console.log(hashTable.get('name')); //--> null
 // remove() 测试
-hashTable.remove('address');
-console.log(hashTable);
-//--> {storage: Array(16), count: 5, limit: 17, loadFactor: 0.75, minLoadFactor: 0.25}
-
+console.log(hashTable.remove('Nathan')); //--> ['Nathan', 'nathan@email.com']
+console.log(hashTable.toString());
+/**
+ *哈希表存储数据
+  0=>Jack,jack@email.com
+  0=>Sue,sue@email.com
+  1=>Aethelwulf,aethelwulf@email.com
+  4=>Jamie,jamie@email.com
+ */
 
 console.log('// ----- 哈希表结构测试 END -----//');
 

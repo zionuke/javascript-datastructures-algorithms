@@ -111,5 +111,32 @@ export default class HashTable {
     // 5、没有找到, return null
     return null
   }
+
+  isEmpty() {
+    return this.count === 0
+  }
+
+  size() {
+    return this.count
+  }
+
+  toString() {
+    if (this.isEmpty()) {
+      return ''
+    }
+    let objString = '哈希表存储数据'
+    for (const bucket of this.storage) {
+      // 数组空位不能迭代
+      if (bucket !== undefined) {
+        for (const tuple of bucket) {
+          // 模板字符串拼接，为了换行后前面无空格，写法有点丑
+          objString = `${objString}
+${this.storage.indexOf(bucket)}=>${tuple[0]},${tuple[1]}`
+      }
+      }
+
+    }
+    return objString
+  }
 }
 

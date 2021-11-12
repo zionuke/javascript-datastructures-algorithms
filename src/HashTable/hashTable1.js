@@ -4,22 +4,7 @@
  * @param limit 哈希表的最大个数（数组长度）
  * @returns {number} hashCode
  */
-export function hashFn(string, limit = 7) {
 
-  // 自己采用的一个质数（无强制要求，质数即可，开发中37用的较多）
-  const PRIME = 37;
-
-  // 1、定义存储 hashCode 的变量
-  let hashCode = 0;
-
-  // 2、使用霍纳法则（秦九韶算法），计算 hashCode 的值
-  for (let item of string) {
-    hashCode = PRIME * hashCode + item.charCodeAt();
-  }
-
-  // 3、对 hashCode 取余，并返回
-  return hashCode % limit;
-}
 
 
 /**
@@ -51,7 +36,7 @@ export function isPrime(number) {
 }
 
 // 哈希表的封装
-export class HashTable {
+export default class HashTable {
 
   constructor() {
     this.storage = []; // 哈希表存储数据的变量
@@ -61,6 +46,23 @@ export class HashTable {
     // 装填因子(已有个数/总个数)
     this.loadFactor = 0.75;
     this.minLoadFactor = 0.25;
+  }
+
+  hashFn(string, limit = 7) {
+
+  // 自己采用的一个质数（无强制要求，质数即可，开发中37用的较多）
+  const PRIME = 37;
+
+  // 1、定义存储 hashCode 的变量
+  let hashCode = 0;
+
+  // 2、使用霍纳法则（秦九韶算法），计算 hashCode 的值
+  for (let item of string) {
+    hashCode = PRIME * hashCode + item.charCodeAt();
+  }
+
+  // 3、对 hashCode 取余，并返回
+  return hashCode % limit;
   }
 
   // getPrime(number) 根据传入的 number 获取最临近的质数
@@ -75,7 +77,7 @@ export class HashTable {
   put(key, value) {
 
     // 1、根据 key 获取要映射到 storage 里面的 index（通过哈希函数获取）
-    const index = hashFn(key, this.limit);
+    const index = this.hashFn(key, this.limit);
 
     // 2、根据 index 取出对应的 bucket
     let bucket = this.storage[index];
@@ -109,7 +111,7 @@ export class HashTable {
   // 根据 get(key) 获取 value
   get(key) {
 
-    const index = hashFn(key, this.limit);
+    const index = this.hashFn(key, this.limit);
     const bucket = this.storage[index];
 
     if (bucket === undefined) {
@@ -124,10 +126,10 @@ export class HashTable {
     return null;
   }
 
-  // remove(key) 删除指定 key 的数据
+
   remove(key) {
 
-    const index = hashFn(key, this.limit);
+    const index = this.hashFn(key, this.limit);
     const bucket = this.storage[index];
 
     if (bucket === undefined) {
