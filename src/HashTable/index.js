@@ -1,13 +1,13 @@
-import { hashFn, HashTable, isPrime } from './hashTable';
+import HashTable from './hashTable';
 // ---------------- 封装的哈希表结构测试 ---------------- //
 console.log('// ----- 哈希表结构测试 START -----//');
 
-console.log('=== START 哈希函数测试 START === ');
-console.log(hashFn('124')); //--> 5
-console.log(hashFn('abc')); //--> 4
-console.log('=== END 哈希函数测试 END === ');
-
 const hashTable = new HashTable();
+
+console.log('=== START 哈希函数测试 START === ');
+console.log(hashTable.hashFn('124')); //--> 3
+console.log(hashTable.hashFn('abc')); //--> 2
+console.log('=== END 哈希函数测试 END === ');
 
 // put() 测试
 hashTable.put('name', 'XPoet');
