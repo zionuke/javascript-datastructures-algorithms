@@ -132,9 +132,8 @@ export default class HashTable {
           // 模板字符串拼接，为了换行后前面无空格，写法有点丑
           objString = `${objString}
 ${this.storage.indexOf(bucket)}=>${tuple[0]},${tuple[1]}`
+        }
       }
-      }
-
     }
     return objString
   }
