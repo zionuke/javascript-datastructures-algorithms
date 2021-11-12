@@ -35,7 +35,7 @@ module.exports = {
       }
     ]
   },
-
+  devtool: 'cheap-module-eval-source-map', //开发环境下使用
   // 配置插件
   plugins: [
     new htmlWebpackPlugin({
