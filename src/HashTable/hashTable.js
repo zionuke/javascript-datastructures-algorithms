@@ -10,7 +10,7 @@ export default class HashTable {
     this.limit = 7  // 哈希表长度（初始设为质数 7）
   }
 
-  /**
+ /**
  * 设计哈希函数，将传入的键哈希化，转换成 hashCode
  * @param key 要哈希化的键
  * @param {number} limit 哈希表的最大个数（数组长度）
@@ -35,6 +35,39 @@ export default class HashTable {
 
     // 对 hashCode 取余，并返回
     return hashCode % limit
+  }
+
+  // put(key, value) 哈希表添加或修改数据
+  put(key, value) {
+
+    // 1、根据传入的key获取对应的hashCode, 也就是数组的index
+    const index = this.hashFn(key, this.limit)
+
+    // 2、从哈希表的index位置中取出桶(另外一个数组)
+    let bucket = this.storage[index]
+
+    // 3、判断相应位置是否存在 bucket
+    if (bucket === undefined) {
+      bucket = [] // 不存在则创建
+      this.storage[index] = bucket
+      // 桶不存在则为该index第一个数据，直接添加即可
+      bucket.push([key, value])
+      this.count++
+      return
+    }
+
+    // 4、判断是插入数据操作还是修改数据操作
+    for (const tuple of bucket) {
+      // 如果 key 相等，则直接修改数据即可
+      if (tuple[0] === key) {
+        tuple[1] = value
+        return
+      }
+    }
+
+    // 5、遍历发现哈希表中无此数据，则在相应 bucket 添加数据
+    bucket.push([key, value])
+    this.count++
   }
 }
 
