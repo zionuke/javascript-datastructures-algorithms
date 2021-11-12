@@ -50,13 +50,10 @@ export default class HashTable {
     if (bucket === undefined) {
       bucket = [] // 不存在则创建
       this.storage[index] = bucket
-      // 桶不存在则为该index第一个数据，直接添加即可
-      bucket.push([key, value])
-      this.count++
-      return
     }
 
     // 4、判断是插入数据操作还是修改数据操作
+    // 注意for...of语句在可迭代对象如数组为空时，不执行循环体内容
     for (const tuple of bucket) {
       // 如果 key 相等，则直接修改数据即可
       if (tuple[0] === key) {
@@ -68,6 +65,27 @@ export default class HashTable {
     // 5、遍历发现哈希表中无此数据，则在相应 bucket 添加数据
     bucket.push([key, value])
     this.count++
+  }
+
+  // get(key) 获取数据
+  get(key) {
+
+    // 1、根据key获取hashCode(也就是index)
+    const index = this.hashFn(key)
+    // 2、根据index取出bucket
+    const bucket = this.storage[index]
+    // 3、bucket不存在，直接返回null
+    if (bucket === undefined) {
+      return null
+    }
+    // 4、bucket存在, 遍历判断是否有对应的key
+    for (const tuple of bucket) {
+      if (tuple[0] === key) {
+        return tuple[1]
+      }
+    }
+    // 5、没有找到, return null
+    return null
   }
 }
 
