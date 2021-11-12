@@ -78,10 +78,34 @@ export default class HashTable {
     if (bucket === undefined) {
       return null
     }
-    // 4、bucket存在, 遍历判断是否有对应的key
+    // 4、bucket存在, 遍历判断是否有key对应的数据
     for (const tuple of bucket) {
       if (tuple[0] === key) {
         return tuple[1]
+      }
+    }
+    // 5、没有找到, return null
+    return null
+  }
+
+  // remove(key) 删除数据
+  remove(key) {
+
+    // 1.获取key对应的index
+    const index = this.hashFn(key)
+    // 2.获取对应的bucket
+    const bucket = this.storage[index]
+    // 3.bucket不存在，直接返回null
+    if (bucket === undefined) {
+      return null
+    }
+    // 4.bucket存在, 遍历判断是否有key对应的数据
+    for (let i = 0; i < bucket.length; i++){
+      let tuple = bucket[i]
+      if (tuple[0] === key) {
+        bucket.splice(i, 1)
+        this.count--
+        return tuple
       }
     }
     // 5、没有找到, return null
