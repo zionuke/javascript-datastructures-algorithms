@@ -37,6 +37,20 @@ export default class HashTable {
     return hashCode % limit
   }
 
+  /**
+  * 判断一个数是否为质数
+  * @param number
+  * @returns {boolean}
+  */
+  isPrime(number) {
+    for (let i = 2; i < number; i++){
+      if (number % i === 0) {
+        return false
+      }
+    }
+    return true
+  }
+
   // put(key, value) 哈希表添加或修改数据
   put(key, value) {
 
