@@ -156,7 +156,7 @@ export default class HashTable {
   }
 
   isEmpty() {
-    return this.count === 0;
+    return this.count === 0
   }
 
   size() {
@@ -181,7 +181,6 @@ export default class HashTable {
           this.put(b[0], b[1]);
         }
       }
-
     }
   }
 }

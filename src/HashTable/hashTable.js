@@ -67,6 +67,14 @@ export default class HashTable {
     return true
   }
 
+  // getPrime(number) 根据传入的 number 获取最接近的质数
+  getPrime(number) {
+    while (!this.isPrime(number)) {
+      number++
+    }
+    return number
+  }
+
   // put(key, value) 哈希表添加或修改数据
   put(key, value) {
 
@@ -98,7 +106,7 @@ export default class HashTable {
 
     // 6、判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
     if (this.count > this.limit * 0.75) {
-      this.resize(this.limit * 2)
+      this.resize(this.getPrime(this.limit * 2))
     }
   }
 
@@ -143,7 +151,7 @@ export default class HashTable {
         this.count--
         // 根据装填因子的大小，判断是否要进行哈希表压缩
         if (this.count > 7 && this.count < this.limit * 0.25) {
-          this.resize(Math.floor(this.limit / 2))
+          this.resize(this.getPrime(Math.floor(this.limit / 2)))
         }
         return tuple
       }
