@@ -42,8 +42,24 @@ export default class HashTable {
   * @param number
   * @returns {boolean}
   */
+  // 方法一，性能较差
+  // isPrime(number) {
+  //   if (number <= 1) {
+  //     return false
+  //   }
+  //   for (let i = 2; i < number; i++){
+  //     if (number % i === 0) {
+  //       return false
+  //     }
+  //   }
+  //   return true
+  // }
   isPrime(number) {
-    for (let i = 2; i < number; i++){
+    if (number <= 1) {
+      return false
+    }
+    const sqrt = Math.floor(Math.sqrt(number))
+    for (let i = 2; i <= sqrt; i++){
       if (number % i === 0) {
         return false
       }
