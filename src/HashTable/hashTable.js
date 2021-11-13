@@ -65,6 +65,11 @@ export default class HashTable {
     // 5、遍历发现哈希表中无此数据，则在相应 bucket 添加数据
     bucket.push([key, value])
     this.count++
+
+    // 6、判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
+    if (this.count > this.limit * 0.75) {
+      this.resize(this.limit * 2)
+    }
   }
 
   // get(key) 获取数据
@@ -103,13 +108,40 @@ export default class HashTable {
     for (let i = 0; i < bucket.length; i++){
       let tuple = bucket[i]
       if (tuple[0] === key) {
+        // 找到则删除对应位置的数组项
         bucket.splice(i, 1)
         this.count--
+        // 根据装填因子的大小，判断是否要进行哈希表压缩
+        if (this.count > 7 && this.count < this.limit * 0.25) {
+          this.resize(Math.floor(this.limit / 2))
+        }
         return tuple
       }
     }
-    // 5、没有找到, return null
+    // 没有找到, return null
     return null
+  }
+
+  // resize(newLimit) 重新调整哈希表大小，扩容或压缩
+  resize(newLimit) {
+
+    // 1、保存旧的哈希表数组内容
+    const oldStorage = this.storage
+
+    // 2、重置哈希表
+    this.storage = []
+    this.count = 0
+    this.limit = newLimit
+
+    // 3、遍历旧哈希表中的所有数据项, 并且重新插入到新哈希表中
+    for (const bucket of oldStorage) {
+      // bucket存在则遍历bucket重新插入数据
+      if (bucket !== undefined) {
+        for (const tuple of bucket) {
+          this.put(tuple[0], tuple[1])
+        }
+      }
+    }
   }
 
   isEmpty() {
@@ -130,8 +162,7 @@ export default class HashTable {
       if (bucket !== undefined) {
         for (const tuple of bucket) {
           // 模板字符串拼接，为了换行后前面无空格，写法有点丑
-          objString = `${objString}
-${this.storage.indexOf(bucket)}=>${tuple[0]},${tuple[1]}`
+          objString = objString + '\n' + `${this.storage.indexOf(bucket)}=>${tuple[0]},${tuple[1]}`
         }
       }
     }
