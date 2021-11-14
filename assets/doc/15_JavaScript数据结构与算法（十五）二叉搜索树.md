@@ -1,4 +1,4 @@
-# JavaScript 数据结构与算法（十三）二叉搜索树
+# JavaScript 数据结构与算法（十五）二叉搜索树
 
 ## 二叉搜索树
 
@@ -391,7 +391,7 @@ while (currentNode.key !== key) {
     } else {
       parentNode.right = null;
     }
-
+  
     // 2、删除的是只有一个子节点的节点
   }
   ```

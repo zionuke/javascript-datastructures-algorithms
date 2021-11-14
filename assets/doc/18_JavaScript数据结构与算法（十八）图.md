@@ -1,4 +1,4 @@
-# JavaScript 数据结构与算法（十四）图
+# JavaScript 数据结构与算法（十八）图
 
 ## 图的概念
 
@@ -437,5 +437,4 @@ _initializeColor() {
 
 - 递归的代码较难理解一些，这副图来帮助理解过程：
   ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.6z6nkgmevxo0.png)
-
 

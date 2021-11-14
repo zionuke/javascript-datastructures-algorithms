@@ -1,4 +1,4 @@
-# JavaScript 数据结构与算法（十一）树
+# JavaScript 数据结构与算法（十三）树
 
 ## 树结构
 
