@@ -107,4 +107,26 @@ export default class BinarySearchTree {
       callback(node.key)
     }
   }
+
+  // min() 获取二叉搜索树最小值
+  min() {
+    if (!this.root) return null
+    let node = this.root
+    while (node.left !== null) {
+      node = node.left
+    }
+    return node.key
+  }
+
+  // max() 获取二叉搜索树最大值
+  max() {
+    if (!this.root) return null
+    let node = this.root
+    while (node.right !== null) {
+      node = node.right
+    }
+    return node.key
+  }
+
+
 }
