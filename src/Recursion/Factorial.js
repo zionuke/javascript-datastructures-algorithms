@@ -1,5 +1,6 @@
 // @ts-check
 
+// 迭代阶乘
 function factorialIterative(number) {
   if (number < 0) {
     return undefined;
@@ -14,6 +15,7 @@ function factorialIterative(number) {
 console.log('factorialIterative(5): ', factorialIterative(5));
 console.log('factorialIterative(3): ', factorialIterative(3));
 
+// 递归阶乘
 function factorial(n) {
   // console.trace();
   if (n === 1 || n === 0) {
