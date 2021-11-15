@@ -48,4 +48,31 @@ export default class BinarySearchTree {
       }
     }
   }
+
+  // ----------- 二叉树遍历 ----------- //
+
+  /**
+  * 先序遍历（根左右 DLR）
+  * @param {function} callback 回调函数,用来定义对遍历到的每个节点进行的操作(这也叫作访问者模式)
+  */
+  preOrderTraverse(callback) {
+    this.preOrderTraverseNode(this.root, callback)
+  }
+
+  /**
+  * 先序遍历的辅助方法
+  * @param node 要遍历的树的根节点
+  * @param {function} callback 回调函数,用来定义对遍历到的每个节点进行的操作
+  */
+  preOrderTraverseNode(node, callback) {
+    // 检查以参数形式传入的节点是否为null，是递归算法的基线条件
+    if (node !== null) {
+      // 访问根节点
+      callback(node.key)
+      // 先序遍历其左子树
+      this.preOrderTraverseNode(node.left, callback)
+      // 先序遍历其右子树
+      this.preOrderTraverseNode(node.right, callback)
+    }
+  }
 }

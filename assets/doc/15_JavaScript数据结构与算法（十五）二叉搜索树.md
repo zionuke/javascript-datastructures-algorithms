@@ -149,9 +149,10 @@ insertNode(root, node) {
 
 先序遍历的过程为：
 
-首先，遍历根节点；
-然后，遍历其左子树；
-最后，遍历其右子树；
+1. 访问根节点；
+
+2. 先序遍历其左子树；
+3. 先序遍历其右子树；
 
 ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.69ooahvtbbo0.png)
 
