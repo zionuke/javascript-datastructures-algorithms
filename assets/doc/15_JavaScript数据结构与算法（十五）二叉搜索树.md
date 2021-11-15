@@ -82,14 +82,14 @@ insert(key) 代码实现
 ```js
 // insert(key) 插入数据
 insert(key) {
-  const newNode = new Node(key);
-
+  // 根据传入的key, 创建对应的Node
+  const newNode = new Node(key)
+  // 判断根节点是否存在,不存在则直接把新节点作为根节点
   if (this.root === null) {
-    this.root = newNode;
-  } else {
-    this.insertNode(this.root, newNode);
+    this.root = newNode
+  } else { //若存在根节点则调用insertNode比较决定插入的位置
+    this.insertNode(this.root, newNode)
   }
-
 }
 ```
 
@@ -112,26 +112,23 @@ insertNode() 的实现思路:
 insertNode(root, node) 代码实现
 
 ```js
-insertNode(root, node) {
-
-  if (node.key < root.key) { // 往左边查找插入
-
-    if (root.left === null) {
-      root.left = node;
-    } else {
-      this.insertNode(root.left, node);
+insertNode(node, newNode) {
+  // 往左边查找插入
+  if (newNode.key < node.key) {
+    // 左子节点为空，直接插入(同时作为递归结束条件)
+    if (node.left === null) {
+      node.left = newNode
+    } else { // 左子节点非空，则问题变成了比较左子节点和新节点决定插入位置，递归调用即可
+      this.insertNode(node.left, newNode)
     }
-
   } else { // 往右边查找插入
-
-    if (root.right === null) {
-      root.right = node;
-    } else {
-      this.insertNode(root.right, node);
+    // 右子节点为空，直接插入(同时作为递归结束条件)
+    if (node.right === null) {
+      node.right = newNode
+    } else { // 右子节点非空，则问题变成了比较右子节点和新节点决定插入位置，递归调用即可
+      this.insertNode(node.right, newNode)
     }
-
   }
-
 }
 ```
 
@@ -162,17 +159,20 @@ insertNode(root, node) {
 
 ```js
 // 先序遍历（根左右 DLR）
-preorderTraversal() {
-  const result = [];
-  this.preorderTraversalNode(this.root, result);
-  return result;
+preOrderTraverse(callback) {
+  this.preOrderTraverseNode(this.root, callback)
 }
 
-preorderTraversalNode(node, result) {
-  if (node === null) return result;
-  result.push(node.key);
-  this.preorderTraversalNode(node.left, result);
-  this.preorderTraversalNode(node.right, result);
+preOrderTraverseNode(node, callback) {
+  // 检查以参数形式传入的节点是否为null，是递归算法的基线条件
+  if (node !== null) {
+    // 访问根节点
+    callback(node.key)
+    // 先序遍历其左子树
+    this.preOrderTraverseNode(node.left, callback)
+    // 先序遍历其右子树
+    this.preOrderTraverseNode(node.right, callback)
+  }
 }
 ```
 
@@ -180,9 +180,10 @@ preorderTraversalNode(node, result) {
 
 实现思路：与先序遍历原理相同，只不过是遍历的顺序不一样了。
 
-首先，遍历其左子树；
-然后，遍历根（父）节点；
-最后，遍历其右子树；
+1. 中序遍历其左子树；
+
+2. 访问根节点；
+3. 中序遍历其右子树；
 
 过程图解：
 
@@ -194,17 +195,19 @@ preorderTraversalNode(node, result) {
 
 ```js
 // 中序遍历（左根右 LDR）
-inorderTraversal() {
-  const result = [];
-  this.inorderTraversalNode(this.root, result);
-  return result;
+inOrderTraverse(callback) {
+  this.inOrderTraverseNode(this.root, callback)
 }
 
-inorderTraversalNode(node, result) {
-  if (node === null) return result;
-  this.inorderTraversalNode(node.left, result);
-  result.push(node.key);
-  this.inorderTraversalNode(node.right, result);
+inOrderTraverseNode(node, callback) {
+  if (node != null) {
+    // 中序遍历其左子树
+    this.inOrderTraverseNode(node.left, callback)
+    // 访问根节点
+    callback(node.key)
+    // 中序遍历其右子树
+    this.inOrderTraverseNode(node.right, callback)
+  }
 }
 ```
 
@@ -212,9 +215,10 @@ inorderTraversalNode(node, result) {
 
 实现思路：与先序遍历原理相同，只不过是遍历的顺序不一样了。
 
-首先，遍历其左子树；
-然后，遍历其右子树；
-最后，遍历根（父）节点；
+1. 后序遍历其左子树；
+
+2. 后序遍历其右子树；
+3. 访问根节点；
 
 过程图解：
 
@@ -226,17 +230,19 @@ inorderTraversalNode(node, result) {
 
 ```js
 // 后序遍历（左右根 LRD）
-postorderTraversal() {
-  const result = [];
-  this.postorderTraversalNode(this.root, result);
-  return result;
+postOrderTraverse(callback) {
+  this.postOrderTraverseNode(this.root, callback)
 }
 
-postorderTraversalNode(node, result) {
-  if (node === null) return result;
-  this.postorderTraversalNode(node.left, result);
-  this.postorderTraversalNode(node.right, result);
-  result.push(node.key);
+postOrderTraverseNode(node, callback) {
+  if (node != null) {
+    // 后序遍历其左子树
+    this.postOrderTraverseNode(node.left, callback)
+    // 后序遍历其右子树
+    this.postOrderTraverseNode(node.right, callback)
+    // 访问根节点
+    callback(node.key)
+  }
 }
 ```
 

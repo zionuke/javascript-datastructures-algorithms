@@ -75,4 +75,36 @@ export default class BinarySearchTree {
       this.preOrderTraverseNode(node.right, callback)
     }
   }
+
+  // 中序遍历（左根右 LDR）
+  inOrderTraverse(callback) {
+    this.inOrderTraverseNode(this.root, callback)
+  }
+
+  inOrderTraverseNode(node, callback) {
+    if (node != null) {
+      // 中序遍历其左子树
+      this.inOrderTraverseNode(node.left, callback)
+      // 访问根节点
+      callback(node.key)
+      // 中序遍历其右子树
+      this.inOrderTraverseNode(node.right, callback)
+    }
+  }
+
+  // 后序遍历（左右根 LRD）
+  postOrderTraverse(callback) {
+    this.postOrderTraverseNode(this.root, callback)
+  }
+
+  postOrderTraverseNode(node, callback) {
+    if (node != null) {
+      // 后序遍历其左子树
+      this.postOrderTraverseNode(node.left, callback)
+      // 后序遍历其右子树
+      this.postOrderTraverseNode(node.right, callback)
+      // 访问根节点
+      callback(node.key)
+    }
+  }
 }
