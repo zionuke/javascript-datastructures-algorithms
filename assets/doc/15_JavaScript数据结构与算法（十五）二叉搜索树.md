@@ -289,40 +289,43 @@ max() {
 代码实现：
 
 ```js
-// search(key) 查找二叉搜索树中是否有相同的key，存在返回 true，否则返回 false
+// search(key) 查找BST中是否有特定的值key，存在返回 true，否则返回 false
 search(key) {
-  return this.searchNode(this.root, key);
+  return this.searchNode(this.root, key)
 }
 
-// 通过递归实现
+//search(key)的辅助方法，通过递归实现
 searchNode(node, key) {
-  if (node === null) return false;
+  if (node === null) return false
   if (key < node.key) {
-    return this.searchNode(node.left, key);
+    // 这里注意要加return,否则此条件下无返回值了
+    return this.searchNode(node.left, key)
   } else if (key > node.key) {
-    return this.searchNode(node.right, key);
+    return this.searchNode(node.right, key)
   } else {
-    return true;
+    return true
   }
 }
 
-// 通过 while 循环实现
-search2(key) {
-
-  let node = this.root;
-
+// 迭代实现查找BST某一个特定的值
+searchIterative(key) {
+  // 取得根节点
+  let node = this.root
+  // 只要当前节点非空，就继续查找
   while (node !== null) {
+    // 要查找的数据小于当前节点的数据，则向左查找
     if (key < node.key) {
-      node = node.left;
+      node = node.left
+    // 要查找的数据大于当前节点的数据，则向右查找
     } else if (key > node.key) {
-      node = node.right;
+      node = node.right
+    // 找到该数据，返回true
     } else {
-      return true;
+      return true
     }
   }
-
-  return false;
-
+  // 查到叶节点也没找到，说明无此数据，返回false
+  return false
 }
 ```
 
@@ -332,7 +335,7 @@ search2(key) {
 
 第一步：先找到需要删除的节点，若没找到，则不需要删除；
 
-首先定义变量 current 用于保存需要删除的节点、变量 parent 用于保存它的父节点、变量 isLeftChild 保存 current 是否为 parent 的左节点，这样方便之后删除节点时改变相关节点的指向。
+首先定义变量 current 用于保存需要 删除的节点、变量 parent 用于保存它的父节点、变量 isLeftChild 保存 current 是否为 parent 的左节点，这样方便之后删除节点时改变相关节点的指向。
 
 ```js
 let currentNode = this.root;
@@ -495,21 +498,23 @@ while (currentNode.key !== key) {
 
 相信你已经发现其中的规律了！
 
-规律总结：如果要删除的节点有两个子节点，甚至子节点还有子节点，这种情况下需要从要删除节点下面的子节点中找到一个合适的节点，来替换当前的节点。
+规律总结：如果要**删除的节点有两个子节点**，甚至**子节点还有子节点**，这种情况下需要从要删除节点下面的子节点中找到一个**合适的节点**，来替换**当前的节点**。
 
 若用 current 表示需要删除的节点，则合适的节点指的是：
 
-- current 左子树中比 current 小一点点的节点，即 current 左子树中的最大值；
-- current 右子树中比 current 大一点点的节点，即 current 右子树中的最小值；
+- current 左子树中比 current 小一点点的节点，即 current **左子树中的最大值**；
+- current 右子树中比 current 大一点点的节点，即 current **右子树中的最小值**；
 
 ###### 前驱&后继
 
 在二叉搜索树中，这两个特殊的节点有特殊的名字：
 
-- 比 current 小一点点的节点，称为 current 节点的前驱。比如下图中的节点 5 就是节点 7 的前驱；
-- 比 current 大一点点的节点，称为 current 节点的后继。比如下图中的节点 8 就是节点 7 的后继；
+- 比 current 小一点点的节点，称为 current 节点的**前驱**。比如下图中的节点 5 就是节点 7 的前驱；
+- 比 current 大一点点的节点，称为 current 节点的**后继**。比如下图中的节点 8 就是节点 7 的后继；
 
 ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.71vg0g9z7io0.png)
+
+也就是说为了能够删除有两个子节点的current, 要么找到它的前驱, 要么找到它的后继.
 
 查找需要被删除的节点 current 的后继时，需要在 current 的右子树中查找最小值，即在 current 的右子树中一直向左遍历查找；
 
