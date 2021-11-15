@@ -128,5 +128,42 @@ export default class BinarySearchTree {
     return node.key
   }
 
+  // search(key) 查找BST中是否有特定的值key，存在返回 true，否则返回 false
+  search(key) {
+    return this.searchNode(this.root, key)
+  }
 
+  //search(key)的辅助方法，通过递归实现
+  searchNode(node, key) {
+    if (node === null) return false
+    if (key < node.key) {
+      // 这里注意要加return,否则此条件下无返回值了
+      return this.searchNode(node.left, key)
+    } else if (key > node.key) {
+      return this.searchNode(node.right, key)
+    } else {
+      return true
+    }
+  }
+
+  // 迭代实现查找BST某一个特定的值
+  searchIterative(key) {
+    // 取得根节点
+    let node = this.root
+    // 只要当前节点非空，就继续查找
+    while (node !== null) {
+      // 要查找的数据小于当前节点的数据，则向左查找
+      if (key < node.key) {
+        node = node.left
+      // 要查找的数据大于当前节点的数据，则向右查找
+      } else if (key > node.key) {
+        node = node.right
+      // 找到该数据，返回true
+      } else {
+        return true
+      }
+    }
+    // 查到叶节点也没找到，说明无此数据，返回false
+    return false
+  }
 }
