@@ -71,7 +71,7 @@
 
 ### 二叉堆和堆排序
 
-- [二叉堆的封装](src/Heap/Heap.js)
+- [二叉堆的封装](src/Heap/heap.js)
 
 ### 图
 
