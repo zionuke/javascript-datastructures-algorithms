@@ -67,7 +67,7 @@
 
 ### 树
 
-- [二叉搜索树的封装](src/Tree/tree.js)
+- [二叉搜索树的封装](src/Tree/binary-search-tree.js)
 
 ### 二叉堆和堆排序
 
@@ -119,11 +119,14 @@ npm run start
 // import './Map'
 
 // 导入哈希表结构的封装及测试代码
-// import './HashTable';
+// import './HashTable'
+
+// 导入递归的封装及测试代码
+// import './Recursion'
 
 // 导入树结构的封装及测试代码
-// import './Tree';
+// import './Tree'
 
-// 导入图结构的封装及测试代码
-// import './Graph';
+// // 导入图结构的封装及测试代码
+// import './Graph'
 ```
