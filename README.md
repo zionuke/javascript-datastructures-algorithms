@@ -25,7 +25,7 @@
 - [JavaScript 数据结构与算法（十三）树](assets/doc/13_JavaScript数据结构与算法（十三）树.md)
 - [JavaScript 数据结构与算法（十四）二叉树](assets/doc/14_JavaScript数据结构与算法（十四）二叉树.md)
 - [JavaScript 数据结构与算法（十五）二叉搜索树](assets/doc/15_JavaScript数据结构与算法（十五）二叉搜索树.md)
-- [JavaScript 数据结构与算法（十六）自平衡树](assets/doc/.md)
+- [JavaScript 数据结构与算法（十六）自平衡树](assets/doc/16_JavaScript数据结构与算法（十六）自平衡树.md)
 - [JavaScript 数据结构与算法（十七）二叉堆和堆排序](assets/doc/.md)
 - [JavaScript 数据结构与算法（十八）图](assets/doc/18_JavaScript数据结构与算法（十八）图.md)
 
