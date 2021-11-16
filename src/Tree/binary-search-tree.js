@@ -110,23 +110,50 @@ export default class BinarySearchTree {
 
   // min() 获取二叉搜索树最小值
   min() {
-    if (!this.root) return null
-    let node = this.root
-    while (node.left !== null) {
-      node = node.left
-    }
-    return node.key
+    return this.minNode(this.root)
   }
+
+  // min()的辅助方法，查找以节点node为根节点的树的最小的节点
+  minNode(node) {
+    if (!node) return null
+    let current = node
+    while (current.left !== null) {
+      current = current.left
+    }
+    return current
+  }
+
+  // min() {
+  //   if (!this.root) return null
+  //   let node = this.root
+  //   while (node.left !== null) {
+  //     node = node.left
+  //   }
+  //   return node.key
+  // }
 
   // max() 获取二叉搜索树最大值
   max() {
-    if (!this.root) return null
-    let node = this.root
-    while (node.right !== null) {
-      node = node.right
-    }
-    return node.key
+    return this.maxNode(this.root)
   }
+
+  // max()的辅助方法，查找以节点node为根节点的树的最大的节点
+  maxNode(node) {
+    let current = node
+    while (current != null && current.right != null) {
+      current = current.right
+    }
+    return current
+  }
+
+  // max() {
+  //   if (!this.root) return null
+  //   let node = this.root
+  //   while (node.right !== null) {
+  //     node = node.right
+  //   }
+  //   return node.key
+  // }
 
   // search(key) 查找BST中是否有特定的值key，存在返回 true，否则返回 false
   search(key) {
@@ -167,8 +194,63 @@ export default class BinarySearchTree {
     return false
   }
 
-  // 删除节点
+  // 删除节点，通过递归实现
   remove(key) {
+    // root被赋值为removeNode方法的返回值，这里很关键
+    this.root = this.removeNode(this.root, key)
+  }
+
+  // remove(key)的辅助方法
+  removeNode(node, key) {
+    // 如果正在检测的节点为null，说明键不存在于树中，返回null
+    if (node === null) {
+      return null
+    }
+    // 要找的键比当前节点的值小，沿着树的左边找到下一个节点
+    if (key < node.key) {
+      node.left = this.removeNode(node.left, key)
+      return node
+      // 要找的键比当前节点的值大，沿着树的右边找到下一个节点
+    } else if (key > node.key) {
+      node.right = this.removeNode(node.right, key)
+      return node
+    } else {
+      // 找到要删除的节点，分类讨论
+
+      // 1、删除的是叶子节点的情况
+      if (node.left === null && node.right === null) {
+
+        // 返回null来将对应的父节点指针赋予null值
+        return null
+
+        // 2、删除的是只有一个子节点的节点
+        // 2.1 要删除的节点只存在<右子节点>的情况
+      } else if (node.left === null) {
+        // 把对它的引用改为对它右侧子节点的引用
+        return node.right
+
+        // 2.2 要删除的节点只存在<左子节点>的情况
+      } else if (node.right === null) {
+        // 把对它的引用改为对它左侧子节点的引用
+        return node.left
+
+        // 3、删除的是有两个子节点的节点
+      } else {
+
+        // 找到它右边子树中最小的节点(它的继承者)
+        const aux = this.minNode(node.right)
+        // 用它右侧子树中最小节点的键去更新这个节点的值，即它被移除了
+        node.key = aux.key
+        // 把右侧子树中的最小节点移除，因为它已经被移至要移除的节点的位置了
+        node.right = this.removeNode(node.right, aux.key)
+        // 向它的父节点返回更新后节点的引用
+        return node
+      }
+    }
+  }
+
+  // 删除节点,通过循环迭代实现
+  removeIterative(key) {
     // 二叉树为空，直接返回false
     if (!this.root) return false
 
@@ -212,7 +294,7 @@ export default class BinarySearchTree {
 
       // 2、删除的是只有一个子节点的节点
     } else if (current.right === null) {
-      //-- 2.1、要删除的节点只存在<左节点>的情况
+      //-- 2.1、要删除的节点只存在<左子节点>的情况
 
       //---- 2.1.1、要删除的节点为根节点
       if (current === this.root) {
@@ -225,7 +307,7 @@ export default class BinarySearchTree {
         parent.right = current.left
       }
     } else if (current.left === null) {
-      //-- 2.2、currentNode 只存在<右节点>的情况
+      //-- 2.2、要删除的节点只存在<右子节点>的情况
 
       //---- 2.2.1 要删除的节点为根节点
       if (current === this.root) {

@@ -1,4 +1,4 @@
-import { BinarySearchTree } from './tree';
+import BinarySearchTree from './binary-search-tree';
 // ---------------- 封装的树结构测试 ---------------- //
 console.log('// ----- 树结构测试 START -----//');
 
@@ -22,23 +22,28 @@ binarySearchTree.insert(25);
 binarySearchTree.insert(19);
 console.log(binarySearchTree);
 
+const printNode = (value) => console.log(value);
 
-console.log('前序遍历', binarySearchTree.preorderTraversal());
-console.log('中序遍历', binarySearchTree.inorderTraversal());
-console.log('后序遍历', binarySearchTree.postorderTraversal());
+console.log('前序遍历');
+binarySearchTree.preOrderTraverse(printNode);
+console.log('中序遍历');
+binarySearchTree.inOrderTraverse(printNode);
+console.log('后序遍历');
+binarySearchTree.postOrderTraverse(printNode);
 console.log('min', binarySearchTree.min());
 console.log('max', binarySearchTree.max());
 console.log('search(98)-递归实现', binarySearchTree.search(98));
 console.log('search(10)-递归实现', binarySearchTree.search(10));
 
-console.log('search(98)-while循环实现', binarySearchTree.search2(98));
-console.log('search(10)-while循环实现', binarySearchTree.search2(10));
+console.log('search(98)-迭代实现', binarySearchTree.searchIterative(98));
+console.log('search(10)-迭代实现', binarySearchTree.searchIterative(10));
 
-console.log('remove(20)');
-binarySearchTree.remove(20);
-console.log(binarySearchTree);
-console.log(binarySearchTree.inorderTraversal());
-
+console.log('remove(11)');
+binarySearchTree.remove(11);
+binarySearchTree.inOrderTraverse(printNode);
+console.log('remove(35)');
+binarySearchTree.remove(35);
+binarySearchTree.inOrderTraverse(printNode);
 console.log('// -----树结构测试 END -----//');
 
 
