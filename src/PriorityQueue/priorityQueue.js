@@ -62,5 +62,4 @@ export class PriorityQueue extends Queue{
     }
     return result
   }
-  
 }

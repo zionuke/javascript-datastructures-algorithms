@@ -238,5 +238,4 @@ export class DoublyLinkedList extends LinkedList {
 
     return result
   }
-
 }

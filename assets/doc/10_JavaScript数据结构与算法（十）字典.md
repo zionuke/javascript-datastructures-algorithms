@@ -96,27 +96,27 @@ export default class Map {
 const map = new Map();
 
 // set() 测试
-map.set("name", "XPoet");
-map.set("age", 18);
-map.set("email", "i@xpoet.cn");
-console.log(map); // {items: {name: "XPoet", age: 18, email: "i@xpoet.cn"}}
+map.set('name', 'Jack');
+map.set('age', 22);
+map.set('email', '@hust.edu.cn');
+console.log(map.items); // {items: {name: 'Jack', age: 22, email: '@hust.edu.cn'}}
 
 // has() 测试
-console.log(map.has("name")); //--> true
-console.log(map.has("address")); //--> false
+console.log(map.has('name')); //--> true
+console.log(map.has('address')); //--> false
 
 // remove() 测试
-map.remove("name");
-console.log(map); // {age: 18, email: "i@xpoet.cn"}
+map.remove('name');
+console.log(map.items); // {age: 22, email: "@hust.edu.cn"}
 
 // get() 测试
-console.log(map.get("age")); //--> 18
+console.log(map.get('age')); //--> 22
 
 // keys() 测试
 console.log(map.keys()); //--> ["age", "email"]
 
 // values() 测试
-console.log(map.values()); //--> [18, "i@xpoet.cn"]
+console.log(map.values()); //--> [22, "@hust.edu.cn"]
 
 // size() 测试
 console.log(map.size()); //--> 2

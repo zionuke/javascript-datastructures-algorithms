@@ -51,9 +51,9 @@
 // 节点类
 class Node {
   constructor(key) {
-    this.key = key;
-    this.left = null;
-    this.right = null;
+    this.key = key //节点值
+    this.left = null // 左侧子节点引用
+    this.right = null //右侧子节点引用
   }
 }
 ```
@@ -263,22 +263,31 @@ postOrderTraverseNode(node, callback) {
 ```js
 // min() 获取二叉搜索树最小值
 min() {
-  if (!this.root) return null;
-  let node = this.root;
-  while (node.left !== null) {
-    node = node.left;
+  return this.minNode(this.root)
+}
+
+// min()的辅助方法，查找以节点node为根节点的树的最小的节点
+minNode(node) {
+  if (!node) return null
+  let current = node
+  while (current.left !== null) {
+    current = current.left
   }
-  return node.key;
+  return current
 }
 
 // max() 获取二叉搜索树最大值
 max() {
-  if (!this.root) return null;
-  let node = this.root;
-  while (node.right !== null) {
-    node = node.right;
+  return this.maxNode(this.root)
+}
+
+// max()的辅助方法，查找以节点node为根节点的树的最大的节点
+maxNode(node) {
+  let current = node
+  while (current != null && current.right != null) {
+    current = current.right
   }
-  return node.key;
+  return current
 }
 ```
 
@@ -329,7 +338,7 @@ searchIterative(key) {
 }
 ```
 
-#### 删除数据
+#### 删除数据(通过循环迭代实现)
 
 实现思路：
 
@@ -338,27 +347,30 @@ searchIterative(key) {
 首先定义变量 current 用于保存需要 删除的节点、变量 parent 用于保存它的父节点、变量 isLeftChild 保存 current 是否为 parent 的左节点，这样方便之后删除节点时改变相关节点的指向。
 
 ```js
-let currentNode = this.root;
-let parentNode = null;
-let isLeftChild = true;
+// 二叉树为空，直接返回false
+if (!this.root) return false
 
-// 循环查找到要删除的节点 currentNode，以及它的 parentNode、isLeftChild
-while (currentNode.key !== key) {
-  parentNode = currentNode;
+// 寻找要删除的节点
+// 定义临时保存的变量
+let current = this.root //查找的当前节点
+let parent = null //当前节点的父节点
+let isLeftChild = true //当前节点是否为父节点的左子节点
 
-  // 小于，往左查找
-  if (key < currentNode.key) {
-    isLeftChild = true;
-    currentNode = currentNode.left;
+// 开始寻找要删除的节点
+while (current.key !== key) {
+  parent = current
+  // 要删除的节点小于当前节点，往左找
+  if (key < current.key) {
+    isLeftChild = true
+    current = current.left
+  // 要删除的节点大于当前节点，往右找
   } else {
-    // 否则往右查找
-    isLeftChild = false;
-    currentNode = currentNode.right;
+    isLeftChild = false
+    current = current.right
   }
-
-  // 找到最后都没找到相等的节点，返回 false
-  if (currentNode === null) {
-    return false;
+  // 查找到叶节点仍未找到，返回false
+  if (current === null) {
+    return false
   }
 }
 ```
@@ -393,17 +405,17 @@ while (currentNode.key !== key) {
 
   ```js
   // 1、删除的是叶子节点的情况
-  if (currentNode.left === null && currentNode.right === null) {
-    if (currentNode === this.root) {
-      this.root = null;
+  if (current.left === null && current.right === null) {
+    // 叶子节点同时是根节点
+    if (current === this.root) {
+      this.root = null
+      // 是父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = null;
+      parent.left = null
+      // 是父节点的右子节点
     } else {
-      parentNode.right = null;
+      parent.right = null
     }
-  
-    // 2、删除的是只有一个子节点的节点
-  }
   ```
 
 ##### 删除的是只有一个子节点的节点
@@ -434,32 +446,31 @@ while (currentNode.key !== key) {
 
 ```js
 // 2、删除的是只有一个子节点的节点
-} else if (currentNode.right === null) { // currentNode 只存在左节点
-  //-- 2.1、currentNode 只存在<左节点>的情况
-  //---- 2.1.1、currentNode 等于 root
-  //---- 2.1.2、parentNode.left 等于 currentNode
-  //---- 2.1.3、parentNode.right 等于 currentNode
+} else if (current.right === null) {
+  //-- 2.1、要删除的节点只存在<左子节点>的情况
 
-  if (currentNode === this.root) {
-    this.root = currentNode.left;
+  //---- 2.1.1、要删除的节点为根节点
+  if (current === this.root) {
+    this.root = current.left
+    //---- 2.1.2、要删除的节点是其父节点的左子节点
   } else if (isLeftChild) {
-    parentNode.left = currentNode.left;
+    parent.left = current.left
+    //---- 2.1.3、要删除的节点是其父节点的右子节点
   } else {
-    parentNode.right = currentNode.left;
+    parent.right = current.left
   }
+} else if (current.left === null) {
+  //-- 2.2、要删除的节点只存在<右子节点>的情况
 
-} else if (currentNode.left === null) { // currentNode 只存在右节点
-  //-- 2.2、currentNode 只存在<右节点>的情况
-  //---- 2.1.1 currentNode 等于 root
-  //---- 2.1.1 parentNode.left 等于 currentNode
-  //---- 2.1.1 parentNode.right 等于 currentNode
-
-  if (currentNode === this.root) {
-    this.root = currentNode.right;
+  //---- 2.2.1 要删除的节点为根节点
+  if (current === this.root) {
+    this.root = current.right
+    //---- 2.2.2 要删除的节点是其父节点的左子节点
   } else if (isLeftChild) {
-    parentNode.left = currentNode.right;
+    parent.left = current.right
+    //---- 2.2.3 要删除的节点是其父节点的右子节点
   } else {
-    parentNode.right = currentNode.right;
+    parent.right = current.right
   }
 ```
 
@@ -525,166 +536,238 @@ while (currentNode.key !== key) {
 代码实现：
 
 ```js
-  // 3、删除的是有两个子节点的节点
+// 3、删除的是有两个子节点的节点
   } else {
 
-    // 1、找到后续节点
-    let successor = this.getSuccessor(currentNode);
+    // 3.1 找到要删除节点的后继节点
+    const successor = this.getSuccessor(current)
 
-    // 2、判断是否为根节点
-    if (currentNode === this.root) {
-      this.root = successor;
+    // 3.2.1 要删除的节点为根节点
+    if (current === this.root) {
+      this.root = successor
+      // 3.2.2 要删除的节点是其父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = successor;
+      parent.left = successor
+      // 3.2.3 要删除的节点是其父节点的右子节点
     } else {
-      parentNode.right = successor;
+      parent.right = successor
     }
 
-    // 3、将后续的左节点改为被删除的左节点
-    successor.left = currentNode.left;
+    // 3.3 将后继节点的左子节点改为被删除的节点的左子节点
+    successor.left = current.left
   }
 }
 
-// 获取后续节点，即从要删除的节点的右边开始查找最小的值
+// 获取要删除节点的后继节点，即从要删除的节点的右边开始查找最小的值
 getSuccessor(delNode) {
 
-  // 定义变量，保存要找到的后续
-  let successor = delNode;
-  let current = delNode.right;
-  let successorParent = delNode;
+  // 定义状态变量，保存要找到的后续节点相关的信息
+  let successor = delNode     //保存后继节点
+  let successorParent = null  //保存后继节点的父节点
+  let current = delNode.right //当前节点，用于遍历标识是否已找到后续节点
 
-  // 循环查找 current 的右子树节点
+  // 当没找到后继节点时，遍历要删除节点的右子树的左子节点，直到找到后继节点
   while (current !== null) {
-    successorParent = successor;
-    successor = current;
-    current = current.left;
+    successorParent = successor
+    successor = current
+    current = current.left
   }
 
-  // 判断寻找到的后续节点是否直接就是要删除节点的 right
+  // 若找到的后继节点不是要删除节点的直接右子节点，则后继节点可能有右子节点(不可能有左子节点，若有的话，该节点会成为后继节点，情况反而变简单了)，需要后继节点的父节点指向后继节点的右子节点，同时要删除节点的右子节点要成为后继节点的右子节点
   if (successor !== delNode.right) {
-    successorParent.left = successor.right;
-    successor.right = delNode.right;
+    // 后继节点的父节点指向后继节点的右子节点
+    successorParent.left = successor.right
+    // 要删除节点的右子节点要成为后继节点的右子节点
+    successor.right = delNode.right
   }
-  return successor;
+
+  // 返回找到的后继节点
+  return successor
 }
 ```
 
 ##### 完整实现
 
 ```js
-// 删除节点
-remove(key) {
+// 删除节点,通过循环迭代实现
+removeIterative(key) {
+  // 二叉树为空，直接返回false
+  if (!this.root) return false
 
-  let currentNode = this.root;
-  let parentNode = null;
-  let isLeftChild = true;
+  // 寻找要删除的节点
+  // 定义临时保存的变量
+  let current = this.root //查找的当前节点
+  let parent = null //当前节点的父节点
+  let isLeftChild = true //当前节点是否为父节点的左子节点
 
-  // 循环查找到要删除的节点 currentNode，以及它的 parentNode、isLeftChild
-  while (currentNode.key !== key) {
-
-    parentNode = currentNode;
-
-    // 小于，往左查找
-    if (key < currentNode.key) {
-      isLeftChild = true;
-      currentNode = currentNode.left;
-
-    } else {  // 否则往右查找
-      isLeftChild = false;
-      currentNode = currentNode.right;
+  // 开始寻找要删除的节点
+  while (current.key !== key) {
+    parent = current
+    // 要删除的节点小于当前节点，往左找
+    if (key < current.key) {
+      isLeftChild = true
+      current = current.left
+    // 要删除的节点大于当前节点，往右找
+    } else {
+      isLeftChild = false
+      current = current.right
     }
-
-    // 找到最后都没找到相等的节点，返回 false
-    if (currentNode === null) {
-      return false;
+    // 查找到叶节点仍未找到，返回false
+    if (current === null) {
+      return false
     }
-
   }
 
-
+  // 找到要删除的节点，分类讨论
   // 1、删除的是叶子节点的情况
-  if (currentNode.left === null && currentNode.right === null) {
-
-    if (currentNode === this.root) {
-      this.root = null;
+  if (current.left === null && current.right === null) {
+    // 叶子节点同时是根节点
+    if (current === this.root) {
+      this.root = null
+      // 是父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = null;
+      parent.left = null
+      // 是父节点的右子节点
     } else {
-      parentNode.right = null;
+      parent.right = null
     }
-
 
     // 2、删除的是只有一个子节点的节点
-  } else if (currentNode.right === null) { // currentNode 只存在左节点
-    //-- 2.1、currentNode 只存在<左节点>的情况
-    //---- 2.1.1、currentNode 等于 root
-    //---- 2.1.2、parentNode.left 等于 currentNode
-    //---- 2.1.3、parentNode.right 等于 currentNode
+  } else if (current.right === null) {
+    //-- 2.1、要删除的节点只存在<左子节点>的情况
 
-    if (currentNode === this.root) {
-      this.root = currentNode.left;
+    //---- 2.1.1、要删除的节点为根节点
+    if (current === this.root) {
+      this.root = current.left
+      //---- 2.1.2、要删除的节点是其父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = currentNode.left;
+      parent.left = current.left
+      //---- 2.1.3、要删除的节点是其父节点的右子节点
     } else {
-      parentNode.right = currentNode.left;
+      parent.right = current.left
     }
+  } else if (current.left === null) {
+    //-- 2.2、要删除的节点只存在<右子节点>的情况
 
-  } else if (currentNode.left === null) { // currentNode 只存在右节点
-    //-- 2.2、currentNode 只存在<右节点>的情况
-    //---- 2.1.1 currentNode 等于 root
-    //---- 2.1.1 parentNode.left 等于 currentNode
-    //---- 2.1.1 parentNode.right 等于 currentNode
-
-    if (currentNode === this.root) {
-      this.root = currentNode.right;
+    //---- 2.2.1 要删除的节点为根节点
+    if (current === this.root) {
+      this.root = current.right
+      //---- 2.2.2 要删除的节点是其父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = currentNode.right;
+      parent.left = current.right
+      //---- 2.2.3 要删除的节点是其父节点的右子节点
     } else {
-      parentNode.right = currentNode.right;
+      parent.right = current.right
     }
-
 
     // 3、删除的是有两个子节点的节点
   } else {
 
-    // 1、找到后续节点
-    let successor = this.getSuccessor(currentNode);
+    // 3.1 找到要删除节点的后继节点
+    const successor = this.getSuccessor(current)
 
-    // 2、判断是否为根节点
-    if (currentNode === this.root) {
-      this.root = successor;
+    // 3.2.1 要删除的节点为根节点
+    if (current === this.root) {
+      this.root = successor
+      // 3.2.2 要删除的节点是其父节点的左子节点
     } else if (isLeftChild) {
-      parentNode.left = successor;
+      parent.left = successor
+      // 3.2.3 要删除的节点是其父节点的右子节点
     } else {
-      parentNode.right = successor;
+      parent.right = successor
     }
 
-    // 3、将后续的左节点改为被删除的左节点
-    successor.left = currentNode.left;
+    // 3.3 将后继节点的左子节点改为被删除的节点的左子节点
+    successor.left = current.left
   }
 }
 
-// 获取后续节点，即从要删除的节点的右边开始查找最小的值
+// 获取要删除节点的后继节点，即从要删除的节点的右边开始查找最小的值
 getSuccessor(delNode) {
 
-  // 定义变量，保存要找到的后续
-  let successor = delNode;
-  let current = delNode.right;
-  let successorParent = delNode;
+  // 定义状态变量，保存要找到的后续节点相关的信息
+  let successor = delNode     //保存后继节点
+  let successorParent = null  //保存后继节点的父节点
+  let current = delNode.right //当前节点，用于遍历标识是否已找到后续节点
 
-  // 循环查找 current 的右子树节点
+  // 当没找到后继节点时，遍历要删除节点的右子树的左子节点，直到找到后继节点
   while (current !== null) {
-    successorParent = successor;
-    successor = current;
-    current = current.left;
+    successorParent = successor
+    successor = current
+    current = current.left
   }
 
-  // 判断寻找到的后续节点是否直接就是要删除节点的 right
+  // 若找到的后继节点不是要删除节点的直接右子节点，则后继节点可能有右子节点(不可能有左子节点，若有的话，该节点会成为后继节点，情况反而变简单了)，需要后继节点的父节点指向后继节点的右子节点，同时要删除节点的右子节点要成为后继节点的右子节点
   if (successor !== delNode.right) {
-    successorParent.left = successor.right;
-    successor.right = delNode.right;
+    // 后继节点的父节点指向后继节点的右子节点
+    successorParent.left = successor.right
+    // 要删除节点的右子节点要成为后继节点的右子节点
+    successor.right = delNode.right
   }
-  return successor;
+
+  // 返回找到的后继节点
+  return successor
+}
+```
+
+#### 删除数据(通过递归实现)
+
+代码更少更容易实现
+
+```js
+// 删除节点，通过递归实现
+remove(key) {
+  // root被赋值为removeNode方法的返回值，这里很关键
+  this.root = this.removeNode(this.root, key)
+}
+
+// remove(key)的辅助方法
+removeNode(node, key) {
+  // 如果正在检测的节点为null，说明键不存在于树中，返回null
+  if (node === null) {
+    return null
+  }
+  // 要找的键比当前节点的值小，沿着树的左边找到下一个节点
+  if (key < node.key) {
+    node.left = this.removeNode(node.left, key)
+    return node
+    // 要找的键比当前节点的值大，沿着树的右边找到下一个节点
+  } else if (key > node.key) {
+    node.right = this.removeNode(node.right, key)
+    return node
+  } else {
+    // 找到要删除的节点，分类讨论
+
+    // 1、删除的是叶子节点的情况
+    if (node.left === null && node.right === null) {
+
+      // 返回null来将对应的父节点指针赋予null值
+      return null
+
+      // 2、删除的是只有一个子节点的节点
+      // 2.1 要删除的节点只存在<右子节点>的情况
+    } else if (node.left === null) {
+      // 把对它的引用改为对它右侧子节点的引用
+      return node.right
+
+      // 2.2 要删除的节点只存在<左子节点>的情况
+    } else if (node.right === null) {
+      // 把对它的引用改为对它左侧子节点的引用
+      return node.left
+
+      // 3、删除的是有两个子节点的节点
+    } else {
+
+      // 找到它右边子树中最小的节点(它的继承者)
+      const aux = this.minNode(node.right)
+      // 用它右侧子树中最小节点的键去更新这个节点的值，即它被移除了
+      node.key = aux.key
+      // 把右侧子树中的最小节点移除，因为它已经被移至要移除的节点的位置了
+      node.right = this.removeNode(node.right, aux.key)
+      // 向它的父节点返回更新后节点的引用
+      return node
+    }
+  }
 }
 ```
 

@@ -148,24 +148,22 @@ console.log(stack.toString()); //--> 1 2
 ### 代码实现
 
 ```js
-function dec2bin(dec) {
-  // new 一个 Stack，保存余数
-  const stack = new Stack();
+function dec2bin(decNumber) {
+  // 1.定义栈对象
+  let stack = new StackArray()
 
-  // 当不确定循环次数时，使用 while 循环
-  while (dec > 0) {
-    // 除二取余法
-    stack.push(dec % 2); // 获取余数，放入栈中
-    dec = Math.floor(dec / 2); // 除数除以二，向下取整
+  // 2.循环取余压栈
+  while (decNumber > 0) {
+    stack.push(decNumber % 2)
+    decNumber = Math.floor(decNumber / 2)
   }
 
-  let binaryString = "";
-  // 不断地从栈中取出元素（0 或 1），并拼接到一起。
+  // 3.按顺序出栈显示结果
+  let binaryString = ''
   while (!stack.isEmpty()) {
-    binaryString += stack.pop();
+    binaryString += stack.pop()
   }
-
-  return binaryString;
+  return binaryString
 }
 ```
 

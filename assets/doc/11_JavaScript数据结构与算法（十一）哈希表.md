@@ -357,29 +357,41 @@ Java 中的 HashMap 采用的是链地址法，哈希化采用的是公式为：
 首先使用霍纳法则计算 hashCode 的值，通过取余操作实现哈希化，此处先简单地指定数组的大小。
 
 ```js
-hashFn(string, limit = 7) {
+/**
+* 设计哈希函数，将传入的键哈希化，转换成 hashCode
+* @param key 要哈希化的键
+* @param {number} limit 哈希表的最大个数（数组长度）
+* @returns {number} hashCode
+*/
+hashFn(key, limit = 7) {
+
+  // 将键转化为字符串
+  const tableKey = defaultToString(key)
 
   // 自己采用的一个质数（无强制要求，质数即可）
-  const PRIME = 31;
+  const PRIME = 37
 
-  // 1、定义存储 hashCode 的变量
-  let hashCode = 0;
+  // 初始化一个hash变量并赋值为一个质数(大多数实现都使用5381)
+  let hashCode = 5381
 
-  // 2、使用霍纳法则（秦九韶算法），计算 hashCode 的值
-  for (let item of string) {
-    hashCode = PRIME * hashCode + item.charCodeAt();
+  // 使用霍纳法则（秦九韶算法），计算 hashCode 的值
+  // 迭代参数key，将hashCode与PRIME相乘（用作一个幻数），并和当前迭代到的字符的Unicode码值相加
+  for (let item of tableKey) {
+    hashCode = hashCode * PRIME + item.charCodeAt()
   }
 
-  // 3、对 hashCode 取余，并返回
-  return hashCode % limit;
+  // 对 hashCode 取余，并返回
+  return hashCode % limit
 }
 ```
 
 哈希函数测试
 
 ```js
-console.log(hashFn("123")); //--> 5
-console.log(hashFn("abc")); //--> 6
+const hashTable = new HashTable();
+
+console.log(hashTable.hashFn('Aethelwulf')); //--> 1
+console.log(hashTable.hashFn('Jamie')); //--> 4
 ```
 
 ### 哈希表的实现
@@ -395,9 +407,9 @@ console.log(hashFn("abc")); //--> 6
 ```js
 class HashTable {
   constructor() {
-    this.storage = []; // 哈希表存储数据的变量
-    this.count = 0; // 当前存放的元素个数
-    this.limit = 7; // 哈希表长度（初始设为质数 7）
+    this.storage = [] // 用数组实现哈希表
+    this.count = 0  // 当前存放的元素个数
+    this.limit = 7  // 哈希表长度（初始设为质数 7）
   }
 }
 ```
@@ -418,39 +430,39 @@ class HashTable {
 代码实现
 
 ```js
-// put(key, value) 往哈希表里添加数据
+// put(key, value) 哈希表添加或修改数据
 put(key, value) {
 
-  // 1、根据 key 获取要映射到 storage 里面的 index（通过哈希函数获取）
-  const index = hashFn(key, this.limit);
+  // 1、根据传入的key获取对应的hashCode, 也就是数组的index
+  const index = this.hashFn(key, this.limit)
 
-  // 2、根据 index 取出对应的 bucket
-  let bucket = this.storage[index];
+  // 2、从哈希表的index位置中取出桶(另外一个数组)
+  let bucket = this.storage[index]
 
-  // 3、判断是否存在 bucket
+  // 3、判断相应位置是否存在 bucket
   if (bucket === undefined) {
-    bucket = [];  // 不存在则创建
-    this.storage[index] = bucket;
+    bucket = [] // 不存在则创建
+    this.storage[index] = bucket
   }
 
   // 4、判断是插入数据操作还是修改数据操作
-  for (let i = 0; i < bucket.length; i++) {
-    let tuple = bucket[i]; // tuple 的格式：[key, value]
-    if (tuple[0] === key) { // 如果 key 相等，则修改数据
-      tuple[1] = value;
-      return; // 修改完 tuple 里数据，return 终止不再往下执行。
+  // 注意for...of语句在可迭代对象如数组为空时，不执行循环体内容
+  for (const tuple of bucket) {
+    // 如果 key 相等，则直接修改数据即可
+    if (tuple[0] === key) {
+      tuple[1] = value
+      return
     }
   }
 
-  // 5、bucket 新增数据
-  bucket.push([key, value]); // bucket 存储元组 tuple，格式为 [key, value]
-  this.count++;
+  // 5、遍历发现哈希表中无此数据，则在相应 bucket 添加数据
+  bucket.push([key, value])
+  this.count++
 
-  // 判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
-  if (this.count / this.limit > this.loadFactor) {
-    this.resize(this.getPrime(this.limit * 2));
+  // 6、判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
+  if (this.count > this.limit * 0.75) {
+    this.resize(this.getPrime(this.limit * 2))
   }
-
 }
 ```
 
@@ -467,22 +479,25 @@ put(key, value) {
 代码实现
 
 ```js
-// 根据 get(key) 获取 value
+// get(key) 获取数据
 get(key) {
 
-  const index = hashFn(key, this.limit);
-  const bucket = this.storage[index];
-
+  // 1、根据key获取hashCode(也就是index)
+  const index = this.hashFn(key)
+  // 2、根据index取出bucket
+  const bucket = this.storage[index]
+  // 3、bucket不存在，直接返回null
   if (bucket === undefined) {
-    return null;
+    return null
   }
-
+  // 4、bucket存在, 遍历判断是否有key对应的数据
   for (const tuple of bucket) {
     if (tuple[0] === key) {
-      return tuple[1];
+      return tuple[1]
     }
   }
-  return null;
+  // 5、没有找到, return null
+  return null
 }
 ```
 
@@ -497,33 +512,33 @@ get(key) {
 - 最后，依然没有找到，返回 `null`。
 
 ```js
-// remove(key) 删除指定 key 的数据
+// remove(key) 删除数据
 remove(key) {
 
-  const index = hashFn(key, this.limit);
-  const bucket = this.storage[index];
-
+  // 1.获取key对应的index
+  const index = this.hashFn(key)
+  // 2.获取对应的bucket
+  const bucket = this.storage[index]
+  // 3.bucket不存在，直接返回null
   if (bucket === undefined) {
-    return null;
+    return null
   }
-
-  // 遍历 bucket，找到对应位置的 tuple，将其删除
-  for (let i = 0, len = bucket.length; i < len; i++) {
-    const tuple = bucket[i];
+  // 4.bucket存在, 遍历判断是否有key对应的数据
+  for (let i = 0; i < bucket.length; i++){
+    let tuple = bucket[i]
     if (tuple[0] === key) {
-      bucket.splice(i, 1); // 删除对应位置的数组项
-      this.count--;
-
+      // 找到则删除对应位置的数组项
+      bucket.splice(i, 1)
+      this.count--
       // 根据装填因子的大小，判断是否要进行哈希表压缩
-      if (this.limit > 7 && this.count / this.limit < this.minLoadFactor) {
-        this.resize(this.getPrime(Math.floor(this.limit / 2)));
+      if (this.count > 7 && this.count < this.limit * 0.25) {
+        this.resize(this.getPrime(Math.floor(this.limit / 2)))
       }
-
-      return tuple;
+      return tuple
     }
-
   }
-
+  // 没有找到, return null
+  return null
 }
 ```
 
@@ -531,7 +546,7 @@ remove(key) {
 
 ```js
 isEmpty() {
-  return this.count === 0;
+  return this.count === 0
 }
 ```
 
@@ -539,7 +554,7 @@ isEmpty() {
 
 ```js
 size() {
-  return this.count;
+  return this.count
 }
 ```
 
@@ -576,25 +591,25 @@ size() {
 resize 方法，既可以实现哈希表的扩容，也可以实现哈希表容量的压缩。
 
 ```js
-// 重新调整哈希表大小，扩容或压缩
+// resize(newLimit) 重新调整哈希表大小，扩容或压缩
 resize(newLimit) {
 
-  // 1、保存旧的 storage 数组内容
-  const oldStorage = this.storage;
+  // 1、保存旧的哈希表数组内容
+  const oldStorage = this.storage
 
-  // 2、重置所有属性
-  this.storage = [];
-  this.count = 0;
-  this.limit = newLimit;
+  // 2、重置哈希表
+  this.storage = []
+  this.count = 0
+  this.limit = newLimit
 
-  // 3、遍历 oldStorage，取出所有数据，重新 put 到 this.storage
+  // 3、遍历旧哈希表中的所有数据项, 并且重新插入到新哈希表中
   for (const bucket of oldStorage) {
-    if (bucket) {
-      for (const b of bucket) {
-        this.put(b[0], b[1]);
+    // bucket存在则遍历bucket重新插入数据
+    if (bucket !== undefined) {
+      for (const tuple of bucket) {
+        this.put(tuple[0], tuple[1])
       }
     }
-
   }
 }
 ```
@@ -603,8 +618,8 @@ resize(newLimit) {
 
   ```js
   // 判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
-  if (this.count / this.limit > this.loadFactor) {
-    this.resize(this.getPrime(this.limit * 2));
+  if (this.count > this.limit * 0.75) {
+    this.resize(this.getPrime(this.limit * 2))
   }
   ```
 
@@ -612,8 +627,8 @@ resize(newLimit) {
 
   ```js
   // 根据装填因子的大小，判断是否要进行哈希表压缩
-  if (this.limit > 7 && this.count / this.limit < this.minLoadFactor) {
-    this.resize(this.getPrime(Math.floor(this.limit / 2)));
+  if (this.count > 7 && this.count < this.limit * 0.25) {
+    this.resize(this.getPrime(Math.floor(this.limit / 2)))
   }
   ```
 
@@ -633,13 +648,13 @@ resize(newLimit) {
 
   ```js
   function isPrime(number) {
-    if (number <= 1) return false;
+    if (number <= 1) return false
     for (let i = 2; i < number; i++) {
       if (number % i === 0) {
-        return false;
+        return false
       }
     }
-    return true;
+    return true
   }
   ```
 
@@ -647,14 +662,16 @@ resize(newLimit) {
 
   ```js
   function isPrime(number) {
-    if (number <= 1 || number === 4) return false;
-    const temp = Math.ceil(Math.sqrt(number));
-    for (let i = 2; i < temp; i++) {
+    if (number <= 1) {
+      return false
+    }
+    const sqrt = Math.floor(Math.sqrt(number))
+    for (let i = 2; i <= sqrt; i++){
       if (number % i === 0) {
-        return false;
+        return false
       }
     }
-    return true;
+    return true
   }
   ```
 
@@ -667,12 +684,12 @@ resize(newLimit) {
 - 第一步：首先需要为 HashTable 类添加判断质数的 `isPrime` 方法和获取质数的 `getPrime` 方法：
 
   ```js
-  // getPrime(number) 根据传入的 number 获取最临近的质数
+  // getPrime(number) 根据传入的 number 获取最接近的质数
   getPrime(number) {
-    while (!isPrime(number)) {
-      number++;
+    while (!this.isPrime(number)) {
+      number++
     }
-    return number;
+    return number
   }
   ```
 
@@ -682,8 +699,8 @@ resize(newLimit) {
 
   ```js
   // 判断哈希表是否要扩容，若装填因子 > 0.75，则扩容
-  if (this.count / this.limit > this.loadFactor) {
-    this.resize(this.getPrime(this.limit * 2));
+  if (this.count > this.limit * 0.75) {
+    this.resize(this.getPrime(this.limit * 2))
   }
   ```
 
@@ -691,8 +708,8 @@ resize(newLimit) {
 
   ```js
   // 根据装填因子的大小，判断是否要进行哈希表压缩
-  if (this.limit > 7 && this.count / this.limit < this.minLoadFactor) {
-    this.resize(this.getPrime(Math.floor(this.limit / 2)));
+  if (this.count > 7 && this.count < this.limit * 0.25) {
+    this.resize(this.getPrime(Math.floor(this.limit / 2)))
   }
   ```
 
