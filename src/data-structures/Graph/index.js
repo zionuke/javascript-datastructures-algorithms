@@ -1,6 +1,7 @@
 import Graph from './graph'
 import Stack from '../Stack/stack'
-import {breadthFirstSearch, BFS} from './breadth-first-search'
+import { breadthFirstSearch, BFS } from './breadth-first-search'
+import {depthFirstSearch} from './depth-first-search'
 // ---------------- 封装的图构测试 ---------------- //
 console.log('// ----- 图结构测试 START -----//');
 
@@ -44,6 +45,9 @@ breadthFirstSearch(graph, myVertices[0], printVertex);
  Visited vertex: H
  Visited vertex: I
  */
+console.log('********* dfs with callback ***********');
+
+depthFirstSearch(graph, printVertex);
 
 console.log('********* shortest path - BFS ***********');
 const shortestPathA = BFS(graph, myVertices[0]);
