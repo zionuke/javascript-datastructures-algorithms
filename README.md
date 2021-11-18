@@ -33,49 +33,49 @@
 
 ### 栈
 
-- [基于数组的栈](src/Stack/stack-array.js)
-- [基于JavaScript对象的栈](src/Stack/stack.js)
-- [使用ES6 Symbol类型基于数组的栈](src/Stack/StackSymbol.js)
-- [使用ES6 WeakMap类型基于对象的栈](src/Stack/StackWeakMap.js)
+- [基于数组的栈](src/data-structures/Stack/stack-array.js)
+- [基于JavaScript对象的栈](src/data-structures/Stack/stack.js)
+- [使用ES6 Symbol类型基于数组的栈](src/data-structures/Stack/StackSymbol.js)
+- [使用ES6 WeakMap类型基于对象的栈](src/data-structures/Stack/StackWeakMap.js)
 
 ### 队列
 
-- [基于数组的队列](src/Queue/queue-array.js)
-- [基于JavaScript对象的队列](src/Queue/queue.js)
-- [双端队列的封装](src/Queue/deque.js)
-- [优先队列的封装](src/PriorityQueue/priorityQueue.js)
+- [基于数组的队列](src/data-structures/Queue/queue-array.js)
+- [基于JavaScript对象的队列](src/data-structures/Queue/queue.js)
+- [双端队列的封装](src/data-structures/Queue/deque.js)
+- [优先队列的封装](src/data-structures/PriorityQueue/priorityQueue.js)
 
 ### 链表
 
-- [单向链表的封装](src/LinkedList/linkedList.js)
-- [双向链表的封装](src/DoublyLinkedList/doublyLinkedList.js)
+- [单向链表的封装](src/data-structures/LinkedList/linkedList.js)
+- [双向链表的封装](src/data-structures/DoublyLinkedList/doublyLinkedList.js)
 
 ### 集合
 
-- [集合的封装](src/Set/set.js)
+- [集合的封装](src/data-structures/Set/set.js)
 
 ### 字典和散列表
 
-- [字典的封装](src/Map/map.js)
-- [哈希表的封装](src/HashTable/hashTable.js)
+- [字典的封装](src/data-structures/Map/map.js)
+- [哈希表的封装](src/data-structures/HashTable/hashTable.js)
 
 ### 递归
 
-- [阶乘](src/Recursion/Factorial.js)
-- [裴波那契数列](src/Recursion/Fibonacci.js)
-- [测试JS调用栈大小](src/Recursion/JSCallStack.js)
+- [阶乘](src/data-structures/Recursion/Factorial.js)
+- [裴波那契数列](src/data-structures/Recursion/Fibonacci.js)
+- [测试JS调用栈大小](src/data-structures/Recursion/JSCallStack.js)
 
 ### 树
 
-- [二叉搜索树的封装](src/Tree/binary-search-tree.js)
+- [二叉搜索树的封装](src/data-structures/Tree/binary-search-tree.js)
 
 ### 二叉堆和堆排序
 
-- [二叉堆的封装](src/Heap/heap.js)
+- [二叉堆的封装](src/data-structures/Heap/heap.js)
 
 ### 图
 
-- [图的封装](src/Graph/graph.js)
+- [图的封装](src/data-structures/Graph/graph.js)
 
 ### 排序和搜索算法
 
@@ -94,39 +94,42 @@ npm run start
 ```
 
 开启**测试环境**的服务后，可在 `src/index.js` 选择要测试的代码，查看具体值输出。
-比如：我要测试**栈**，把 `// import './Stack'` 的注释去掉，要测试哪个就去掉哪个的注释。
+比如：我要测试**栈**，把 `// import './data-structures/Stack'` 的注释去掉，要测试哪个就去掉哪个的注释。
 
 ```js
 // 导入栈结构的封装及测试代码
-// import './Stack'
+// import './data-structures/Stack'
 
 // 导入队列结构的封装及测试代码
-// import './Queue'
+// import './data-structures/Queue'
 
 // 导入优先队列结构的封装及测试代码
-// import './PriorityQueue'
+// import './data-structures/PriorityQueue'
 
 // 导入单向链表结构的封装及测试代码
-// import './LinkedList'
+// import './data-structures/LinkedList'
 
 // 导入双向链表结构的封装及测试代码
-// import './DoublyLinkedList'
+// import './data-structures/DoublyLinkedList'
 
 // 导入集合结构的封装及测试代码
-// import './Set'
+// import './data-structures/Set'
 
 // 导入字典结构的封装及测试代码
-// import './Map'
+// import './data-structures/Map'
 
 // 导入哈希表结构的封装及测试代码
-// import './HashTable'
+// import './data-structures/HashTable'
 
 // 导入递归的封装及测试代码
-// import './Recursion'
+// import './data-structures/Recursion'
 
 // 导入树结构的封装及测试代码
-// import './Tree'
+// import './data-structures/Tree'
+
+// 导入二叉堆结构的封装及测试代码
+// import './data-structures/Heap'
 
 // // 导入图结构的封装及测试代码
-// import './Graph'
+// import './data-structures/Graph'
 ```
