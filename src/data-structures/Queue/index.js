@@ -1,5 +1,5 @@
 // 导入队列结构的封装及测试代码
-import './queue'
+import './queue-array'
 
 // 导入双端队列结构的封装及测试代码
 import './deque'
