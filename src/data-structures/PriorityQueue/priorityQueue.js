@@ -1,4 +1,4 @@
-import Queue from '../Queue/queue'
+import Queue from '../Queue/queue-array'
 
 /**
  * 优先队列结构的封装

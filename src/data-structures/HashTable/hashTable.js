@@ -1,5 +1,5 @@
 // 引入转换字符串工具函数
-import { defaultToString } from '../util'
+import { defaultToString } from '../../util'
 
 // 哈希表的封装
 export default class HashTable {

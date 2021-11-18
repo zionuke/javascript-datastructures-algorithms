@@ -1,7 +1,7 @@
 // 引入工具函数
 import {
   Compare, defaultCompare, reverseCompare, swap
-} from '../util'
+} from '../../util'
 
 // 封装最小堆类
 export class MinHeap {

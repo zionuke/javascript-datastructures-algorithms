@@ -4,9 +4,9 @@ console.log('// ----- 图结构测试 START -----//');
 
 
 // 测试代码
-let graph = new Graph()
+const graph = new Graph()
 // 添加顶点
-let myVertexes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+const myVertexes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
 for (let i = 0; i < myVertexes.length; i++) {
     graph.addVertex(myVertexes[i])
 }
@@ -25,20 +25,20 @@ graph.addEdge('E', 'I');
 console.log(graph.toString())
 
 
-// 调用广度优先算法
-let result = ""
-graph.bfs(function (v) {
-    result += v + " "
-})
-// 输出广度优先
-console.log(result) // A B C D E F G H I 
+// // 调用广度优先算法
+// let result = ""
+// graph.bfs(function (v) {
+//     result += v + " "
+// })
+// // 输出广度优先
+// console.log(result) // A B C D E F G H I
 
-// 调用深度优先算法
-result = ""
-graph.dfs(function (v) {
-    result += v + " "
-})
-// 输出深度优先
-console.log(result)  //A B E I F C D G H
+// // 调用深度优先算法
+// result = ""
+// graph.dfs(function (v) {
+//     result += v + " "
+// })
+// // 输出深度优先
+// console.log(result)  //A B E I F C D G H
 
 console.log('// ----- 图结构测试 END -----//');

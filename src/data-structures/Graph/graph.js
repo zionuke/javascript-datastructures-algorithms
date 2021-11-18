@@ -34,4 +34,31 @@ export default class Graph {
       this.adjList.get(w).push(v)
     }
   }
+
+  // 返回顶点列表
+  getVertices() {
+    return this.vertices
+  }
+
+  // 返回邻接表
+  getAdjList() {
+    return this.adjList
+  }
+
+  // 方便在控制台输出图
+  toString() {
+    let s = ''
+    // 迭代vertices数组列表将顶点名字加入字符串
+    for (let i = 0; i < this.vertices.length; i++) {
+      s += `${this.vertices[i]} -> `
+      // 取得该顶点邻接表将相邻顶点加入字符串
+      const neighbors = this.adjList.get(this.vertices[i])
+      for (let j = 0; j < neighbors.length; j++) {
+        s += `${neighbors[j]} `
+      }
+      // 邻接表迭代完成后换行
+      s += '\n'
+    }
+    return s
+  }
 }
