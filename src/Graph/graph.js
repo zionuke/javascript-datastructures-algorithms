@@ -18,5 +18,20 @@ export default class Graph {
     }
   }
 
-
+  // 添加边,接收两个顶点作为参数
+  addEdge(v, w) {
+    // 如果顶点v或w不存在于图中，要将它们加入顶点列表
+    if (!this.adjList.get(v)) {
+      this.addVertex(v)
+    }
+    if (!this.adjList.get(w)) {
+      this.addVertex(w)
+    }
+    // 将w加入到v的邻接表中，即添加了一条自顶点v到顶点w的边
+    this.adjList.get(v).push(w)
+    // 无向图，所以需要添加一条自w到v的边
+    if (!this.isDirected) {
+      this.adjList.get(w).push(v)
+    }
+  }
 }
