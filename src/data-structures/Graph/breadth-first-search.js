@@ -2,9 +2,9 @@ import Queue from '../Queue/queue'
 
 // 作为枚举器标记顶点
 const Colors = {
-  WHITE: 0,
-  GREY: 1,
-  BLACK: 2
+  WHITE: 0, // 白色：表示该顶点还没有被访问
+  GREY: 1, // 灰色：表示该顶点被访问过，但并未被探索过
+  BLACK: 2 // 黑色：表示该顶点被访问过且被完全探索过
 }
 
 // 用于生成辅助对象来帮助存储顶点是否被访问过
