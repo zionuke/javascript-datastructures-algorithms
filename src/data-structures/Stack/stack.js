@@ -59,28 +59,28 @@ export default class Stack {
   }
 }
 
-// 测试代码
-console.log('// ----- 基于JavaScript对象的栈结构测试 START -----//');
-const stack = new Stack()
-console.log('stack.isEmpty() => ', stack.isEmpty()); // outputs true
+// // 测试代码
+// console.log('// ----- 基于JavaScript对象的栈结构测试 START -----//');
+// const stack = new Stack()
+// console.log('stack.isEmpty() => ', stack.isEmpty()); // outputs true
 
-stack.push(5);
-stack.push(8);
+// stack.push(5);
+// stack.push(8);
 
-console.log('stack after push 5 and 8 => ', stack.toString());
+// console.log('stack after push 5 and 8 => ', stack.toString());
 
-console.log('stack.peek() => ', stack.peek()); // outputs 8
+// console.log('stack.peek() => ', stack.peek()); // outputs 8
 
-stack.push(11);
+// stack.push(11);
 
-console.log('stack.size() after push 11 => ', stack.size()); // outputs 3
-console.log('stack.isEmpty() => ', stack.isEmpty()); // outputs false
+// console.log('stack.size() after push 11 => ', stack.size()); // outputs 3
+// console.log('stack.isEmpty() => ', stack.isEmpty()); // outputs false
 
-stack.push(15);
+// stack.push(15);
 
-stack.pop();
-stack.pop();
+// stack.pop();
+// stack.pop();
 
-console.log('stack.size() after push 15 and pop twice => ', stack.size()); // outputs 2
+// console.log('stack.size() after push 15 and pop twice => ', stack.size()); // outputs 2
 
-console.log('// ----- 基于JavaScript对象的栈结构测试 END -----//');
+// console.log('// ----- 基于JavaScript对象的栈结构测试 END -----//');

@@ -55,4 +55,41 @@ export const breadthFirstSearch = (graph, startVertex, callback) => {
   }
 }
 
+export const BFS = (graph, startVertex) => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+  const queue = new Queue()
+  // 声明对象distances来表示距离
+  const distances = {}
+  // 声明predecessors对象来表示前溯点
+  const predecessors = {}
+  queue.enqueue(startVertex)
+  // 对于图中的每一个顶点，用0来初始化对象distances，用null来初始化对象predecessors
+  for (let i = 0; i < vertices.length; i++) {
+    distances[vertices[i]] = 0
+    predecessors[vertices[i]] = null
+  }
+  while (!queue.isEmpty()) {
+    const u = queue.dequeue()
+    const neighbors = adjList.get(u)
+    color[u] = Colors.GREY
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i]
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY
+        // distances[u]加1来增加v和w之间的距离（u是w的前溯点，distances[u]的值已经有了）
+        distances[w] = distances[u] + 1
+        // 当发现顶点u的邻点w时，设置w的前溯点值为u
+        predecessors[w] = u
+        queue.enqueue(w)
+      }
+    }
+    color[u] = Colors.BLACK
+  }
+  return {
+    distances,
+    predecessors
+  }
+}
 
