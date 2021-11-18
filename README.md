@@ -77,6 +77,7 @@
 
 - [图的封装](src/data-structures/Graph/graph.js)
 - [广度优先搜索](src/data-structures/Graph/breadth-first-search.js)
+- [深度优先搜索](src/data-structures/Graph/depth-first-search.js)
 
 ### 排序和搜索算法
 
