@@ -29,8 +29,7 @@ console.log('********* bfs with callback ***********');
 
 const printVertex = (value) => console.log('Visited vertex: ' + value);
 breadthFirstSearch(graph, myVertices[0], printVertex);
-/**
- *
+/*
  Visited vertex: A
  Visited vertex: B
  Visited vertex: C

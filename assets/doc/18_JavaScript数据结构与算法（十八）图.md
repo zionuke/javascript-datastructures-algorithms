@@ -2,13 +2,14 @@
 
 ## 一、图的概念
 
-在计算机程序设计中，图也是一种非常常见的数据结构，**图论**其实是一个非常大的话题，在数学上起源于哥尼斯堡七桥问题。
+在计算机程序设计中，图是一种非常常见的非线性数据结构，**图论**其实是一个非常大的话题，在数学上起源于哥尼斯堡七桥问题。
 
 ### 什么是图？
 
 - 图是一种与**树结构**有些相似的数据结构。
 
   - 实际上，在数学的概念上，**树是图的一种**。
+  - 图是网络结构的抽象模型。图是一组由边连接的节点（或顶点）。学习图是重要的，因为任何二元关系都可以用图来表示。
   - 我们知道树可以用来模拟很多现实的数据结构，比如：家谱/公司组织架构等等。
 
 - 那么图长什么样子呢？或者什么样的数据使用图来模拟更合适呢？
@@ -42,44 +43,37 @@
 - 这里，这里介绍几个比较常见的术语，某些术语后面用到的时候，再了解，没有用到的，不做赘述。
 - 下面这是个抽象出来的图
   ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.rr153grdbc0.png)
-
 - 顶点
 
   - 顶点刚才我们已经介绍过了，表示图中的一个**节点。**
   - 比如地铁站中某个站/多个村庄中的某个村庄/互联网中的某台主机/人际关系中的人。
-
 - 边
 
   - 边表示**顶点和顶点**之间的**连线**。
   - 比如地铁站中**两个站点之间**的直接连线, 就是一个边。
   - 注意：这里的边不要叫做路径，路径有其他的概念，后面会区分。
-
-- 相邻顶点
-
+- **相邻顶点**
   - 由一条边连接在一起的顶点称为相邻顶点。
   - 比如 `0 - 1` 是相邻的，`0 - 3` 是相邻的。`0 - 2` 是不相邻的。
-
 - 度
 
   - 一个顶点的度是**相邻顶点的数量**
   - 比如 0 顶点和其他两个顶点相连，0 顶点的度是 2
   - 比如 1 顶点和其他四个顶点相连，1 顶点的度是 4
-
-- 路径
-
+- **路径**
   - 路径是顶点 `v1`，`v2`...，`vn` 的一个连续序列, 比如上图中 `0 1 5 9` 就是一条路径。
   - 简单路径: 简单路径要求不包含重复的顶点. 比如 `0 1 5 9` 是一条简单路径。
   - 回路：第一个顶点和最后一个顶点相同的路径称为回路。比如 `0 1 5 6 3 0`。
-
 - 无向图
 
   - 上面的图就是一张无向图，因为所有的边都没有方向。
   - 比如 `0 - 1` 之间有边，那么说明这条边可以保证 `0 -> 1`，也可以保证 `1 -> 0`。
-
 - 有向图
 
   - 有向图表示的图中的边是有方向的。
   - 比如 `0 -> 1`，不能保证一定可以 `1 -> 0`，要根据方向来定。
+- 如果图中不存在环，则称该图是无环的。如果图中每两个顶点间都存在路径，则该图是连通的。
+- 如果图中每两个顶点间在双向上都存在路径，则该图是强连通的。
 
 #### 无权图和带权图
 
@@ -147,7 +141,7 @@
     - 也就是 A -> D 是 1 的时候，对称的位置 D -> 1 一定也是 1。
     - 那么这种情况下会造成空间的浪费，解决办法需自己去研究下。
 
-  - 邻接矩阵还有一个比较严重的问题就是如果图是一个稀疏图
+  - 邻接矩阵还有一个比较严重的问题就是如果图是一个**稀疏图**
     - 那么矩阵中将存在大量的 0，这意味着我们浪费了计算机存储空间来表示根本不存在的边。
     - 而且即使只有一个边，我们也必须遍历一行来找出这个边，也浪费很多时间。
 
@@ -159,30 +153,38 @@
   - 这个列表有很多中方式来存储：数组/链表/字典(哈希表)都可以。
   - 演示
     ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.3mu1hv8a84u0.png)
-
 - 图片解析
 
   - 其实图片比较容易理解
   - 比如我们要表示和 A 顶点有关联的顶点（边），A 和 B/C/D 有边，那么我们可以通过 A 找到 对应的数组/链表/字典，再取出其中的内容就可以啦。
-
 - 邻接表的问题
   - 邻接表计算“出度”是比较简单的（出度：指向别人的数量, 入度: 指向自己的数量）
   - 邻接表如果需要计算有向图的“入度”，那么是一件非常麻烦的事情。
   - 它必须构造一个“逆邻接表”，才能有效的计算“入度”。而邻接矩阵会非常简单。
 
+### 关联矩阵
+
+还可以用关联矩阵来表示图。在关联矩阵中，矩阵的行表示顶点，列表示边。如下图所示，使用二维数组来表示两者之间的连通性，如果顶点v是边e的入射点，则`array[v][e] === 1`；否则，`array[v][e] === 0`。
+
+![image](https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.59rg5k3b33k0.png)
+
+关联矩阵通常用于边的数量比顶点多的情况，以节省空间和内存。
+
 ## 三、图的封装
 
 ### 创建图类
 
-- 先来创建 Graph 类，定义了两个属性：
+- 先来创建 Graph 类，定义了三个属性：
+  - `isDirected`表示图是否有向，默认情况下无向
   - `vertexes` 用于存储所有的顶点，使用一个数组来保存。
   - `adjList` adj 是 adjoin 的缩写，邻接的意思。adjList 用于存储所有的边，这里采用邻接表的形式。
 
 ```js
 class Graph {
-  constructor() {
-    this.vertexes = []; // 存储顶点
-    this.adjList = new Dictionay(); //存储边信息
+  constructor(isDirected = false) {
+    this.isDirected = isDirected //表示图是否有向，默认情况下无向
+    this.vertices = [] // 用数组存储顶点的名字
+    this.adjList = new Dictionary() //用字典来存储邻接表
   }
 }
 ```
@@ -190,50 +192,79 @@ class Graph {
 ### 添加方法
 
 - 添加顶点：可以向图中添加一些顶点。
-  - 将添加的顶点放入到数组中。
+  - 只有在这个顶点不存在于图中时
+  - 将添加的顶点添加到顶点列表中。
   - 另外，给该顶点创建一个数组`[]`，该数组用于存储顶点连接的所有的边.（回顾邻接表的实现方式）
 
 ```js
 // 添加顶点
-addVertex(val) {
-    // 添加点
-    this.vertexes.push(val)
-    // 添加点的关系  采用邻接矩阵法 结构用Map
-    this.adjList.set(val, [])
+addVertex(v) {
+  // 顶点不存在于图中时才添加
+  if (!this.vertices.includes(v)) {
+    // 将顶点添加到顶点列表中
+    this.vertices.push(v)
+    // 在邻接表中，设置顶点v作为键，对应的字典值为一个空数组
+    this.adjList.set(v, [])
+  }
 }
 ```
 
 - 添加边：可以指定顶点和顶点之间的边。
   - 添加边需要传入两个顶点，因为边是两个顶点之间的边，边不可能单独存在。
-  - 根据顶点 v 取出对应的数组，将 w 加入到它的数组中。
-  - 根据顶点 w 取出对应的数组，将 v 加入到它的数组中。
-  - 因为这里实现的是无向图，所以边是可以双向的。
+  - 在连接顶点之前，需要验证顶点是否存在于图中。如果顶点v或w不存在于图中，要将它们加入顶点列表。
+  - 然后，通过将w加入到v的邻接表中，我们添加了一条自顶点v到顶点w的边。如果想实现一个有向图，则这样足够了。由于本节中大多数的例子都是基于无向图的，我们需要添加一条自w到v的边
 
 ```js
-// 添加边
-addEdge(val1, val2) {
-    // 添加边需要传入两个顶点, 因为边是两个顶点之间的边, 边不可能单独存在.
-    // 这里实现的是无向图, 所以这里不考虑方向问题
-    this.adjList.get(val1).push(val2)
-    this.adjList.get(val2).push(val1)
+// 添加边,接收两个顶点作为参数
+addEdge(v, w) {
+  // 如果顶点v或w不存在于图中，要将它们加入顶点列表
+  if (!this.adjList.get(v)) {
+    this.addVertex(v)
+  }
+  if (!this.adjList.get(w)) {
+    this.addVertex(w)
+  }
+  // 将w加入到v的邻接表中，即添加了一条自顶点v到顶点w的边
+  this.adjList.get(v).push(w)
+  // 无向图，所以需要添加一条自w到v的边
+  if (!this.isDirected) {
+    this.adjList.get(w).push(v)
+  }
+}
+```
+
+要完成创建Graph类，我们还要声明两个取值的方法：一个返回顶点列表，另一个返回邻接表。
+
+```js
+// 返回顶点列表
+getVertices() {
+  return this.vertices
+}
+
+// 返回邻接表
+getAdjList() {
+  return this.adjList
 }
 ```
 
 toString 方法：为了能够正确的显示图的结果，就是拿出二维数组的每一项。
 
 ```js
-// 输出图结构
+// 方便在控制台输出图
 toString() {
-    let res = ''
-    for (let i = 0; i < this.vertexes.length; i++) {
-        res += this.vertexes[i] + "->"
-        let adj = this.adjList.get(this.vertexes[i])
-        for (let j = 0; j < adj.length; j++) {
-            res += adj[j] + ""
-        }
-        res += "\n"
+  let s = ''
+  // 迭代vertices数组列表将顶点名字加入字符串
+  for (let i = 0; i < this.vertices.length; i++) {
+    s += `${this.vertices[i]} -> `
+    // 取得该顶点邻接表将相邻顶点加入字符串
+    const neighbors = this.adjList.get(this.vertices[i])
+    for (let j = 0; j < neighbors.length; j++) {
+      s += `${neighbors[j]} `
     }
-    return res
+    // 邻接表迭代完成后换行
+    s += '\n'
+  }
+  return s
 }
 ```
 
@@ -241,35 +272,39 @@ toString() {
 
 ```js
 // 测试代码
-let graph = new Graph();
+const graph = new Graph();
 
-// 添加顶点
-let myVertexes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-for (let i = 0; i < myVertexes.length; i++) {
-  graph.addVertex(myVertexes[i]);
+const myVertices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+
+for (let i = 0; i < myVertices.length; i++) {
+  graph.addVertex(myVertices[i]);
 }
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('A', 'D');
+graph.addEdge('C', 'D');
+graph.addEdge('C', 'G');
+graph.addEdge('D', 'G');
+graph.addEdge('D', 'H');
+graph.addEdge('B', 'E');
+graph.addEdge('B', 'F');
+graph.addEdge('E', 'I');
 
-// 添加边
-graph.addEdge("A", "B");
-graph.addEdge("A", "C");
-graph.addEdge("A", "D");
-graph.addEdge("C", "D");
-graph.addEdge("C", "G");
-graph.addEdge("D", "G");
-graph.addEdge("D", "H");
-graph.addEdge("B", "E");
-graph.addEdge("B", "F");
-graph.addEdge("E", "I");
+console.log('********* printing graph ***********');
+
+console.log(graph.toString());
 ```
 
 ## 四、图的遍历
 
-和其他数据结构一样，需要通过某种算法来遍历图结构中每一个数据。这样可以保证，在我们需要时，通过这种算法来访问某个顶点的数据以及它对应的边。
+和树数据结构类似，我们可以访问图的所有节点。有两种算法可以对图进行遍历：**广度优先搜索**（breadth-first search,BFS）和**深度优先搜索**（depth-first search, DFS）。图遍历可以用来寻找特定的顶点或寻找两个顶点之间的路径，检查图是否连通，检查图是否含有环，等等。
+
+在实现算法之前，让我们来更好地理解一下图遍历的思想。
 
 ### 遍历的方式
 
 - 图的遍历思想
-  图的遍历算法的思想在于必须访问每个第一次访问的节点，并且追踪有哪些顶点还没有被访问到。
+  **图遍历算法**的思想是必须追踪每个第一次访问的节点，并且追踪有哪些节点还没有被完全探索。
 
 - 有两种算法可以对图进行遍历
 
@@ -279,161 +314,469 @@ graph.addEdge("E", "I");
 
 - 遍历的注意点
 
-  - 完全探索一个顶点要求我们便查看该顶点的每一条边。
-  - 对于每一条所连接的没有被访问过的顶点，将其标注为被发现的，并将其加进待访问顶点列表中。
-  - 为了保证算法的效率：每个顶点至多访问两次。
+  - 完全探索一个顶点要求我们查看该顶点的每一条边。
+  - 对于每一条边所连接的没有被访问过的顶点，将其标注为被发现的，并将其加进待访问顶点列表中。
+  - 为了保证算法的效率，务必访问每个顶点至多两次。连通图中每条边和顶点都会被访问到。
 
 - 两种算法的思想
 
-  - BFS 基于队列，入队列的顶点先被探索。
-  - DFS 基于栈，通过将顶点存入栈中，顶点是沿着路径被探索的，存在新的相邻顶点就去访问。
+  - BFS 基于队列，将顶点存入队列，最先入队列的顶点先被探索。
+  - DFS 基于栈，将顶点存入栈，顶点是沿着路径被探索的，存在新的相邻顶点就去访问。
 
 - 为了记录顶点是否被访问过，我们使用三种颜色来反应它们的状态。(或者两种颜色也可以)
-  - **白色**表示该顶点还没有被访问.
-  - **灰色**表示该顶点被访问过, 但并未被探索过.
-  - **黑色**表示该顶点被访问过且被完全探索过.
-  - 初始化颜色代码
+  - **白色：**表示该顶点还没有被访问。
+  - **灰色：**表示该顶点被访问过，但并未被探索过。
+  - **黑色：**表示该顶点被访问过且被完全探索过。
+  
+
+这就是之前提到的务必访问每个顶点最多两次的原因。
+
+为了有助于在广度优先和深度优先算法中标记顶点，我们要使用Colors变量（作为一个枚举器），声明如下。
 
 ```js
-// 初始化顶点的颜色
-_initializeColor() {
-    // 白色: 表示该顶点还没有被访问.
-    // 灰色: 表示该顶点被访问过, 但并未被探索过.
-    // 黑色: 表示该顶点被访问过且被完全探索过.
-    let colors = []
-    for (let i = 0; i < this.vertexes.length; i++) {
-        colors[this.vertexes[i]] = "white"
-    }
-    return colors
+// 作为枚举器标记顶点
+const Colors = {
+  WHITE: 0, // 白色：表示该顶点还没有被访问
+  GREY: 1, // 灰色：表示该顶点被访问过，但并未被探索过
+  BLACK: 2 // 黑色：表示该顶点被访问过且被完全探索过
+}
+```
+
+两个算法还需要一个辅助对象来帮助存储顶点是否被访问过。在每个算法的开头，所有的顶点会被标记为未访问（白色）。我们要用下面的函数来初始化每个顶点的颜色。
+
+```js
+// 用于生成辅助对象来帮助存储顶点是否被访问过
+const initializeColor = vertices => {
+  const color = {}
+  // 初始化，所有的顶点会被标记为未访问（白色）
+  for (let i = 0; i < vertices.length; i++){
+    color[vertices[i]] = Colors.WHITE
+  }
+  return color
 }
 ```
 
 ### 广度优先搜索(BFS)
 
 - 广度优先搜索算法的思路
-  广度优先算法会从指定的第一个顶点开始遍历图，先访问其所有的相邻点，就像一次访问图的一层。换句话说，就是先宽后深的访问顶点。
-
-- 图解 BFS
+  
+  广度优先搜索算法会从指定的第一个顶点开始遍历图，先访问其所有的邻点（相邻顶点），就像一次访问图的一层。换句话说，就是先宽后深地访问顶点，如下图所示。
   ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.3vz7fx7tgvs0.png)
-
-- 广度优先搜索的实现
+  
+- 以下是从顶点v开始的广度优先搜索算法所遵循的步骤。
 
   1. 创建一个队列 Q
-  2. 将 v 标注为被发现的(灰色), 并将 v 将入队列 Q
-  3. 如果 Q 非空, 执行下面的步骤：
-     - 将 v 从 Q 中取出队列
-     - 将 v 标注为被发现的灰色
-     - 将 v 所有的未被访问过的邻接点（白色），加入到队列中
-     - 将 v 标志为黑色
+  2. 将v标注为被发现的(灰色), 并将v入队列Q
+  3. 如果Q非空, 则执行下面的步骤：
+     - 将u从Q中出队列
+     - 标注u为被发现的（灰色）
+     - 将u所有未被访问过的邻点（白色）入队列
+     - 标注u为已被探索的（黑色）
 
 - 广度优先搜索的代码
 
   ```js
-  // 广度优先搜索
-  bfs(handle) {
-      // 1.初始化颜色
-      let color = this._initializeColor()
-      // 2. 创建队列
-      let queue = new Queue
-      // 3. 将传入的顶点放入队列
-      queue.enqueue(this.vertexes[0])
-      // 4.依赖队列操作数据   队列不为空时一直持续
-      while (!queue.isEmpty()) {
-          // 4.1 拿到队头
-          let qVal = queue.dequeue()
-          //  4.2 拿到队头所关联（相连）的点并设置为访问中状态（灰色）
-          let qAdj = this.adjList.get(qVal)
-          color[qVal] = "gray"
-          // 4.3 将队头关联的点添加到队尾
-          // 这一步是完成bfs的关键，依赖队列的先进先出的特点。
-          for (let i = 0; i < qAdj.length; i++) {
-              let a = qAdj[i]
-              if (color[a] === "white") {
-                  color[a] = "gray"
-                  queue.enqueue(a)
-              }
-          }
-          // 4.5设置访问完的点为黑色。
-          color[qVal] = "black"
-          if (handle) [
-              handle(qVal)
-          ]
+  // 广度优先搜索算法
+  const breadthFirstSearch = (graph, startVertex, callback) => {
+    // 取得图对应顶点和邻接表
+    const vertices = graph.getVertices()
+    const adjList = graph.getAdjList()
+    // 用initializeColor函数来将color对象所有顶点初始化为白色
+    const color = initializeColor(vertices)
+    // 创建一个Queue实例，它将会存储待访问和待探索的顶点
+    const queue = new Queue()
+    // 将起始顶点入队列
+    queue.enqueue(startVertex)
+    // 如果队列非空，并
+    while (!queue.isEmpty()) {
+      // 通过出队列操作从队列中移除一个顶点
+      const u = queue.dequeue()
+      // 取得一个包含其所有邻点的邻接表数组
+      const neighbors = adjList.get(u)
+      // 将该顶点标注为灰色，表示我们发现了它（但还未完成对其的探索）
+      color[u] = Colors.GREY
+      // 对于u的每个邻点
+      for (let i = 0; i < neighbors.length; i++){
+        // 取得其值（该顶点的名字）
+        const w = neighbors[i]
+        // 如果它还未被访问过（颜色为白色），则将其标注为我们已经发现了它（颜色设置为灰色），并将这个顶点加入队列
+        if (color[w] === Colors.WHITE) {
+          color[w] = Colors.GREY
+          queue.enqueue(w)
+        }
       }
+      // 标注u为已被探索的（黑色）
+      color[u] = Colors.BLACK
+      // 如果传递了回调函数，就使用回调函数
+      if (callback) {
+        callback(u)
+      }
+    }
   }
   ```
 
 - 测试代码
 
   ```js
-  // 调用广度优先算法
-  let result = "";
-  graph.bfs(graph.vertexes[0], function (v) {
-    result += v + " ";
-  });
-  console.log(result); // A B C D E F G H I
+  console.log('********* bfs with callback ***********');
+  
+  const printVertex = (value) => console.log('Visited vertex: ' + value);
+  breadthFirstSearch(graph, myVertices[0], printVertex);
+  /* 输出如下
+   Visited vertex: A
+   Visited vertex: B
+   Visited vertex: C
+   Visited vertex: D
+   Visited vertex: E
+   Visited vertex: F
+   Visited vertex: G
+   Visited vertex: H
+   Visited vertex: I
+   */
   ```
+
+#### 使用BFS寻找最短路径
+
+到目前为止，我们只展示了BFS算法的工作原理。我们可以用该算法做更多事情，而不只是输出被访问顶点的顺序。例如，考虑如何来解决下面这个问题。
+
+给定一个图G和源顶点v，找出每个顶点u和v之间最短路径的距离（以边的数量计）。
+
+对于给定顶点v，广度优先算法会访问所有与其距离为1的顶点，接着是距离为2的顶点，以此类推。所以，可以用广度优先算法来解这个问题。我们可以修改breadthFirstSearch方法以返回给我们一些信息：
+
+- 从v到u的距离distances[u]；
+- 前溯点predecessors[u]，用来推导出从v到其他每个顶点u的最短路径。
+
+让我们来看看改进过的广度优先方法的实现。
+
+```js
+const BFS = (graph, startVertex) => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+  const queue = new Queue()
+  // 声明对象distances来表示距离
+  const distances = {}
+  // 声明predecessors对象来表示前溯点
+  const predecessors = {}
+  queue.enqueue(startVertex)
+  // 对于图中的每一个顶点，用0来初始化对象distances，用null来初始化对象predecessors
+  for (let i = 0; i < vertices.length; i++) {
+    distances[vertices[i]] = 0
+    predecessors[vertices[i]] = null
+  }
+  while (!queue.isEmpty()) {
+    const u = queue.dequeue()
+    const neighbors = adjList.get(u)
+    color[u] = Colors.GREY
+    for (let i = 0; i < neighbors.length; i++) {
+      const w = neighbors[i]
+      if (color[w] === Colors.WHITE) {
+        color[w] = Colors.GREY
+        // distances[u]加1来增加v和w之间的距离（u是w的前溯点，distances[u]的值已经有了）
+        distances[w] = distances[u] + 1
+        // 当发现顶点u的邻点w时，设置w的前溯点值为u
+        predecessors[w] = u
+        queue.enqueue(w)
+      }
+    }
+    color[u] = Colors.BLACK
+  }
+  return {
+    distances,
+    predecessors
+  }
+}
+```
+
+现在，我们可以再次执行BFS方法，并将其返回值存在一个变量中。
+
+```js
+console.log('********* shortest path - BFS ***********');
+const shortestPathA = BFS(graph, myVertices[0]);
+console.log(shortestPathA.distances);
+console.log(shortestPathA.predecessors);
+/*
+对顶点A执行BFS方法，以下将会是输出。
+A: 0 B: 1 C: 1 D: 1 E: 2 F: 2 G: 2 H: 2 I: 3
+A: null B: "A" C: "A" D: "A" E: "B" F: "B" G: "C" H: "D" I: "E"
+*/
+```
+
+这意味着顶点A与顶点B、C和D的距离为1；与顶点E、F、G和H的距离为2；与顶点I的距离为3。
+
+通过前溯点数组，我们可以用下面这段代码来构建从顶点A到其他顶点的路径。
+
+```js
+// 用顶点A作为源顶点
+const fromVertex = myVertices[0]
+// 对于每个其他顶点（除了顶点A），计算顶点A到它的路径
+for (let i = 1; i < myVertices.length; i++) {
+  // 从myVertices数组得到值，然后创建一个栈来存储路径值
+  const toVertex = myVertices[i]
+  const path = new Stack()
+  // 追溯toVertex到fromVertex的路径。变量v被赋值为其前溯点的值，这样我们能够反向追溯这条路径
+  for (let v = toVertex; v !== fromVertex; v = shortestPathA.predecessors[v]) {
+    // 将变量v添加到栈中
+    path.push(v)
+  }
+  // 源顶点添加到栈中
+  path.push(fromVertex)
+  // 创建一个s字符串，并将源顶点赋值给它（它是最后一个加入栈中的，所以是第一个被弹出的项)
+  let s = path.pop()
+  // 当栈非空时，从栈中移出一个项并将其拼接到字符串s的后面
+  while (!path.isEmpty()) {
+    s += ' - ' + path.pop()
+  }
+  console.log(s)
+}
+```
+
+执行该代码段，我们会得到如下输出。
+
+```
+A - B
+A - C
+A - D
+A - B - E
+A - B - F
+A - C - G
+A - D - H
+A - B - E - I
+```
+
+这里，我们得到了从顶点A到图中其他顶点的最短路径（衡量标准是边的数量）。
+
+#### 深入学习最短路径算法
+
+本节中的图不是加权图。如果要计算加权图中的最短路径（例如，城市A和城市B之间的最短路径——GPS和Google Maps中用到的算法），广度优先搜索未必合适。
+
+举几个例子，**Dijkstra算法**解决了单源最短路径问题。**Bellman-Ford算法**解决了边权值为负的单源最短路径问题。**A*搜索算法**解决了求仅一对顶点间的最短路径问题，用经验法则来加速搜索过程。**Floyd-Warshall算法**解决了求所有顶点对之间的最短路径这一问题。
 
 ### 深度优先搜索(DFS)
 
 深度优先搜索的思路：
 
-- 深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径知道这条路径最后被访问了。
+- 深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径直到这条路径最后一个顶点被访问了。
 - 接着原路回退并探索下一条路径。
-- 图解 DFS
+- 换句话说，它是先深度后广度地访问顶点，如下图所示。
   ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.1bjimck65r8g.png)
 
-深度优先搜索算法的实现：
+深度优先搜索算法不需要一个源顶点。在深度优先搜索算法中，若图中顶点v未访问，则访问该顶点v。
 
-- 广度优先搜索算法我们使用的是队列，这里可以使用栈完成，也可以使用递归。
-- 方便代码书写，我们还是使用递归(递归本质上就是函数栈的调用)
-- 深度优先搜索算法的代码：
+要访问顶点v，照如下步骤做：
 
-  ```js
-  // 深度优先搜索
-  dfs(handle) {
-      // 1.初始化颜色
-      let color = this._initializeColor()
-      // 2. 遍历所有顶点，开始访问
-      for (let i = 0; i < this.vertexes.length; i++) {
-          if (color[this.vertexes[i]] === "white") {
-              this._dfsVisit(this.vertexes[i], color, handle)
-          }
-      }
+(1) 标注v为被发现的（灰色）；
+
+(2) 对于v的所有未访问（白色）的邻点w，访问顶点w；
+
+(3) 标注v为已被探索的（黑色）。
+
+如你所见，深度优先搜索的步骤是递归的，这意味着深度优先搜索算法使用栈来存储函数调用（由递归调用所创建的栈）。
+
+- 让我们来实现一下深度优先算法。
+
+
+```js
+const depthFirstSearch = (graph, callback) => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+
+  // 对于图实例中每一个未被访问过的顶点，调用私有的递归函数depthFirstSearchVisit
+  for (let i = 0; i < vertices.length; i++){
+    if (color[vertices[i]] === Colors.WHITE) {
+      depthFirstSearchVisit(vertices[i], color, adjList, callback)
+    }
   }
-  // dfs的递归方法  这里直接使用函数的调用栈
-  _dfsVisit(val, color, handle) {
-      // 1. 将颜色设置为访问中
-      color[val] = "gray"
-      // 2. 执行相应的回调
-      if (handle) {
-          handle(val)
-      }
-      // 3. 拿与该点相邻的点，对每个点操作
-      let adj = this.adjList.get(val)
-      for (let i = 0; i < adj.length; i++) {
-          let w = adj[i]
-          // 如果相邻点未未访问状态，开始访问。
-          if (color[w] === "white") {
-              this._dfsVisit(w, color, handle)
-          }
-      }
-      // 4. 处理完后设置为访问过点。
-      color[val] = "black"
+}
+
+const depthFirstSearchVisit = (u, color, adjList, callback) => {
+  // 访问顶点u时，标注其为被发现的（灰色）
+  color[u] = Colors.GREY
+  // 有callback函数，则执行该函数输出已访问过的顶点
+  if (callback) {
+    callback(u)
   }
-  ```
+  // console.log('Discovered ' + u)
+  const neighbors = adjList.get(u)
+  // 对于顶点u的每一个未被访问过（颜色为白色）的邻点w，调用depthFirstSearchVisit函数，传递w和其他参数（添加顶点w入栈，这样接下来就能访问它）
+  for (let i = 0; i < neighbors.length; i++){
+    const w = neighbors[i]
+    if (color[w] === Colors.WHITE) {
+      depthFirstSearchVisit(w, color, adjList, callback)
+    }
+  }
+  // 在该顶点和邻点按深度访问之后回退，即该顶点已被完全探索，并将其标注为黑色
+  color[u] = Colors.BLACK
+  // console.log('explored ' + u)
+}
+```
 
 - 测试代码
 
-  ```js
-  // 调用深度优先算法
-  result = "";
-  graph.dfs(function (v) {
-    result += v + " ";
-  });
-  // 输出深度优先
-  console.log(result); //A B E I F C D G H
-  ```
 
-- 递归的代码较难理解一些，这副图来帮助理解过程：
-  ![image](https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.6z6nkgmevxo0.png)
+```js
+console.log('********* dfs with callback ***********');
+const printVertex = value => console.log('Visited vertex: ' + value);
+depthFirstSearch(graph, printVertex);
+/* 输出如下
+Visited vertex: A
+Visited vertex: B
+Visited vertex: E
+Visited vertex: I
+Visited vertex: F
+Visited vertex: C
+Visited vertex: D
+Visited vertex: G
+Visited vertex: H
+*/
+```
 
+- 这个顺序和本节开头处示意图所展示的一致。下面这个示意图展示了该算法每一步的执行过程。
+  ![image](https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.508auz415c80.png)
+
+> Angular（版本2+）在探测变更（验证HTML模板是否需要更新）方面使用的算法和深度优先搜索算法非常相似。要了解更多，请访问http://t.cn/E532diz。数据结构和算法对于理解前端框架是怎样工作的以及将你的知识提升到更高的层次也是很重要的。
+
+#### 探索深度优先算法
+
+到目前为止，我们只是展示了深度优先搜索算法的工作原理。我们可以用该算法做更多的事情，而不只是输出被访问顶点的顺序。
+
+对于给定的图G，我们希望深度优先搜索算法遍历图G的所有节点，构建“森林”（有根树的一个集合）以及一组源顶点（根），并输出两个数组：发现时间和完成探索时间。我们可以修改depthFirstSearch函数来返回一些信息：
+
+- 顶点u的发现时间d[u]；
+- 当顶点u被标注为黑色时，u的完成探索时间f[u]；
+- 顶点u的前溯点p[u]。
+
+让我们来看看改进了的DFS方法的实现。
+
+```js
+// 对于给定的图G，深度优先搜索遍历图G的所有节点，构建“森林”（有根树的一个集合）以及一组源顶点（根），并输出两个数组：发现时间和完成探索时间
+export const DFS = graph => {
+  const vertices = graph.getVertices()
+  const adjList = graph.getAdjList()
+  const color = initializeColor(vertices)
+  // 顶点u的发现时间d[u]
+  const d = {}
+  // 当顶点u被标注为黑色时，u的完成探索时间f[u]
+  const f = {}
+  // 顶点u的前溯点p[u]
+  const p = {}
+  // 次数统计在这个算法执行过程中是全局使用的，所以需要将参数以对象传递，而不是原始值
+  const time = { count: 0 }
+  // 初始化相应对象
+  for (let i = 0; i < vertices.length; i++) {
+    f[vertices[i]] = 0
+    d[vertices[i]] = 0
+    p[vertices[i]] = null
+  }
+  for (let i = 0; i < vertices.length; i++) {
+    if (color[vertices[i]] === Colors.WHITE) {
+      DFSVisit(vertices[i], color, d, f, p, time, adjList)
+    }
+  }
+  return {
+    discovery: d,
+    finished: f,
+    predecessors: p
+  }
+}
+
+const DFSVisit = (u, color, d, f, p, time, adjList) => {
+  // console.log('discovered ' + u)
+  color[u] = Colors.GREY
+  // 当一个顶点第一次被发现时，追踪其发现时间
+  d[u] = ++time.count
+  const neighbors = adjList.get(u)
+  for (let i = 0; i < neighbors.length; i++) {
+    const w = neighbors[i]
+    if (color[w] === Colors.WHITE) {
+      // 当顶点w是由引自顶点u的边而被发现的，它的前溯点即为u
+      p[w] = u
+      DFSVisit(w, color, d, f, p, time, adjList)
+    }
+  }
+  color[u] = Colors.BLACK
+  // 当这个顶点被完全探索后，追踪其完成时间
+  f[u] = ++time.count
+  // console.log('explored ' + u)
+}
+```
+
+深度优先算法背后的思想是什么？边是从最近发现的顶点u处被向外探索的。只有连接到未发现的顶点的边被探索了。当u所有的边都被探索了，该算法回退到u被发现的地方去探索其他的边。这个过程持续到我们发现了所有从原始顶点能够触及的顶点。如果还留有任何其他未被发现的顶点，我们对新源顶点重复这个过程。重复该算法，直到图中所有的顶点都被探索了。
+
+对于改进过的深度优先搜索，有两点需要我们注意：
+
+- 时间（time）变量值的范围只可能在图顶点数量的一倍到两倍（2|V|）之间；
+- 对于所有的顶点u, d[u]<f[u]（意味着，发现时间的值比完成时间的值小，完成时间意思是所有顶点都已经被探索过了）。
+
+如果对同一个图再跑一遍新的深度优先搜索方法，对图中每个顶点，我们会得到如下的发现/完成时间。
+
+<img src="https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.3qnozzte9ms0.png" alt="image" style="zoom:50%;" />
+
+但我们能用这些新信息来做什么呢？来看下一节。
+
+#### 拓扑排序——使用深度优先搜索
+
+给定下图，假定每个顶点都是一个我们需要去执行的任务。
+
+<img src="https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.1amj5h1x96w0.png" alt="image" style="zoom:50%;" />
+
+> 这是一个有向图，意味着任务的执行是有顺序的。例如，任务F不能在任务A之前执行。注意这个图没有环，意味着这是一个无环图。所以，我们可以说该图是一个**有向无环图（DAG）**。
+
+当我们需要编排一些任务或步骤的执行顺序时，这称为**拓扑排序**（topological sorting，英文亦写作topsort或是toposort）。在日常生活中，这个问题在不同情形下都会出现。例如，当我们开始学习一门计算机科学课程，在学习某些知识之前得按顺序完成一些知识储备（你不可以在上算法I课程前先上算法II课程）。当我们在开发一个项目时，需要按顺序执行一些步骤。例如，首先从客户那里得到需求，接着开发客户要求的东西，最后交付项目。你不能先交付项目再去收集需求。
+
+拓扑排序只能应用于DAG。那么，如何使用深度优先搜索来实现拓扑排序呢？让我们在本节开头的示意图上执行一下深度优先搜索。
+
+```js
+graph = new Graph(true); // 有向图
+
+myVertices = ['A', 'B', 'C', 'D', 'E', 'F'];
+for (let i = 0; i < myVertices.length; i++) {
+  graph.addVertex(myVertices[i]);
+}
+graph.addEdge('A', 'C');
+graph.addEdge('A', 'D');
+graph.addEdge('B', 'D');
+graph.addEdge('B', 'E');
+graph.addEdge('C', 'F');
+graph.addEdge('F', 'E');
+
+// 执行改进版本的深度优先搜索算法，并将结果保存到result变量
+const result = DFS(graph);
+```
+
+这段代码将创建图，添加边，执行改进版本的深度优先搜索算法，并将结果保存到result变量。下图展示了深度优先搜索算法执行后，该图的发现和完成时间。
+
+<img src="https://cdn.jsdelivr.net/gh/dragon-liu/picBed@master/img/image.58monacksd40.png" alt="image" style="zoom:50%;" />
+
+现在要做的仅仅是以倒序来排序完成时间数组，这便得出了该图的拓扑排序，如下所示。
+
+```js
+const fTimes = result.finished;
+let s = '';
+// 倒序输出完成时间数组，以得出该图的拓扑排序
+for (let count = 0; count < myVertices.length; count++) {
+  let max = 0;
+  let maxName = null;
+  // 遍历找出完成时间最晚的顶点
+  for (let i = 0; i < myVertices.length; i++) {
+    if (fTimes[myVertices[i]] > max) {
+      max = fTimes[myVertices[i]];
+      maxName = myVertices[i];
+    }
+  }
+  s += ' - ' + maxName;
+  delete fTimes[maxName];
+}
+console.log(s);
+```
+
+执行了上述代码后，我们会得到下面的输出。
+
+`- B - A - D - C - F - E`
+
+注意之前的拓扑排序结果仅是多种可能性之一。如果我们稍微修改一下算法，就会有不同的结果。比如下面这个结果也是众多其他可能性中的一个。
+
+`-A - B - C - D - F - E`
+
+这也是一个可以接受的结果。
