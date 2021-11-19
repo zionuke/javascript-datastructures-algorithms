@@ -3,7 +3,7 @@
 本书内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与书籍《学习JavaScript数据结构与算法(第3版)》整理的学习笔记，视频教程讲的比较好，结合书籍ES6实现，配合本书的代码测试环境来练习，学习效果更佳，欢迎大家 Star 和 Fork，这是对作者最大的支持和鼓励。  
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
-- [本书地址](https://godbasin.github.io/vue-ebook/)
+- [本书地址](https://dragon-liu.github.io/javascript-datastructures-algorithms/)
 
 
 > 重点要掌握数据结构与算法的思想和原理，使用哪种编程语言区别不大。
