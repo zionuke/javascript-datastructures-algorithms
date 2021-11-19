@@ -1,4 +1,4 @@
-import Queue from '../Queue/queue'
+import Queue from '../../Queue/queue'
 
 // 作为枚举器标记顶点
 const Colors = {

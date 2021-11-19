@@ -6,3 +6,5 @@ import './test/DFS'
 import './test/Dijkstra'
 // Floyd-Warshall算法
 import './test/Floyd-Warshall'
+// Prim算法
+import './test/Prim'

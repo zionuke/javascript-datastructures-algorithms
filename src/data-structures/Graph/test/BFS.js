@@ -1,6 +1,6 @@
 import Graph from '../graph'
 import Stack from '../../Stack/stack'
-import { breadthFirstSearch, BFS } from '../breadth-first-search'
+import { breadthFirstSearch, BFS } from '../algorithms/breadth-first-search'
 
 // 测试代码
 const graph = new Graph()

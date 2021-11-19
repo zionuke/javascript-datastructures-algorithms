@@ -1,4 +1,4 @@
-import {dijkstra} from '../dijkstra'
+import {dijkstra} from '../algorithms/dijkstra'
 
 const graph = [
   [0, 2, 4, 0, 0, 0],

@@ -1,4 +1,4 @@
-import { floydWarshall } from '../floyd-warshall'
+import { floydWarshall } from '../algorithms/floyd-warshall'
 
 const INF = Infinity;
 const graph = [

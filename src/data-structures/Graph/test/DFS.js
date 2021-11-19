@@ -1,5 +1,5 @@
 import Graph from '../graph'
-import { depthFirstSearch, DFS } from '../depth-first-search'
+import { depthFirstSearch, DFS } from '../algorithms/depth-first-search'
 
 // 有向图
 let graph = new Graph(true);
