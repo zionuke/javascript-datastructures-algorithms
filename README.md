@@ -1,33 +1,42 @@
 # JavaScript 数据结构与算法
 
-本仓库内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与书籍《学习JavaScript数据结构与算法(第3版)》整理的学习笔记，视频教程讲的比较好，结合书籍ES6实现，配合本仓库的代码测试环境来练习，学习效果更佳，欢迎大家 Star 和 Fork，这是对作者最大的支持和鼓励。  
+本书内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与书籍《学习JavaScript数据结构与算法(第3版)》整理的学习笔记，视频教程讲的比较好，结合书籍ES6实现，配合本书的代码测试环境来练习，学习效果更佳，欢迎大家 Star 和 Fork，这是对作者最大的支持和鼓励。  
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
+- [本书地址](https://godbasin.github.io/vue-ebook/)
+
 
 > 重点要掌握数据结构与算法的思想和原理，使用哪种编程语言区别不大。
 
 > 本仓库在XPoet的[仓库](https://github.com/XPoet/js-data-structures-and-algorithms)基础上重构和补充代码完成
 
-## 文档目录
+## 结构和内容
 
-- [JavaScript 数据结构与算法（一）前言](assets/doc/01_JavaScript数据结构与算法（一）前言.md)
-- [JavaScript 数据结构与算法（二）数组](assets/doc/02_JavaScript数据结构与算法（二）数组.md)
-- [JavaScript 数据结构与算法（三）栈](assets/doc/03_JavaScript数据结构与算法（三）栈.md)
-- [JavaScript 数据结构与算法（四）队列和双端队列](assets/doc/04_JavaScript数据结构与算法（四）队列.md)
-- [JavaScript 数据结构与算法（五）优先队列](assets/doc/05_JavaScript数据结构与算法（五）优先队列.md)
-- [JavaScript 数据结构与算法（六）单向链表](assets/doc/06_JavaScript数据结构与算法（六）单向链表.md)
-- [JavaScript 数据结构与算法（七）双向链表](assets/doc/07_JavaScript数据结构与算法（七）双向链表.md)
-- [JavaScript 数据结构与算法（八）循环链表，有序链表和栈链表](assets/doc/.md)
-- [JavaScript 数据结构与算法（九）集合](assets/doc/09_JavaScript数据结构与算法（九）集合.md)
-- [JavaScript 数据结构与算法（十）字典](assets/doc/10_JavaScript数据结构与算法（十）字典.md)
-- [JavaScript 数据结构与算法（十一）哈希表](assets/doc/11_JavaScript数据结构与算法（十一）哈希表.md)
-- [JavaScript 数据结构与算法（十二）递归](assets/doc/12_JavaScript数据结构与算法（十二）递归.md)
-- [JavaScript 数据结构与算法（十三）树](assets/doc/13_JavaScript数据结构与算法（十三）树.md)
-- [JavaScript 数据结构与算法（十四）二叉树](assets/doc/14_JavaScript数据结构与算法（十四）二叉树.md)
-- [JavaScript 数据结构与算法（十五）二叉搜索树](assets/doc/15_JavaScript数据结构与算法（十五）二叉搜索树.md)
-- [JavaScript 数据结构与算法（十六）自平衡树](assets/doc/16_JavaScript数据结构与算法（十六）自平衡树.md)
-- [JavaScript 数据结构与算法（十七）二叉堆和堆排序](assets/doc/17_JavaScript数据结构与算法（十七）二叉堆和堆排序.md)
-- [JavaScript 数据结构与算法（十八）图](assets/doc/18_JavaScript数据结构与算法（十八）图.md)
+### 基础
+
+- [前言](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/1.前言.html)
+
+### 第一部分 数据结构
+
+- [第1章 数组](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/2.数组.html)
+- [第2章 栈](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/3.%E6%A0%88.html)
+- [第3章 队列和双端队列](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/4.%E9%98%9F%E5%88%97.html)
+- [第4章 优先队列](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/5.%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97.html)
+- [第5章 单向链表](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/6.%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8.html)
+- [第6章 双向链表](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/7.%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.html)
+- [第7章 循环链表，有序链表和栈链表](assets/doc/.md)
+- [第8章 集合](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/9.%E9%9B%86%E5%90%88.html)
+- [第9章 字典](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/10.%E5%AD%97%E5%85%B8.html)
+- [第10章 哈希表](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/11.%E5%93%88%E5%B8%8C%E8%A1%A8.html)
+- [第11章 递归](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/12.%E9%80%92%E5%BD%92.html)
+- [第12章 树](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/13.%E6%A0%91.html)
+- [第13章 二叉树](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/14.%E4%BA%8C%E5%8F%89%E6%A0%91.html)
+- [第14章 二叉搜索树](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/15.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html)
+- [第15章 自平衡树](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/16.%E8%87%AA%E5%B9%B3%E8%A1%A1%E6%A0%91.html)
+- [第16章 二叉堆](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/17.%E4%BA%8C%E5%8F%89%E5%A0%86.html)
+- [第17章 图](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/18.%E5%9B%BE.html)
+
+### 第二部分 算法
 
 ## 代码目录
 
@@ -135,3 +144,8 @@ npm run start
 // // 导入图结构的封装及测试代码
 // import './data-structures/Graph'
 ```
+
+## 版权许可
+
+本书采用“保持署名—非商用”创意共享 4.0 许可证。只要保持原作者署名和非商用，您可以自由地阅读、分享、修改本书。  
+详细的法律条文请参见[创意共享](http://creativecommons.org/licenses/by-nc/4.0/)网站。  
