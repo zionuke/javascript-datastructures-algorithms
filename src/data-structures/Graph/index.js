@@ -4,3 +4,5 @@ import './test/BFS'
 import './test/DFS'
 // Dijkstra算法
 import './test/Dijkstra'
+// Floyd-Warshall算法
+import './test/Floyd-Warshall'
