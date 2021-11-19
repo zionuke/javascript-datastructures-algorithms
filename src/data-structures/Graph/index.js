@@ -8,3 +8,5 @@ import './test/Dijkstra'
 import './test/Floyd-Warshall'
 // Prim算法
 import './test/Prim'
+// Kruskal算法
+import './test/Kruskal'
