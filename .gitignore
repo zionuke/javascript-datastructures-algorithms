@@ -7,7 +7,6 @@ dist
 .deploy*/
 deploy.sh
 package-lock.json
-docs/
 
 # dependencies
 # dependencies
