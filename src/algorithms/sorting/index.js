@@ -8,4 +8,7 @@
 // import './test/InsertionSort'
 
 // 归并排序
-import './test/MergeSort'
+// import './test/MergeSort'
+
+// 快速排序
+import './test/QuickSort'
