@@ -1,6 +1,6 @@
-import { quickSort } from '../quicksort'
+import { quickSort1 } from '../quicksort'
 
-let array = [2,4,3,4,6,3,2,5,6,2,3,6,5,4];
+let array = [1,2,8,6,4,3,1,4];
 console.log(array.join());
-array = quickSort(array);
+array = quickSort1(array);
 console.log(array.join());
