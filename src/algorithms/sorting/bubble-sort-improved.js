@@ -1,5 +1,6 @@
 import { Compare, defaultCompare, swap } from '../../util';
 
+// 冒泡排序改进版
 export function modifiedBubbleSort(array, compareFn = defaultCompare) {
   // 声明一个名为length的变量，用来存储数组的长度
   const { length } = array;

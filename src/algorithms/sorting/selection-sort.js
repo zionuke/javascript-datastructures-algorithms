@@ -1,5 +1,6 @@
 import { Compare, defaultCompare, swap } from '../../util'
 
+// 选择排序
 export const selectionSort = (array, compareFn = defaultCompare) => {
   const { length } = array
   let indexMin

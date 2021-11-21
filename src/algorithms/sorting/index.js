@@ -5,4 +5,7 @@
 // import './test/SelectionSort'
 
 // 插入排序
-import './test/InsertionSort'
+// import './test/InsertionSort'
+
+// 归并排序
+import './test/MergeSort'

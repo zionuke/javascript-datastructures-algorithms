@@ -1,5 +1,6 @@
 import { Compare, defaultCompare } from '../../util'
 
+// 插入排序
 export const insertionSort = (array, compareFn = defaultCompare) => {
   const { length } = array
   let temp

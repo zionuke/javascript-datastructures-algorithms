@@ -1,5 +1,6 @@
 import { Compare, defaultCompare, swap } from '../../util'
 
+// 冒泡排序
 export function bubbleSort(array, compareFn = defaultCompare) {
   const { length } = array
   for (let i = 0; i < length - 1; i++){
