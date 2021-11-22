@@ -20,4 +20,7 @@
 // import './test/BucketSort'
 
 // 基数排序
-import './test/RadixSort'
+// import './test/RadixSort'
+
+// 堆排序
+import './test/HeapSort'

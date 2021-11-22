@@ -106,7 +106,7 @@ export class MinHeap {
     // 获取堆的大小
     const size = this.size()
     // 将元素和最小子节点（最小堆）和最大子节点（最大堆）进行交换
-    // 如果元素比左侧子节点要小（且index合法），最小子节点索引就记为左子节点
+    // 如果元素比左侧子节点要大（且index合法），最小子节点索引就记为左子节点
     if (
       left < size
       && this.compareFn(this.heap[element], this.heap[left]) === Compare.BIGGER_THAN
@@ -120,7 +120,7 @@ export class MinHeap {
     ) {
       element = right
     }
-    // 只有最小子节点不是自己才和最小子节点交换，并递归重复下移直至次元素被放在正确的位置
+    // 只有最小子节点不是自己才和最小子节点交换，并递归重复下移直至该元素被放在正确的位置
     if (index !== element) {
       swap(this.heap, index, element)
       this.siftDown(element)
