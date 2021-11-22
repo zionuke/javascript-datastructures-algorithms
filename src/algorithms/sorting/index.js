@@ -14,4 +14,7 @@
 // import './test/QuickSort'
 
 // 计数排序
-import './test/CountingSort'
+// import './test/CountingSort'
+
+// 桶排序
+import './test/BucketSort'
