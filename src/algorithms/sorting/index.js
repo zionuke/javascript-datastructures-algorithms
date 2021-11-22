@@ -11,4 +11,7 @@
 // import './test/MergeSort'
 
 // 快速排序
-import './test/QuickSort'
+// import './test/QuickSort'
+
+// 计数排序
+import './test/CountingSort'
