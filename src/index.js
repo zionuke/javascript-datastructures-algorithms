@@ -36,3 +36,6 @@
 
 // 导入排序算法的封装及测试代码
 // import './algorithms/sorting'
+
+// 导入搜索算法的封装及测试代码
+import './algorithms/search'
