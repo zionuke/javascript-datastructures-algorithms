@@ -1,5 +1,6 @@
-import {binarySearch} from './binary-search'
+import { binarySearch } from './binary-search'
+import {interpolationSearch} from './interpolation-search'
 
-const array = [1,2,8,6,4,3,1,4];
-const index = binarySearch(array, 2);
+const array = [1,2,3,4,5,6,7,8,9,10];
+const index = interpolationSearch(array, 4);
 console.log(index);
