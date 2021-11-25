@@ -38,4 +38,7 @@
 // import './algorithms/sorting'
 
 // 导入搜索算法的封装及测试代码
-import './algorithms/search'
+// import './algorithms/search'
+
+// 导入随机算法的封装及测试代码
+import './algorithms/shuffle'
