@@ -1,6 +1,6 @@
 # JavaScript 数据结构与算法
 
-本书内容根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与书籍《学习JavaScript数据结构与算法(第3版)》整理的学习笔记，视频教程讲的比较好，结合书籍ES6实现，配合本书的代码测试环境来练习，学习效果更佳，欢迎大家 Star 和 Fork，这是对作者最大的支持和鼓励。  
+本书内容是根据哔哩哔哩 [《JavaScript 数据结构与算法》](https://www.bilibili.com/video/BV1x7411L7Q7?p=1) 视频与自己补充整理的学习笔记构成，视频教程讲的比较好，但用的是ES5语法，本书代码用ES6+实现，且用webpack搭建了代码测试环境，视频配合本仓库代码学习效果更佳，欢迎大家 Star 和 Fork，这是对作者最大的支持和鼓励。  
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
 - [本书地址](https://dragon-liu.github.io/javascript-datastructures-algorithms/)
@@ -37,60 +37,6 @@
 - [第17章 图](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/18.%E5%9B%BE.html)
 
 ### 第二部分 算法
-
-## 代码目录
-
-### 栈
-
-- [基于数组的栈](src/data-structures/Stack/stack-array.js)
-- [基于JavaScript对象的栈](src/data-structures/Stack/stack.js)
-- [使用ES6 Symbol类型基于数组的栈](src/data-structures/Stack/StackSymbol.js)
-- [使用ES6 WeakMap类型基于对象的栈](src/data-structures/Stack/StackWeakMap.js)
-
-### 队列
-
-- [基于数组的队列](src/data-structures/Queue/queue-array.js)
-- [基于JavaScript对象的队列](src/data-structures/Queue/queue.js)
-- [双端队列的封装](src/data-structures/Queue/deque.js)
-- [优先队列的封装](src/data-structures/PriorityQueue/priorityQueue.js)
-
-### 链表
-
-- [单向链表的封装](src/data-structures/LinkedList/linkedList.js)
-- [双向链表的封装](src/data-structures/DoublyLinkedList/doublyLinkedList.js)
-
-### 集合
-
-- [集合的封装](src/data-structures/Set/set.js)
-
-### 字典和散列表
-
-- [字典的封装](src/data-structures/Map/map.js)
-- [哈希表的封装](src/data-structures/HashTable/hashTable.js)
-
-### 递归
-
-- [阶乘](src/data-structures/Recursion/Factorial.js)
-- [裴波那契数列](src/data-structures/Recursion/Fibonacci.js)
-- [测试JS调用栈大小](src/data-structures/Recursion/JSCallStack.js)
-
-### 树
-
-- [二叉搜索树的封装](src/data-structures/Tree/binary-search-tree.js)
-
-### 二叉堆和堆排序
-
-- [二叉堆的封装](src/data-structures/Heap/heap.js)
-
-### 图
-
-- [图的封装](src/data-structures/Graph/graph.js)
-- [广度优先搜索](src/data-structures/Graph/breadth-first-search.js)
-- [深度优先搜索](src/data-structures/Graph/depth-first-search.js)
-
-### 排序和搜索算法
-
-### 算法设计与技巧
 
 ## 测试环境
 
@@ -141,8 +87,11 @@ npm run start
 // 导入二叉堆结构的封装及测试代码
 // import './data-structures/Heap'
 
-// // 导入图结构的封装及测试代码
+// 导入图结构的封装及测试代码
 // import './data-structures/Graph'
+
+// 导入排序算法的封装及测试代码
+// import './algorithms/sorting'
 ```
 
 ## 版权许可
