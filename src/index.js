@@ -41,4 +41,7 @@
 // import './algorithms/search'
 
 // 导入随机算法的封装及测试代码
-import './algorithms/shuffle'
+// import './algorithms/shuffle'
+
+// 导入贪心算法的封装及测试代码
+import './algorithms/greedy'
