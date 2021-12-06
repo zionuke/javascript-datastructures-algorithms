@@ -44,4 +44,7 @@
 // import './algorithms/shuffle'
 
 // 导入贪心算法的封装及测试代码
-import './algorithms/greedy'
+// import './algorithms/greedy'
+
+// 导入回溯算法的封装及测试代码
+import './algorithms/backtracking'
