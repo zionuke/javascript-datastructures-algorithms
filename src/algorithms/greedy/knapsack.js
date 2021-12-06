@@ -26,3 +26,10 @@ export function knapSack(capacity, weights, values) {
   }
   return val;
 }
+
+// 测试代码
+const values = [3,4,5];
+const weights = [2,3,4];
+const capacity = 5;
+
+console.log(knapSack(capacity, weights, values)); // 7

@@ -1,0 +1,115 @@
+{
+  "main": {
+    "id": "e4b3e0b2665f4652",
+    "type": "split",
+    "children": [
+      {
+        "id": "b1d8796a1f03e20b",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "19排序算法.md",
+            "mode": "source"
+          }
+        },
+        "group": "33fd10530007f912"
+      },
+      {
+        "id": "402a88570487a867",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "19排序算法.md",
+            "mode": "preview"
+          }
+        },
+        "group": "33fd10530007f912"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "69466a9d155b87a7",
+    "type": "split",
+    "children": [
+      {
+        "id": "73ef6d2efcc25f87",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7eca04901144014f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "51e92e7655484d31",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "96829cd294d1efd2",
+    "type": "split",
+    "children": [
+      {
+        "id": "dcf2fe27a830393c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48bd773ca2b9a9f2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "19排序算法.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "b1d8796a1f03e20b",
+  "lastOpenFiles": [
+    "19排序算法.md",
+    "18.图.md",
+    "17.二叉堆.md",
+    "15.二叉搜索树.md",
+    "16.自平衡树.md",
+    "14.二叉树.md",
+    "12.递归.md",
+    "13.树.md",
+    "11.哈希表.md",
+    "10.字典.md"
+  ]
+}
