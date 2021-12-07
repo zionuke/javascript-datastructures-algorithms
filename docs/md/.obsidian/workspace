@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "22分而治之.md",
+            "file": "23动态规划.md",
             "mode": "source"
           }
         },
@@ -21,7 +21,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "22分而治之.md",
+            "file": "23动态规划.md",
             "mode": "preview"
           }
         },
@@ -89,7 +89,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "22分而治之.md",
+                "file": "23动态规划.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "22分而治之.md"
+                "file": "23动态规划.md"
               }
             }
           }
@@ -130,15 +130,15 @@
   },
   "active": "b1d8796a1f03e20b",
   "lastOpenFiles": [
+    "23动态规划.md",
+    "18.图.md",
+    "12.递归.md",
     "22分而治之.md",
+    "21随机算法.md",
     "20搜索算法.md",
     "19排序算法.md",
-    "21随机算法.md",
-    "18.图.md",
     "14.二叉树.md",
     "imgs/Pasted image 20211207162816.png",
-    "imgs/Pasted image 20211207162738.png",
-    "Pasted image 20211207162604.png",
-    "17.二叉堆.md"
+    "imgs/Pasted image 20211207162738.png"
   ]
 }
