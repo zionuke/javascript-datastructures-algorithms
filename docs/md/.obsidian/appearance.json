@@ -1,4 +1,5 @@
 {
   "baseFontSize": 16,
-  "cssTheme": "Dracula for Obsidian"
+  "cssTheme": "Blue Topaz",
+  "baseFontSizeAction": true
 }
