@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "20搜索算法.md",
+            "file": "22分而治之.md",
             "mode": "source"
           }
         },
@@ -21,7 +21,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "20搜索算法.md",
+            "file": "22分而治之.md",
             "mode": "preview"
           }
         },
@@ -89,7 +89,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "20搜索算法.md",
+                "file": "22分而治之.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "20搜索算法.md"
+                "file": "22分而治之.md"
               }
             }
           }
@@ -130,15 +130,15 @@
   },
   "active": "b1d8796a1f03e20b",
   "lastOpenFiles": [
+    "22分而治之.md",
     "20搜索算法.md",
-    "21随机算法.md",
     "19排序算法.md",
+    "21随机算法.md",
     "18.图.md",
     "14.二叉树.md",
     "imgs/Pasted image 20211207162816.png",
     "imgs/Pasted image 20211207162738.png",
     "Pasted image 20211207162604.png",
-    "17.二叉堆.md",
-    "15.二叉搜索树.md"
+    "17.二叉堆.md"
   ]
 }
