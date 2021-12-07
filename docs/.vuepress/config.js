@@ -1,4 +1,13 @@
 module.exports = {
+  plugins: [
+    [
+      "md-enhance",
+      {
+        // 启用 TeX 支持
+        tex: true,
+      },
+    ],
+  ],
   title: 'JavaScript 数据结构与算法',
   base: '/javascript-datastructures-algorithms/',
   description: '作者: Zion Liu',
@@ -61,10 +70,16 @@ module.exports = {
         title: '第二部分 算法',
         collapsable: false,
         children: [
-
+          ['/md/19排序算法', '第18章 排序算法'],
+          ['/md/20搜索算法', '第19章 搜索算法'],
+          ['/md/21随机算法', '第20章 随机算法'],
+          ['/md/22分而治之', '第21章 分而治之'],
+          ['/md/23动态规划', '第22章 动态规划'],
+          ['/md/24贪心算法', '第23章 贪心算法'],
+          ['/md/25回溯算法', '第24章 回溯算法'],
+          ['/md/26算法复杂度', '第25章 算法复杂度'],
         ]
       },
     ],
-
   },
 }
