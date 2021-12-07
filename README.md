@@ -38,6 +38,14 @@
 
 ### 第二部分 算法
 
+- [第18章 排序算法](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/19%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.html)
+- [第19章 搜索算法](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/20%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95.html)
+- [第20章 随机算法](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/21%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95.html)
+- [第21章 分而治之](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/22%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B.html)
+- [第22章 动态规划](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/23%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.html)
+- [第23章 贪心算法](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/24%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.html)
+- [第24章 回溯算法](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/25%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.html)
+- [第25章 算法复杂度](https://dragon-liu.github.io/javascript-datastructures-algorithms/md/26%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6.html)
 ## 测试环境
 
 ### 安装依赖
@@ -92,6 +100,18 @@ npm run start
 
 // 导入排序算法的封装及测试代码
 // import './algorithms/sorting'
+
+// 导入搜索算法的封装及测试代码
+// import './algorithms/search'
+
+// 导入随机算法的封装及测试代码
+// import './algorithms/shuffle'
+
+// 导入贪心算法的封装及测试代码
+// import './algorithms/greedy'
+
+// 导入回溯算法的封装及测试代码
+// import './algorithms/backtracking'
 ```
 
 ## 版权许可
