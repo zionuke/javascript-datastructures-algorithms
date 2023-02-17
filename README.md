@@ -4,7 +4,7 @@
 
 推荐大家按照目录顺序来学习，由浅入深，循序渐进，轻松搞定数据结构和算法。
 
-- [本书地址](https://dragon-liu.github.io/javascript-datastructures-algorithms/)
+- [本书地址](https://zionuke.github.io/javascript-datastructures-algorithms/)
 
 > 重点要掌握数据结构与算法的思想和原理，使用哪种编程语言区别不大。
 
