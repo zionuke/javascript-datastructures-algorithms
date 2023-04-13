@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第5章 单向链表 | JavaScript 数据结构与算法</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="作者: Zion Liu">
+    
+    <link rel="preload" href="/javascript-datastructures-algorithms/assets/css/0.styles.f1639935.css" as="style"><link rel="preload" href="/javascript-datastructures-algorithms/assets/js/app.d92375d1.js" as="script"><link rel="preload" href="/javascript-datastructures-algorithms/assets/js/2.5c766f7e.js" as="script"><link rel="preload" href="/javascript-datastructures-algorithms/assets/js/30.ba656995.js" as="script"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/10.36076f80.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/11.81c2a456.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/12.e98b4dab.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/13.87f199f7.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/14.9398903d.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/15.a11e9bc3.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/16.b70b93b9.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/17.03bd45de.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/18.7cacacb9.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/19.1bab1189.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/20.7b968f93.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/21.9935adc4.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/22.c0ba2618.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/23.ecdfc82b.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/24.de1d30b9.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/25.23207585.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/26.0b5152bf.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/27.7a07bb4e.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/28.3e0c6894.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/29.555c3cca.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/3.906ed250.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/31.8b56bb47.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/32.883d155b.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/33.4f5d265b.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/34.a8d448b4.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/4.0558b8c9.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/5.0b8d31a5.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/6.a5fb572d.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/7.ca4c0232.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/8.fe77ecdf.js"><link rel="prefetch" href="/javascript-datastructures-algorithms/assets/js/9.ee419479.js">
+    <link rel="stylesheet" href="/javascript-datastructures-algorithms/assets/css/0.styles.f1639935.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/javascript-datastructures-algorithms/" class="home-link router-link-active"><!----> <span class="site-name">JavaScript 数据结构与算法</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/javascript-datastructures-algorithms/" class="nav-link">
+  概述
+</a></div><div class="nav-item"><a href="/javascript-datastructures-algorithms/md/1.前言.html" class="nav-link">
+  内容
+</a></div> <a href="https://github.com/dragon-liu/javascript-datastructures-algorithms" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/javascript-datastructures-algorithms/" class="nav-link">
+  概述
+</a></div><div class="nav-item"><a href="/javascript-datastructures-algorithms/md/1.前言.html" class="nav-link">
+  内容
+</a></div> <a href="https://github.com/dragon-liu/javascript-datastructures-algorithms" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/javascript-datastructures-algorithms/md/1.前言.html" class="sidebar-link">前言</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>第一部分 数据结构</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/javascript-datastructures-algorithms/md/2.数组.html" class="sidebar-link">第1章 数组</a></li><li><a href="/javascript-datastructures-algorithms/md/3.栈.html" class="sidebar-link">第2章 栈</a></li><li><a href="/javascript-datastructures-algorithms/md/4.队列.html" class="sidebar-link">第3章 队列和双端队列</a></li><li><a href="/javascript-datastructures-algorithms/md/5.优先队列.html" class="sidebar-link">第4章 优先队列</a></li><li><a href="/javascript-datastructures-algorithms/md/6.单向链表.html" class="active sidebar-link">第5章 单向链表</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/javascript-datastructures-algorithms/md/6.单向链表.html#认识链表" class="sidebar-link">认识链表</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/javascript-datastructures-algorithms/md/6.单向链表.html#链表和数组" class="sidebar-link">链表和数组</a></li></ul></li><li class="sidebar-sub-header"><a href="/javascript-datastructures-algorithms/md/6.单向链表.html#单向链表" class="sidebar-link">单向链表</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/javascript-datastructures-algorithms/md/6.单向链表.html#链表中的常见操作" class="sidebar-link">链表中的常见操作</a></li><li class="sidebar-sub-header"><a href="/javascript-datastructures-algorithms/md/6.单向链表.html#单向链表的封装" class="sidebar-link">单向链表的封装</a></li></ul></li></ul></li><li><a href="/javascript-datastructures-algorithms/md/7.双向链表.html" class="sidebar-link">第6章 双向链表</a></li><li><a href="/javascript-datastructures-algorithms/md/9.集合.html" class="sidebar-link">第8章 集合</a></li><li><a href="/javascript-datastructures-algorithms/md/10.字典.html" class="sidebar-link">第9章 字典</a></li><li><a href="/javascript-datastructures-algorithms/md/11.哈希表.html" class="sidebar-link">第10章 哈希表</a></li><li><a href="/javascript-datastructures-algorithms/md/12.递归.html" class="sidebar-link">第11章 递归</a></li><li><a href="/javascript-datastructures-algorithms/md/13.树.html" class="sidebar-link">第12章 树</a></li><li><a href="/javascript-datastructures-algorithms/md/14.二叉树.html" class="sidebar-link">第13章 二叉树</a></li><li><a href="/javascript-datastructures-algorithms/md/15.二叉搜索树.html" class="sidebar-link">第14章 二叉搜索树</a></li><li><a href="/javascript-datastructures-algorithms/md/16.自平衡树.html" class="sidebar-link">第15章 自平衡树</a></li><li><a href="/javascript-datastructures-algorithms/md/17.二叉堆.html" class="sidebar-link">第16章 二叉堆</a></li><li><a href="/javascript-datastructures-algorithms/md/18.图.html" class="sidebar-link">第17章 图</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>第二部分 算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/javascript-datastructures-algorithms/md/19排序算法.html" class="sidebar-link">第18章 排序算法</a></li><li><a href="/javascript-datastructures-algorithms/md/20搜索算法.html" class="sidebar-link">第19章 搜索算法</a></li><li><a href="/javascript-datastructures-algorithms/md/21随机算法.html" class="sidebar-link">第20章 随机算法</a></li><li><a href="/javascript-datastructures-algorithms/md/22分而治之.html" class="sidebar-link">第21章 分而治之</a></li><li><a href="/javascript-datastructures-algorithms/md/23动态规划.html" class="sidebar-link">第22章 动态规划</a></li><li><a href="/javascript-datastructures-algorithms/md/24贪心算法.html" class="sidebar-link">第23章 贪心算法</a></li><li><a href="/javascript-datastructures-algorithms/md/25回溯算法.html" class="sidebar-link">第24章 回溯算法</a></li><li><a href="/javascript-datastructures-algorithms/md/26算法复杂度.html" class="sidebar-link">第25章 算法复杂度</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第5章-单向链表"><a href="#第5章-单向链表" class="header-anchor">#</a> 第5章 单向链表</h1> <h2 id="认识链表"><a href="#认识链表" class="header-anchor">#</a> 认识链表</h2> <h3 id="链表和数组"><a href="#链表和数组" class="header-anchor">#</a> 链表和数组</h3> <p>链表和数组一样，可以用于<strong>存储一系列的元素</strong>，但是链表和数组的<strong>实现机制完全不同</strong>。</p> <h4 id="数组"><a href="#数组" class="header-anchor">#</a> 数组</h4> <ul><li><p>存储多个元素，数组（或列表）可能是<strong>最常用</strong>的数据结构。</p></li> <li><p>几乎每一种编程语言都有默认实现数组结构，提供了一个便利的 <code>[]</code> 语法来访问数组元素。</p></li> <li><p>数组缺点：</p> <ul><li>数组的创建需要申请一段<strong>连续的内存空间</strong>(一整块内存)，并且大小是固定的，当前数组<strong>不能满足容量需求</strong>时，需要<strong>扩容</strong>。 (一般情况下是申请一个更大的数组，比如 2 倍，然后将原数组中的元素复制过去)</li></ul></li> <li><p>在数组开头或中间位置插入/删除数据的成本很高，需要进行大量元素的位移。</p></li></ul> <h4 id="链表"><a href="#链表" class="header-anchor">#</a> 链表</h4> <ul><li><p>存储多个元素，另外一个选择就是使用<strong>链表</strong>。</p></li> <li><p>不同于数组，链表中的元素在内存中<strong>不必是连续的空间</strong>。</p></li> <li><p>链表的每个元素由一个存储<strong>元素本身的节点</strong>和一个<strong>指向下一个元素的引用</strong>(有些语言称为指针)组成。</p></li> <li><p>链表优点：</p> <ul><li>内存空间不必是连续的，可以充分利用计算机的内存，实现灵活的<strong>内存动态管理</strong>。</li> <li>链表不必在创建时就<strong>确定大小</strong>，并且大小可以<strong>无限延伸</strong>下去。</li> <li>链表在<strong>插入和删除</strong>数据时，<strong>时间复杂度</strong>可以达到 O(1)，相对数组效率高很多。</li></ul></li> <li><p>链表缺点：</p> <ul><li>访问任何一个位置的元素时，需要<strong>从头开始访问</strong>。(无法跳过第一个元素访问任何一个元素)</li> <li>无法通过下标值直接访问元素，需要从头开始一个个访问，直到找到对应的元素。</li> <li>虽然可以轻松地到达下一个节点，但是回到前一个节点是很难的。</li></ul></li></ul> <h4 id="如何选择"><a href="#如何选择" class="header-anchor">#</a> 如何选择</h4> <ul><li>频繁在中间或前面插入数据时选择链表</li> <li>需要使用下标去修改获取数据时选择数组</li></ul> <h2 id="单向链表"><a href="#单向链表" class="header-anchor">#</a> 单向链表</h2> <p>单向链表类似于火车，有一个火车头，火车头会连接一个节点，节点上有乘客，并且这个节点会连接下一个节点，以此类推。</p> <ul><li><p>链表的火车结构</p> <p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.27xtn3c52zwg.png" alt="链表的火车结构"></p></li> <li><p>链表的数据结构</p> <p>head 属性指向链表的第一个节点。<br>
+链表中的最后一个节点指向 <code>null</code>。
+当链表中一个节点也没有的时候，head 直接指向 <code>null</code>。</p> <p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.37j1by46a120.png" alt="链表的数据结构"></p></li> <li><p>给火车加上数据后的结构</p> <p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.664djiie2t80.png" alt="给火车加上数据后的结构"></p></li></ul> <h3 id="链表中的常见操作"><a href="#链表中的常见操作" class="header-anchor">#</a> 链表中的常见操作</h3> <p>常见操作可以按增删改查分类，剩下的几个都是获取链表信息的方法</p> <ul><li><code>append(element)</code> 向链表尾部添加一个新的项。</li> <li><code>insert(position, element)</code> 向链表的特定位置插入一个新的项。</li> <li><code>get(position)</code> 获取对应位置的元素。</li> <li><code>indexOf(element)</code> 返回元素在链表中的索引。如果链表中没有该元素就返回-1。</li> <li><code>update(position, element)</code> 修改某个位置的元素。</li> <li><code>removeAt(position)</code> 从链表的特定位置移除一项。</li> <li><code>remove(element)</code> 从链表中移除一项。</li> <li><code>isEmpty()</code> 如果链表中不包含任何元素，返回 trun，如果链表长度大于 0 则返回 false。</li> <li><code>size()</code> 返回链表包含的元素个数，与数组的 length 属性类似。</li> <li><code>toString()</code> 由于链表项使用了 Node 类，就需要重写继承自 JavaScript 对象默认的 toString 方法，让其只输出元素的值。</li></ul> <h3 id="单向链表的封装"><a href="#单向链表的封装" class="header-anchor">#</a> 单向链表的封装</h3> <h4 id="创建单向链表类"><a href="#创建单向链表类" class="header-anchor">#</a> 创建单向链表类</h4> <p>先创建单向链表类 LinkedList，添加基本属性，再逐步实现单向链表的常用方法。</p> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 封装链表节点类</span>
+<span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">this</span><span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 链表头节点，初始为 null</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token comment">// 初始链表长度为 0</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h4 id="实现-append-方法"><a href="#实现-append-方法" class="header-anchor">#</a> 实现 append() 方法</h4> <h5 id="代码实现"><a href="#代码实现" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// append(data) 往链表尾部追加数据</span>
+<span class="token function">append</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// 1、创建新节点</span>
+  <span class="token keyword">const</span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+  <span class="token comment">// 2、追加新节点</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 链表长度为 0 时，直接修改头指针head即可</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> newNode
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 链表长度大于 0 时，在尾节点后面添加新节点</span>
+    <span class="token comment">// 先取得链表第一个节点，之后循环遍历至尾节点</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token comment">// 当current.next!=null时表示不是尾节点</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 尾节点的 next 指向新节点</span>
+    current<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 3、追加完新节点后，链表长度 + 1</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">++</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h5 id="过程图解"><a href="#过程图解" class="header-anchor">#</a> 过程图解</h5> <ul><li><p>首先让 <code>currentNode</code> 指向第一个节点。</p> <p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.5iskrdf4nu40.png" alt="image"></p></li> <li><p>通过 <code>while</code> 循环使 <code>currentNode</code> 指向最后一个节点，最后通过 <code>currentNode.next = newNode</code>，让最后一个节点指向新节点 <code>newNode</code>。</p> <p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.4mw3bx5g80m0.png" alt="image"></p></li></ul> <h5 id="代码测试"><a href="#代码测试" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token keyword">const</span> linkedList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 测试 append 方法</span>
+linkedList<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'AA'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+linkedList<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'BB'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+linkedList<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'CC'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><img src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/JavaScript-数据结构与算法/image.6kx4qbq8e5c.png" alt="image"></p> <h4 id="实现-tostring-方法"><a href="#实现-tostring-方法" class="header-anchor">#</a> 实现 toString() 方法</h4> <h5 id="代码实现-2"><a href="#代码实现-2" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// toString() 链表数据以字符串形式返回</span>
+<span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+  <span class="token keyword">let</span> resultString <span class="token operator">=</span> <span class="token string">''</span>
+
+  <span class="token comment">// 遍历所有的节点，拼接为字符串，直到尾节点(值为null)</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    resultString <span class="token operator">+=</span> current<span class="token punctuation">.</span>data <span class="token operator">+</span> <span class="token string">' '</span>
+    current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> resultString
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h5 id="代码测试-2"><a href="#代码测试-2" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 toString 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; AA BB CC</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="实现-insert-方法"><a href="#实现-insert-方法" class="header-anchor">#</a> 实现 insert() 方法</h4> <h5 id="代码实现-3"><a href="#代码实现-3" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// insert(position, data) 在指定位置（position）插入节点</span>
+<span class="token function">insert</span><span class="token punctuation">(</span><span class="token parameter">position<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// position 新插入节点的位置</span>
+  <span class="token comment">// position = 0 表示新插入后是第一个节点</span>
+  <span class="token comment">// position = 1 表示新插入后是第二个节点，以此类推</span>
+
+  <span class="token comment">// 1、对 position 进行越界判断，不能小于 0 或大于链表长度</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span>
+
+  <span class="token comment">// 2、创建新节点</span>
+  <span class="token keyword">const</span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+  <span class="token comment">// 3、插入节点</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// position = 0 即新插入节点为第一个节点的情况</span>
+    <span class="token comment">// 顺序很重要，先让新节点指向原来的第一个节点，之后修改头指针指向新节点</span>
+
+    <span class="token comment">// 让新节点的 next 指向 原来的第一个节点，即 head</span>
+    newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token comment">// head 赋值为 newNode</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> newNode
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 0 &lt; position &lt;= length 的情况</span>
+
+    <span class="token comment">// 初始化一些状态变量</span>
+    <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>           <span class="token comment">// 遍历索引初始化为 0</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token comment">// 遍历的当前节点初始化为 head</span>
+    <span class="token keyword">let</span> previous <span class="token operator">=</span> <span class="token keyword">null</span>     <span class="token comment">// 遍历的的上一节点初始化为 null</span>
+
+    <span class="token comment">// 在 0 ~ position 之间遍历，不断地更新 current 和 previous</span>
+    <span class="token comment">// 直到找到要插入的位置</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      previous <span class="token operator">=</span> current
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 在当前节点和当前节点的上一节点之间插入新节点，即改变它们的指向</span>
+    newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> current
+    previous<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode
+
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 4、追加完新节点后，链表长度 + 1</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">++</span>
+  <span class="token comment">// 5、返回新添加的节点，方便其他操作</span>
+  <span class="token keyword">return</span> newNode
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><h5 id="代码测试-3"><a href="#代码测试-3" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 insert 方法</span>
+linkedList<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+linkedList<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&quot;456&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 123 AA 456 BB CC</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="实现-getdata-方法"><a href="#实现-getdata-方法" class="header-anchor">#</a> 实现 getData() 方法</h4> <p>获取指定位置（position）的 data。</p> <h5 id="代码实现-4"><a href="#代码实现-4" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// getData(position) 获取指定位置的 data</span>
+<span class="token function">getData</span><span class="token punctuation">(</span><span class="token parameter">position</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 1、position越界判断</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span>
+
+  <span class="token comment">// 2、获取指定 position 的节点</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 3、返回相应节点的 data</span>
+  <span class="token keyword">return</span> current<span class="token punctuation">.</span>data
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h5 id="代码测试-4"><a href="#代码测试-4" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 getData 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 123</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; AA</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="实现-indexof-方法"><a href="#实现-indexof-方法" class="header-anchor">#</a> 实现 indexOf() 方法</h4> <p>indexOf(data) 返回指定 data 的 index，如果没有，返回 -1。</p> <h5 id="代码实现-5"><a href="#代码实现-5" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// indexOf(data) 返回指定 data 的 index，如果没有，返回 -1。</span>
+<span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 1、定义遍历变量</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+
+  <span class="token comment">// 2、遍历比较链表中数据</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>current<span class="token punctuation">.</span>data <span class="token operator">===</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 找到相应数据,返回索引</span>
+      <span class="token keyword">return</span> index
+    <span class="token punctuation">}</span>
+    current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    index<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 未找到相应数据，返回-1</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h5 id="代码测试-5"><a href="#代码测试-5" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 indexOf 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;AA&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;ABC&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; -1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="实现-update-方法"><a href="#实现-update-方法" class="header-anchor">#</a> 实现 update() 方法</h4> <p>update(position, data) 修改指定位置节点的 data。</p> <h5 id="代码实现-6"><a href="#代码实现-6" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// update(position, data) 修改指定位置节点的 data</span>
+<span class="token function">update</span><span class="token punctuation">(</span><span class="token parameter">position<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 涉及到 position 都要进行越界判断</span>
+  <span class="token comment">// 1、position越界判断</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span>
+
+  <span class="token comment">// 2、循环遍历，找到指定 position 的节点</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 3、修改相应节点的 data</span>
+  current<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+  <span class="token comment">// 4、返回指定 position 的节点，方便其他操作</span>
+  <span class="token keyword">return</span> current
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h5 id="代码测试-6"><a href="#代码测试-6" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 update 方法</span>
+linkedList<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;12345&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 12345 AA 456 BB CC</span>
+linkedList<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;54321&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 12345 54321 456 BB CC</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="实现-removeat-方法"><a href="#实现-removeat-方法" class="header-anchor">#</a> 实现 removeAt() 方法</h4> <p>removeAt(position) 删除指定位置的节点。</p> <h5 id="代码实现-7"><a href="#代码实现-7" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// removeAt(position) 删除指定位置的节点，并返回删除的那个节点</span>
+<span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token parameter">position</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 1、position越界判断</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span>
+
+  <span class="token comment">// 2、删除指定 position 节点</span>
+  <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// position = 0 的情况</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head<span class="token punctuation">.</span>next
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// position &gt; 0 的情况</span>
+    <span class="token comment">// 在 0 ~ position 之间遍历，不断地更新 current 和 previous</span>
+    <span class="token comment">// 直到找到要删除的位置</span>
+    <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> previous <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      previous <span class="token operator">=</span> current
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 让上一节点的 next 指向当前的节点的 next，相当于删除了当前节点。</span>
+    previous<span class="token punctuation">.</span>next <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 3、更新链表长度 -1</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">--</span>
+  <span class="token comment">// 4、返回被删除的节点，方便其他操作</span>
+  <span class="token keyword">return</span> current
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><h5 id="代码测试-7"><a href="#代码测试-7" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 removeAt 方法</span>
+linkedList<span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 12345 54321 456 CC</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="实现-remove-方法"><a href="#实现-remove-方法" class="header-anchor">#</a> 实现 remove() 方法</h4> <p>remove(data) 删除指定 data 所在的节点。</p> <h5 id="代码实现-8"><a href="#代码实现-8" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// remove(data) 删除指定 data 的节点，并返回删除的那个节点</span>
+<span class="token function">remove</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h5 id="代码测试-8"><a href="#代码测试-8" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 remove 方法</span>
+linkedList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">&quot;CC&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 12345 54321 456</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="实现-isempty-方法"><a href="#实现-isempty-方法" class="header-anchor">#</a> 实现 isEmpty() 方法</h4> <p>isEmpty() 判断链表是否为空。</p> <h5 id="代码实现-9"><a href="#代码实现-9" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// isEmpty() 判断链表是否为空</span>
+<span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h5 id="代码测试-9"><a href="#代码测试-9" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 isEmpty 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; false</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="实现-size-方法"><a href="#实现-size-方法" class="header-anchor">#</a> 实现 size() 方法</h4> <p>size() 获取链表的长度。</p> <h5 id="代码实现-10"><a href="#代码实现-10" class="header-anchor">#</a> 代码实现</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// size() 获取链表的长度</span>
+<span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h5 id="代码测试-10"><a href="#代码测试-10" class="header-anchor">#</a> 代码测试</h5> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 测试 size 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>linkedList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//--&gt; 3</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="完整实现"><a href="#完整实现" class="header-anchor">#</a> 完整实现</h4> <div class="language-js line-numbers-mode"><pre class="language-js"><code><span class="token comment">// 封装链表结构</span>
+
+<span class="token comment">// 封装链表节点类</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token keyword">this</span><span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 单向链表结构的封装</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token punctuation">{</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 链表头节点，初始为 null</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token comment">// 初始链表长度为 0</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// ------------ 链表的常见操作 ------------ //</span>
+
+  <span class="token comment">// append(data) 往链表尾部追加数据</span>
+  <span class="token function">append</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// 1、创建新节点</span>
+    <span class="token keyword">const</span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment">// 2、追加新节点</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 链表长度为 0 时，直接修改头指针head即可</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> newNode
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 链表长度大于 0 时，在尾节点后面添加新节点</span>
+      <span class="token comment">// 先取得链表第一个节点，之后循环遍历至尾节点</span>
+      <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+      <span class="token comment">// 当current.next!=null时表示不是尾节点</span>
+      <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 尾节点的 next 指向新节点</span>
+      current<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 3、追加完新节点后，链表长度 + 1</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// insert(position, data) 在指定位置（position）插入节点</span>
+  <span class="token function">insert</span><span class="token punctuation">(</span><span class="token parameter">position<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// position 新插入节点的位置</span>
+    <span class="token comment">// position = 0 表示新插入后是第一个节点</span>
+    <span class="token comment">// position = 1 表示新插入后是第二个节点，以此类推</span>
+
+    <span class="token comment">// 1、对 position 进行越界判断，不能小于 0 或大于链表长度</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span>
+
+    <span class="token comment">// 2、创建新节点</span>
+    <span class="token keyword">const</span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token comment">// 3、插入节点</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// position = 0 即新插入节点为第一个节点的情况</span>
+      <span class="token comment">// 顺序很重要，先让新节点指向原来的第一个节点，之后修改头指针指向新节点</span>
+
+      <span class="token comment">// 让新节点的 next 指向 原来的第一个节点，即 head</span>
+      newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+      <span class="token comment">// head 赋值为 newNode</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> newNode
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 0 &lt; position &lt;= length 的情况</span>
+
+      <span class="token comment">// 初始化一些状态变量</span>
+      <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>           <span class="token comment">// 遍历索引初始化为 0</span>
+      <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token comment">// 遍历的当前节点初始化为 head</span>
+      <span class="token keyword">let</span> previous <span class="token operator">=</span> <span class="token keyword">null</span>     <span class="token comment">// 遍历的的上一节点初始化为 null</span>
+
+      <span class="token comment">// 在 0 ~ position 之间遍历，不断地更新 current 和 previous</span>
+      <span class="token comment">// 直到找到要插入的位置</span>
+      <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        previous <span class="token operator">=</span> current
+        current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">// 在当前节点和当前节点的上一节点之间插入新节点，即改变它们的指向</span>
+      newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> current
+      previous<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode
+
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 4、追加完新节点后，链表长度 + 1</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">++</span>
+    <span class="token comment">// 5、返回新添加的节点，方便其他操作</span>
+    <span class="token keyword">return</span> newNode
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// getData(position) 获取指定位置的 data</span>
+  <span class="token function">getData</span><span class="token punctuation">(</span><span class="token parameter">position</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1、position越界判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span>
+
+    <span class="token comment">// 2、获取指定 position 的节点</span>
+    <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 3、返回相应节点的 data</span>
+    <span class="token keyword">return</span> current<span class="token punctuation">.</span>data
+
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// indexOf(data) 返回指定 data 的 index，如果没有，返回 -1。</span>
+  <span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1、定义遍历变量</span>
+    <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+
+    <span class="token comment">// 2、遍历比较链表中数据</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>current<span class="token punctuation">.</span>data <span class="token operator">===</span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 找到相应数据,返回索引</span>
+        <span class="token keyword">return</span> index
+      <span class="token punctuation">}</span>
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+      index<span class="token operator">++</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 未找到相应数据，返回-1</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// update(position, data) 修改指定位置节点的 data</span>
+  <span class="token function">update</span><span class="token punctuation">(</span><span class="token parameter">position<span class="token punctuation">,</span> data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 涉及到 position 都要进行越界判断</span>
+    <span class="token comment">// 1、position越界判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span>
+
+    <span class="token comment">// 2、循环遍历，找到指定 position 的节点</span>
+    <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 3、修改相应节点的 data</span>
+    current<span class="token punctuation">.</span>data <span class="token operator">=</span> data
+    <span class="token comment">// 4、返回指定 position 的节点，方便其他操作</span>
+    <span class="token keyword">return</span> current
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// removeAt(position) 删除指定位置的节点，并返回删除的那个节点</span>
+  <span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token parameter">position</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1、position越界判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> position <span class="token operator">&gt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span>
+
+    <span class="token comment">// 2、删除指定 position 节点</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// position = 0 的情况</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>head <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">// position &gt; 0 的情况</span>
+      <span class="token comment">// 在 0 ~ position 之间遍历，不断地更新 current 和 previous</span>
+      <span class="token comment">// 直到找到要删除的位置</span>
+      <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+      <span class="token keyword">let</span> previous <span class="token operator">=</span> <span class="token keyword">null</span>
+      <span class="token keyword">while</span> <span class="token punctuation">(</span>index<span class="token operator">++</span> <span class="token operator">&lt;</span> position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        previous <span class="token operator">=</span> current
+        current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 让上一节点的 next 指向当前的节点的 next，相当于删除了当前节点。</span>
+      previous<span class="token punctuation">.</span>next <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 3、更新链表长度 -1</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token operator">--</span>
+    <span class="token comment">// 4、返回被删除的节点，方便其他操作</span>
+    <span class="token keyword">return</span> current
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// remove(data) 删除指定 data 的节点，并返回删除的那个节点</span>
+  <span class="token function">remove</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// isEmpty() 判断链表是否为空</span>
+  <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// size() 获取链表的长度</span>
+  <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// toString() 链表数据以字符串形式返回</span>
+  <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> current <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>head
+    <span class="token keyword">let</span> resultString <span class="token operator">=</span> <span class="token string">''</span>
+
+    <span class="token comment">// 遍历所有的节点，拼接为字符串，直到尾节点(值为null)</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      resultString <span class="token operator">+=</span> current<span class="token punctuation">.</span>data <span class="token operator">+</span> <span class="token string">' '</span>
+      current <span class="token operator">=</span> current<span class="token punctuation">.</span>next
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> resultString
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br><span class="line-number">170</span><br><span class="line-number">171</span><br><span class="line-number">172</span><br><span class="line-number">173</span><br><span class="line-number">174</span><br><span class="line-number">175</span><br><span class="line-number">176</span><br><span class="line-number">177</span><br><span class="line-number">178</span><br><span class="line-number">179</span><br><span class="line-number">180</span><br><span class="line-number">181</span><br><span class="line-number">182</span><br><span class="line-number">183</span><br><span class="line-number">184</span><br><span class="line-number">185</span><br><span class="line-number">186</span><br><span class="line-number">187</span><br><span class="line-number">188</span><br><span class="line-number">189</span><br><span class="line-number">190</span><br><span class="line-number">191</span><br><span class="line-number">192</span><br><span class="line-number">193</span><br><span class="line-number">194</span><br><span class="line-number">195</span><br><span class="line-number">196</span><br><span class="line-number">197</span><br><span class="line-number">198</span><br><span class="line-number">199</span><br><span class="line-number">200</span><br><span class="line-number">201</span><br><span class="line-number">202</span><br><span class="line-number">203</span><br><span class="line-number">204</span><br><span class="line-number">205</span><br><span class="line-number">206</span><br><span class="line-number">207</span><br><span class="line-number">208</span><br><span class="line-number">209</span><br><span class="line-number">210</span><br><span class="line-number">211</span><br></div></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/dragon-liu/javascript-datastructures-algorithms/edit/master/docs/md/6.单向链表.md" target="_blank" rel="noopener noreferrer">帮助我改善此页面！</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/javascript-datastructures-algorithms/md/5.优先队列.html" class="prev">
+        第4章 优先队列
+      </a></span> <span class="next"><a href="/javascript-datastructures-algorithms/md/7.双向链表.html">
+        第6章 双向链表
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/javascript-datastructures-algorithms/assets/js/app.d92375d1.js" defer></script><script src="/javascript-datastructures-algorithms/assets/js/2.5c766f7e.js" defer></script><script src="/javascript-datastructures-algorithms/assets/js/30.ba656995.js" defer></script>
+  </body>
+</html>
