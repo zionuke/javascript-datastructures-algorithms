@@ -1,2 +1,0 @@
-import './Factorial'
-import './Fibonacci'
